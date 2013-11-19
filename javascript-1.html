@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Javascript Basics 1</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+    <article class="flexbox logo-welcome">
+      <span><img src="images/2c/logo.png"></span>
+    </article>
+
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Изпълнение на javascript</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="html">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Javascript test file&lt;/title&gt;
+    <b>&lt;script&gt;
+        var test_var = 5;
+        console.log(test_var);
+    &lt;/script&gt;</b>
+    &lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p>Конзолата на browser ви позволява да дебъгвате javascript код. Shortcut-а за нея е <b>F12</b>.</p>
+
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Преглед на javascript</h2>
+    </hgroup>
+    <article>
+      <ul class="build fade">
+        <li>Един от най-популярните езици за програмиране днес</li>
+        <li>Използван както за front-end(browser) така и за back-end(server) development</li>
+        <li>C-like синтаксис</li>
+        <li>Фунцкионален и обектно ориентиран</li>
+        <li>Whitespace-а почти винаги нямат значение</li>
+        <li>Редовете няма нужда да завършват с <code>;</code></li>
+        <li>Динамично типизиран език, променливите се декларират с <code>var</code></li>
+        <li>Коментарите се игнорират; многоредовите коментари са между <code>/*</code> и <code>*/</code>. Едноредовите започват с <code>//</code></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Типове от данни</h2>
+    </hgroup>
+    <article class="smaller">
+      <p>В javascript има 2 вида данни: прости(basic types) и комплексни(complex types). Простите(понякога се наричат и скаларни) се състоят от една стойност. Всички комплексни типове са обекти и могат съдържат повече от 1 стойност. </p>
+      <p>Днес започваме с разглеждането на простите типове:</p>
+      <ul>
+        <li>Numbers(числа)</li>
+        <li>Strings(низове)</li>
+        <li>Booleans(булеви)</li>
+        <li>Undefined и null</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Numbers - Числа</h2>
+    </hgroup>
+    <article class="smaller">
+      <p>Всички числа в javascript се третират като реални; например 5 вътрешно е 5.0. </p>
+
+      <p>Функции свързани с числа има в обекта <code>Math</code>: <code>abs</code>, <code>ceil</code>, <code>max</code>, <code>min</code>, <code>random</code> и други.</p>
+
+      <p>Деление на нула в javascript дава резултат безкрайност: </p>
+      <p><code>5 / 0 => Infinity</code></p>
+
+      <p>Ако операцията от числа не може да бъде извършена се получава стойност <code>NaN</code>(not a number):</p>
+      <p><code>5 / "Banana" => NaN</code></p>
+      
+      <string>Оператори:</string>
+      <ul>
+        <li><code>+</code></li>
+        <li><code>-</code></li>
+        <li><code>*</code></li>
+        <li><code>/</code></li>
+        <li><code>%</code></li>
+      </ul>
+
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Strings - Низове</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>String(низ) в javascript е текст обграден в двойни или единични кавички. </p>
+      
+      <p>Низовете са обекти; промяната на низ създава нов низ. </p>
+
+      <p>Няма отделен тип character; той е низ с един елемент. </p>
+
+      <p>Обратната наклонена черта е escape character и се използва за да поставят специални символи в низа:</p>
+      <p><code>\n, \r, \t</code> - whitespace</p>
+      <p><code>\", \'</code> - quoted кавички</p>
+      <p>Низа не може да съдържа нов ред директно, трябва да се използва <code>\n</code>, <code>\r</code> или и двете</p>
+
+      <p>Concatenation("слепване") на 2 низа се прави с оператора плюс:</p>
+      <pre class="prettyprint" data-lang="javascript">
+        var name = "Emo";
+        var greeting = "Good evening";
+        console.log(greeting + ", " + name);
+        // => Good evening, Emo
+      </pre>
+
+
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Strings - Низове (методи)</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>Всеки низ е обект и притежава properties и methods:</p>
+      
+      <pre class="prettyprint" data-lang="javascript">
+        var string = "javascript strings";
+        console.log(string.length); 
+        // => 18
+      </pre>
+      <p>Методите са функции, които работят в контекста на низа. Те не променят низа, а връщат нов низ. Няколко примера:</p>
+
+      <ul>
+        <li><code>.indexOf()</code></li>
+        <li><code>.lastIndexOf()</code></li>
+        <li><code>.replace()</code></li>
+        <li><code>.charAt()</code></li>
+        <li><code>.slice()</code></li>
+        <li><code>.substr()</code></li>
+        <li><code>.toUpperCase()</code>, <code>.toLowerCase()</code></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Booleans - булеви променливи</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>Booleans(булев тип) е тип съдържащ само 2 стойности: истина(<code>true</code>) и лъжа(<code>false</code>).</p>
+
+      <p>Всички стойности в останалите типове могат да се сведат до булева стойност.</p>
+
+      <p>Следните стойности се свеждат до <code>false</code>(falsy са):</p>
+
+      <ul>
+        <li><code>false</code></li>
+        <li><code>null, undefined</code></li>
+        <li><code>''</code>(empty string)</li>
+        <li><code>0, NaN</code></li>
+      </ul>
+
+      <p>Всичко останало се свежда до <code>true</code>(truthy е).</p>
+
+
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Undefined and Null</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>В javascript има 2 вида празни променливи:</p>
+      <ul>
+        <li><code>undefined</code></li>
+        <li><code>null</code></li>
+      </ul>
+      <p>Техническата разлика между тях е тънка и извън обхвата на това обучение.</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Type Conversion: промяна на тип</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>Когато оператор трябва да работи с различни типове, javascript вътрешно прави обръщане на типовете за да извърши операцията.</p>
+      <pre class="prettyprint" data-lang="javascript">
+var circle_radis = 2;
+var circle_area = 3.14 * circle_radis * circle_radis;
+var result = "Circle area is " <b>+</b> circle_area;
+// => Circle area is 12.56</pre>
+      <p>За да може да направи конкатенацията с оператора плюс, javascript трябва да уеднакви типовете на операндите и да превърне числото в низ. </p>
+      <pre class="prettyprint" data-lang="javascript">
+Това крие и капани:
+var a = 5, b = "8";
+var result = a <b>+</b> b;
+// => 58</pre>
+      <p>Защо се получава 58 а не 13?</p>
+
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Оператори за сравняване на променливи</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <ul>
+        <li><code>==</code> equal(проверява само стойност)</li>
+        <li><code>!=</code> not equal(проверява само стойност)</li>
+        <li><code>===</code> identical(проверява стойност и тип)</li>
+        <li><code>!==</code> not identical (проверява стойност и тип)</li>
+        <li><code>&gt;, &lt;, &gt;=, &lt;=</code></li>
+      </ul>
+      <p>Избягвайте <code>==</code> и <code>!=</code>, използвайте <code>===</code> и <code>!==</code> вместо тях:</p>
+      <pre class="prettyprint" data-lang="javascript">
+'' == '0'           // false
+0 == ''             // true
+0 == '0'            // true
+
+false == 'false'    // false
+false == '0'        // true
+
+false == undefined  // false
+false == null       // false
+null == undefined   // true
+
+<b>' \t\r\n ' == 0     // true</b></pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Оператора !</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>Оператора <code>!</code> обръща булевата стойност:</p>
+      <pre class="prettyprint" data-lang="javascript">
+var age = 14;
+var is_teenager = <b>age &lt;= 19</b>;
+if (<b>!</b>is_teenager) {
+    console.log("Allow in");
+} else {
+    console.log("Go away");
+}
+      </pre>
+      <p>Приложен към не-булева променлива, удивителния знак я свежда до булева и обръща стойността й:</p>
+      <pre class="prettyprint" data-lang="javascript">
+var age = 0;
+if (<b>!</b>age) {
+    console.log("Newborns are not allowed here");
+}
+      </pre>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Стриктен режим</h2>
+    </hgroup>
+    <article class="smaller">
+      <!-- 
+      <p>Javascript еволюира много в последните 20 години. Това се наложи от бума на web технологиите, бума на smart phone-ите(които елиминираха flash и оставиха javascript като единствена технология за добавяне на динамика web). </p>
+      <p>Javascript ще еволюира в бъдеще. В момента се работи по нов стандард, нови feature-и в езика се добавят . </p>
+      -->
+      <p><b>Strict mode</b> позволява на browser-а да изпълни определен код в по-контролирана среда и да ви предпази от чести грешки в кода ви. </p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Заключение</h2>
+    </hgroup>
+
+    <article class="smaller">
+      <p>Неща за четене:</p>
+      <ul>
+        <li><a href="http://msdn.microsoft.com/en-us/library/ie/b272f386(v=vs.94).aspx">Math javascript object</a></li>
+        
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals">Values, variables, and literals</a> - тук четете само първите 2 секции: Values и Variables</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">Strings</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict mode</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">Comparison Operators</a></li>
+        <li><a href="https://developers.google.com/chrome-developer-tools/docs/console">Основни неща за Chrome developer tools console panel</a></li>
+      </ul>
+      <p>Задачите за горните точки ще намерите в тасковете си. </p>
+      <!--
+       Задачи за basic javascript.
+
+        # напишете javascript, който да проверява дали променлива съдържа четно или нечетно число. Принтирайте резултата в конзолата
+        # при входни данни на координати от 2 точки(x1, y1, x2, y2) изчислете разтоянието между двете точки
+        # напишете script, който дефинира променлива със следния текст:
+{{{
+An island song
+Like a "floating" river
+Rain's Rain's Fall Fall
+}}}
+Разделете текста на 3 елемента чрез метода split и log-нете резултатния масив в конзолата. 
+        # Дефинирайте променлива със текстова стойност и проверете дали дадена буква се съдържа в нея. Разгледайте методите на string обекта и провете кой ще ви срърши работа за целта. 
+        # Дефинирайте string променлива със текстова стойност и я промените като буквите са в горен регистър. 
+       
+      -->
+    </article>
+  </slide>
+
+  <!--
+  <slide>
+    <hgroup>
+      <h2></h2>
+    </hgroup>
+
+    <article class="smaller">
+      
+    </article>
+  </slide>
+  -->
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+
+</body>
+</html>
