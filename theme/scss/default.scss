@@ -619,6 +619,13 @@ article.smaller {
   color: $gray-4;
 }
 
+b.hidden-highlight {
+  font-weight: normal;
+}
+.highlight-code b.hidden-highlight {
+  font-weight: bold;
+}
+
 .note {
   position: absolute;
   z-index: 100;
