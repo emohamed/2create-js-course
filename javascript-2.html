@@ -25,10 +25,163 @@
 
 	<slide>
 		<hgroup>
-			<h2></h2>
+			<h2>Loops - Цикли</h2>
 		</hgroup>
 		<article>
+			<p>Цикъл е конструкция повтаряща последователно блок от код докато определено условие е изпълнено. Всяка итерация(повторение) може да променя променливите, които участват в условито на цикъла, така че в един момент то да стане невярно, и изпълнението да продължи.</p>
+
+			<p>Има 3 основни вида цикъл:</p>
+
+			<ul>
+				<li><code>for</code> с брояч</li>
+				<li><code>while</code></li>
+				<li><code>for</code> за обхождане на обект</li>
+			</ul>
+
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>for</code> цикъл с брояч</h2>
+		</hgroup>
+		<article>
+			<p>Пример: </p>
+			<pre class="prettyprint" data-lang="javascript">
+for (var i = 0; i &lt; 10; i++) {
+	console.log("i is now " + i);
+}</pre>
+			<p>Този вид цикъл е подходящ, когато трябва да извършите дадена операция определен брой пъти. </p>
+
+			<p><code>for</code> цикъла се състои от следните части:</p>
+			<ul class="build fade">
+				<li>
+					Ключовата дума <code>for</code>
+				</li>
+				<li>
+					Инициализация: <code>var i = 0</code>
+				</li>
+				<li>
+					Условие: <code>i &lt; 10</code>
+				</li>
+				<li>
+					Стъпка: <code>i++</code>
+				</li>
+
+				<li>Тяло: <code>console.log("i is now " + i);</code></li>
+			</ul>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>for</code> цикъл: зад кулисите</h2>
+		</hgroup>
+		<article>
+			<pre class="prettyprint" data-lang="javascript">
+for (var i = 0; i &lt; 2; i++) {
+	console.log("i is now " + i);
+}
+console.log("Loop completed");</pre>
+			<p>Ето какво ще се случи зад кулисите:</p>
+			<pre class="prettyprint" data-lang="javascript">
+var i = 0;
+console.log("i is now 0");
+i++; // i is now 1
+i &lt; 2 ? true ... 
+// Условието е вярно, връщаме се в началото,
+// прилагаме стъпката и изпълняваме тялото отново
+console.log("i is now 1");
+i++; // i is now 2
+i &lt; 2 ? false ...  // Условието вече не е вярно, излизаме от цикъла ... 
+console.log("Loop completed");
+</pre>
+
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>while</code> цикъл</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><code>while</code> цъкъла повтаря блок от код докато определен expression е truthy:</p>
+   			<pre class="prettyprint" data-lang="javascript">
+var counter = 0;
+while (counter &lt; 5) {
+	console.log("Counter is " + counter);
+	counter++;
+}</pre>
+			<p>Преди да започне изпълнението на цикъла, трябва да се инициализира състоянието на средата. </p>
 			
+			<p>Всяка итерация на цикъла трябва да извършва определа работа, така че в един момент условието да стане false. </p>
+
+			<p>Цикъла се състои от следните клаузи:</p>
+			<ul class="build fade">
+				<li>ключовата дума while</li>
+				<li>условието на цъкъла в кръгли скоби след ключовата дума</li>
+				<li>блок от код, който ще бъде изпълняван докато условието е truthy</li>
+			</ul>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>while</code> цикъл: зад кулисите</h2>
+		</hgroup>
+
+		<article class="smaller">
+   			<pre class="prettyprint" data-lang="javascript">
+var counter = 0;
+while (counter &lt; 2) {
+	console.log("Counter is " + counter);
+	counter++;
+}
+console.log("Loop completed");
+		    </pre>
+		    <p>Ето какво ще се случи зад кулисите:</p>
+		    <pre class="prettyprint" data-lang="javascript">
+var counter = 0;
+// Starting loop ... 
+	console.log("Counter is " + counter);
+	counter++; // Counter става равно на 1
+// Loop condition: counter &lt; 2 ? true
+	console.log("Counter is " + counter);
+	counter++; // Counter става равно на 2
+// Loop condition: counter &lt; 2 ? false
+// Exiting loop ... 
+console.log("Loop completed");</pre>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>do {} while ()</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Разновидност на <code>while</code> цикъла, в която условието се дава <strong>след</strong> тялото на цикъла:</p>
+			<ul>
+				<li>Тялото на цикъла се изпълнява поне 1 път</li>
+				<li>
+					Удобен, когато в тялото на цикъла се извършва задача, която може да се провали и да се опита да се направи наново:
+					<pre class="prettyprint" data-lang="javascript">
+var name;
+do {
+	name = <b>window.prompt('Please enter your name')</b>;
+} while(name.length &lt; 2);
+console.log("Name is " + name);</pre>
+					<p>Алтернативата на това е:</p>
+					<pre class="prettyprint" data-lang="javascript">
+var name = <b>window.prompt('Please enter your name')</b>;
+while(name.length &lt; 2) {
+	name = <b>window.prompt('Please enter your name')</b>;
+}
+console.log("Name is " + name);</pre>
+					<code>do-while</code> цикъла избягва повторение. 
+				</li>
+			</ul>
 		</article>
 	</slide>
 
