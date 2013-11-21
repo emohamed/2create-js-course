@@ -48,7 +48,16 @@
 
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Изпълнение на javascript</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<p>В един HTML документ може да имате множество javascript тагове. </p>
+			<p><code>&lt;script&gt;</code> таговете могат да съдържат <code>src</code> атрибут, който указва локация на javascript файл. В този случай, browser-а сваля този файл и го изпълнява в контекста на документа, където е извикан. </p>
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>Преглед на javascript</h2>
@@ -98,15 +107,30 @@
 			<p>Ако операцията от числа не може да бъде извършена се получава стойност <code>NaN</code>(not a number):</p>
 			<p><code>5 / "Banana" => NaN</code></p>
 			
-			<string>Оператори:</string>
-			<ul>
-				<li><code>+</code></li>
-				<li><code>-</code></li>
-				<li><code>*</code></li>
-				<li><code>/</code></li>
-				<li><code>%</code></li>
-			</ul>
+			
 
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Numbers - oprerators</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Оператори:</p>
+			<ul>
+				<li>Събиране <code> 5 + 6 = 11</code></li>
+				<li>Изваждане <code> 5 - 6 = -1</code></li>
+				<li>Умножение <code> 5 * 6 = 30</code></li>
+				<li>Деление <code> 5 / 6 = 0.833...</code></li>
+				<li>Остатък от деление <code>5 % 6 = 1</code></li>
+
+				<li>Инкрементиране <code>a++</code>, <code>a += b</code>, <code>++a</code></li>
+				<li>Декрементиране <code>a--</code>, <code>a -= b</code>, <code>--a</code></li>
+				<li>Обръщане на знак: <code>-a => a *= -1</code></li>
+				<li>Форсиране на тип число: <code>+a => a</code></li>
+			</ul>
 		</article>
 	</slide>
 
@@ -135,7 +159,21 @@ console.log(greeting + ", " + name);
 // => Good evening, Emo</pre>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Strings</h2>
+		</hgroup>
 
+		<article class="">
+<pre class="prettyprint" data-lang="javascript">
+var text = "Lorem ipsum dolor sit amet, consectetur adipisicing<b class="initally-hidden-highlight">\r\n" + </b>
+<b class="initally-hidden-highlight">"</b>elit. Corporis, ratione, accusantium fugit consectetur pariatur";
+
+console.log("Message for " + text);</pre>
+			<p>Разликата между <code>\r</code> и <code>\n</code>. </p>
+			
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>Strings - Низове (методи)</h2>
@@ -220,7 +258,7 @@ var result = "Circle area is " <b>+</b> circle_area;
 var a = 5, b = "8";
 var result = a <b>+</b> b;
 // => 58</pre>
-			<p>Защо се получава 58 а не 13?</p>
+			<p>Защо се получава 58, а не 13?</p>
 
 		</article>
 	</slide>
@@ -257,6 +295,90 @@ null == undefined    // true
 
 	<slide>
 		<hgroup>
+			<h2>Логически оператори</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Логическите оператори позволяват писането на комплексна логика от повече от 1 израз.</p>
+			<ul>
+				<li><code>&amp;&amp;</code> - логически <strong>и</strong>
+					<table>
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th><code>true</code></th>
+								<th><code>false</code></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>true</code></td>
+								<td><code>true</code></td>
+								<td><code>false</code></td>
+							</tr>
+							<tr>
+								<td><code>false</code></td>
+								<td><code>false</code></td>
+								<td><code>false</code></td>
+							</tr>
+						</tbody>
+					</table>
+				</li>
+				<li><code>||</code> - логическо <strong>или</strong>
+					<table>
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th><code>true</code></th>
+								<th><code>false</code></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>true</code></td>
+								<td><code>true</code></td>
+								<td><code>true</code></td>
+							</tr>
+							<tr>
+								<td><code>false</code></td>
+								<td><code>true</code></td>
+								<td><code>false</code></td>
+							</tr>
+						</tbody>
+					</table>
+				</li>
+			</ul>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Логически оператори</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато смесвате 2 различни логически оператора трябва да ползвате скоби: </p>
+<pre class="prettyprint" data-lang="javascript">
+var a = true, b = false, c = true;
+console.log(a &amp;&amp; <b class="initally-hidden-highlight">(</b>b || c<b class="initally-hidden-highlight">)</b>);
+</pre>
+			<p>Операндите в логическите оператори могат да бъдат и резултати от функции. </p>
+<pre class="prettyprint" data-lang="javascript">
+function screen_is_ready() {
+	console.log("screen_is_ready");
+	return false;
+}
+function query_done() {
+	console.log("query_done");
+	return true;
+}
+console.log(screen_is_ready() &amp;&amp; query_done());
+</pre>
+			<p>В тази ситуация <code>query_done</code> <strong>няма</strong> да бъде извикана изобщо. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
 			<h2>Оператора !</h2>
 		</hgroup>
 
@@ -288,7 +410,19 @@ if (<b>!</b>age) {
 			<p>Javascript еволюира много в последните 20 години. Това се наложи от бума на web технологиите, бума на smart phone-ите(които елиминираха flash и оставиха javascript като единствена технология за добавяне на динамика web). </p>
 			<p>Javascript ще еволюира в бъдеще. В момента се работи по нов стандард, нови feature-и в езика се добавят . </p>
 			-->
-			<p><b>Strict mode</b> позволява на browser-а да изпълни определен код в по-контролирана среда и да ви предпази от чести грешки в кода ви. </p>
+			<p><b>Strict mode</b> инструктира browser-а да изпълни код в по-стриктна среда и да ви предпази от чести грешки в кода ви. </p>
+			<p>Вклучва се като се постави низ <code>"use strict"</code> като първи statement в javascript файл, script tag, или във функция. </p>
+<pre class="prettyprint" data-lang="html">
+&lt;script&gt;
+"use strict"
+age = 25;
+&lt;/script>
+
+&lt;script&gt;
+"use strict"
+var age = 25;
+&lt;/script&gt;
+</pre>
 		</article>
 	</slide>
 
