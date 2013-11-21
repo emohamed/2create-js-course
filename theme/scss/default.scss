@@ -335,7 +335,7 @@ ul {
 }
 
 pre {
-  font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-family: 'Consolas', 'Source Code Pro', 'Courier New', monospace;
   font-size: 20px;
   line-height: 28px;
   padding: 10px 0 10px $slide-left-right-padding;
@@ -368,6 +368,7 @@ pre[data-lang="go"] {
 code {
   font-size: 95%;
   font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-family: 'Consolas';
   color: black;
 }
 
@@ -622,7 +623,17 @@ article.smaller {
 b.hidden-highlight {
   font-weight: normal;
 }
+
 .highlight-code b.hidden-highlight {
+  font-weight: bold;
+}
+
+b.initally-hidden-highlight {
+  display: none;
+}
+
+.highlight-code b.initally-hidden-highlight {
+  display: inline;
   font-weight: bold;
 }
 
