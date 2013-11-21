@@ -22,15 +22,140 @@
 			<p data-config-presenter><!-- populated from slide_config.json --></p>
 		</hgroup>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Условни конструкции</h2>
+		</hgroup>
+		<article>
+			<p>Условните конструкции дават възможност на кода да променя поведението си според определено условие. </p>
+			<p>Има 3 вида условни конструкции:</p>
+			<ul class="">
+				<li><code>if - else</code></li>
+				<li><code>switch</code></li>
+				<li><code>condition ? when-true : when-false</code> - троичен оператор</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>if (exp) {} else {}</code></h2>
+		</hgroup>
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var number = 5;
+if (number === 5) {
+	console.log("Number is 5. ");
+} else {
+	console.log("Number is not 5. ");
+}
+</pre>
+			<p>Ако израза <code>exp</code> е truthy се изпълнява кода в блока след <code>if</code>. Ако не е, се изпълнява блока след <code>else</code> клаузата. Клаузата <code>else</code> е незадължителна.</p>
+			<p>В ситуации, в които има повече от 2 случая може да се ползва <code>else if</code> конструкцията:</p>
+<pre class="prettyprint" data-lang="javascript">
+var number = 5;
+if (number &lt; 2) {
+	console.log("lower than 2");	
+} else if (number &lt; 8) {
+	console.log("lower than 8");	
+} else {
+	console.log("greater than 8");	
+}</pre>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>switch</code></h2>
+		</hgroup>
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var direction = 2;
+switch (direction) {
+	case 1: console.log("North"); break; 
+	case 2: console.log("East"); break; 
+	case 3: console.log("South"); break; 
+	case 4: console.log("West"); break; 
+	default: console.log("Error"); break; 
+}
+</pre>
+			<p><code>switch</code> конструкцията се ползва, когато дадена променлива може да има една от няколко предварително определени стойности. <code>case</code> указва какво трябва да се случи ако променливата има конкретна стойност. <code>default</code> клаузата указва какво да се случи, ако никой от изброените случаи не е удовлетворен.</p>
+			<p>Всяка switch конструкция може да се замести с <code>if-elseif-elseif-else</code> клауза: </p>
+<pre class="prettyprint" data-lang="javascript">
+if (direction === 1) {
+	console.log("North"); 
+} else if (direction === 2) {
+	// ...
+} else {
+	console.log("Error");
+}
+</pre>
+			
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>switch: break</code></h2>
+		</hgroup>
+		<article class="smaller">
+			<p>След края на всеки <code>case</code> трябва да има <code>break</code>. В противен случай switch-а ще прoдължи със следващите case-ове:</p>
+<pre class="prettyprint" data-lang="javascript">
+var direction = 3;
+switch (direction) {
+	case 2: console.log("East"); /* break; */
+	case 3: console.log("South"); /* break; */
+	case 4: console.log("West"); /* break; */
+	default: console.log("Error"); /* break; */
+}
+// => South West Error
+</pre>
+			<p>Това поведение позволява да имате код, хващащ няколко случая така: </p>
+<pre class="prettyprint" data-lang="javascript">
+var res = 1;
+switch (res) {
+	case 1:
+	case 2:
+		console.log("res"); break;
+	case 3:
+		console.log("bla"); break;
+}
+</pre>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>condition ? when-true : when-false</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var user_age = 15;
+var user_group = age &lt; 20 ? "teenager" : "adult";
+// user_group is now "teenager"</pre>
+			<p>Троичния оператор е прост начин да напишете <code>if</code>, който връща стойност. </p>
+			<p>Той се състои от следните клаузи: </p>
+			<ul>
+				<li>условие -- израза преди <code>?</code></li>
+				<li>стойност ако е вярно -- израза между <code>?</code> и <code>:</code></li>
+				<li>стойност ако е грешно -- израза след <code>:</code></li>
+			</ul>
+			<p>Можете да вложите 2 троични оператора един в друг, но не го правете: </p>
+			<img src="images/content/codinghorror.gif" align="right">
+<pre class="prettyprint" data-lang="javascript">
+var age_group = age &lt; 20 ? <b class="hidden-highlight">age &lt; 12 ? "child" : "teenager"</b> : "adult";</pre>
+			<p>Този оператор може да бъде елегантен начин да изразите логиката си. Използван неправилно, може да причини много проблеми. </p>
+			
+		</article>
+	</slide>
 
 	<slide>
 		<hgroup>
 			<h2>Loops - Цикли</h2>
 		</hgroup>
 		<article>
-			<p>Цикъл е конструкция повтаряща последователно блок от код докато определено условие е изпълнено. Всяка итерация(повторение) може да променя променливите, които участват в условито на цикъла, така че в един момент то да стане невярно, и изпълнението да продължи.</p>
+			<p>Цикъл е конструкция повтаряща <b>последователно</b> блок от код докато определено условие е изпълнено. Всяка <b>итерация</b>(повторение) може да променя променливите, които участват в условито на цикъла, така че в един момент то да стане невярно, обхождането да спре, и изпълнението да продължи с кода идващ след цикъла.</p>
 
-			<p>Има 3 основни вида цикъл:</p>
+			<p>В javascript има 3 основни вида цикъл:</p>
 
 			<ul>
 				<li><code>for</code> с брояч</li>
@@ -45,29 +170,20 @@
 		<hgroup>
 			<h2><code>for</code> цикъл с брояч</h2>
 		</hgroup>
-		<article>
+		<article class="smaller">
 			<p>Пример: </p>
 			<pre class="prettyprint" data-lang="javascript">
 for (var i = 0; i &lt; 10; i++) {
-	console.log("i is now " + i);
+    console.log("i is now " + i);
 }</pre>
 			<p>Този вид цикъл е подходящ, когато трябва да извършите дадена операция определен брой пъти. </p>
 
 			<p><code>for</code> цикъла се състои от следните части:</p>
-			<ul class="build fade">
-				<li>
-					Ключовата дума <code>for</code>
-				</li>
-				<li>
-					Инициализация: <code>var i = 0</code>
-				</li>
-				<li>
-					Условие: <code>i &lt; 10</code>
-				</li>
-				<li>
-					Стъпка: <code>i++</code>
-				</li>
-
+			<ul>
+				<li>Ключовата дума <code>for</code></li>
+				<li>Инициализация: <code>var i = 0</code></li>
+				<li>Условие: <code>i &lt; 10</code></li>
+				<li>Стъпка: <code>i++</code></li>
 				<li>Тяло: <code>console.log("i is now " + i);</code></li>
 			</ul>
 		</article>
@@ -79,20 +195,20 @@ for (var i = 0; i &lt; 10; i++) {
 		</hgroup>
 		<article>
 			<pre class="prettyprint" data-lang="javascript">
-for (var i = 0; i &lt; 2; i++) {
-	console.log("i is now " + i);
-}
+<b class="initally-hidden-highlight">+--&gt;</b>for (var i = 0; i &lt; 2; i++) { <b class="initally-hidden-highlight">--+</b>
+<b class="initally-hidden-highlight">|</b>    console.log("i is now " + i);<b class="initally-hidden-highlight">  |</b>
+<b class="initally-hidden-highlight">+---</b>} <b class="initally-hidden-highlight">&lt;-----------------------------+</b>
 console.log("Loop completed");</pre>
 			<p>Ето какво ще се случи зад кулисите:</p>
 			<pre class="prettyprint" data-lang="javascript">
 var i = 0;
-console.log("i is now 0");
-i++; // i is now 1
+	console.log("i is now 0");
+	i++; // i is now 1
 i &lt; 2 ? true ... 
 // Условието е вярно, връщаме се в началото,
 // прилагаме стъпката и изпълняваме тялото отново
-console.log("i is now 1");
-i++; // i is now 2
+	console.log("i is now 1");
+	i++; // i is now 2
 i &lt; 2 ? false ...  // Условието вече не е вярно, излизаме от цикъла ... 
 console.log("Loop completed");
 </pre>
@@ -118,7 +234,7 @@ while (counter &lt; 5) {
 			<p>Всяка итерация на цикъла трябва да извършва определа работа, така че в един момент условието да стане false. </p>
 
 			<p>Цикъла се състои от следните клаузи:</p>
-			<ul class="build fade">
+			<ul class="">
 				<li>ключовата дума while</li>
 				<li>условието на цъкъла в кръгли скоби след ключовата дума</li>
 				<li>блок от код, който ще бъде изпълняван докато условието е truthy</li>
@@ -184,7 +300,112 @@ console.log("Name is " + name);</pre>
 			</ul>
 		</article>
 	</slide>
+	
+	<slide>
+		<hgroup>
+			<h2>Безкрайни цикли</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<p>Когато има комплексна логика в условието на цикъла е възможно да изпаднете в ситуация, в която то никога не става грешно:</p>
+			<pre class="prettyprint" data-lang="javascript">
+for (var i=0; i &lt; 10; <b class="hidden-highlight">i--</b>) {
+	console.log("i is now " + i);
+}</pre>
+			<p>Можете ли да намерите проблема в този код? </p>
+			<p>Резултата от него е около 60 секундно зареждане на страницата и след това: </p>
+			<img src="images/content/js-2/browser-hanging.png" alt="">
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2><code>for</code> цикъл за обекти</h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var animal = {
+	"type": "dog",
+	"name": "Jack",
+	"age": 3
+}
+for (var property in animal)  {
+	console.log(property + ": " + animal[property]);
+}</pre>
+<pre class="prettyprint" data-lang="console output">
+type: dog
+name: Jack
+age: 3 </pre>
+			<p>Този цикъл предоставя начин да се итерира през всички елементи на обект. Не го използвайте, освен ако не сте абсолютно сигурни че ви трябва. </p>
+
+			<p>Ще го обсъдим в детайли, когато говорим за обекти. </p>
+
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Ранно излизане от цикъл: <code>break</code> и <code>continue</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Често се налага да прекратите цикъл преждевременно. javascript предоставя 2 механизма за това: </p>
+			<ul>
+				<li><code>break</code></li>
+				<li><code>continue</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>break</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><code>break</code> прекъсва изпълнението на цикъла и <b>продължава със кода след цикъла</b>. </p>
+
+<pre class="prettyprint" data-lang="javascript">
+var number = 14;
+var is_prime = true;
+for (var i=2; i &lt; number; i++) {
+    if (number % i === 0) {
+        is_prime = false;
+        <b class="hidden-highlight">break;</b><b class="initally-hidden-highlight">------+</b>
+    }               <b class="initally-hidden-highlight">|</b>
+}                   <b class="initally-hidden-highlight">|</b>
+<b class="initally-hidden-highlight">&lt;-------------------+</b>
+if (is_prime) {                                      
+	console.log("Number is prime. ");
+} else {
+	console.log("Number is NOT prime. ");
+}
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>continue</code></h2>
+		</hgroup>
+		<article class="smaller">
+			<p><code>continue</code> пропуска останалата част от текущата итерация и <b>продължава със следващата итерация. </b></p>
+
+<pre class="prettyprint" data-lang="javascript">
+var number = 14;
+for (var i=2; i &lt; number; i++) { <b class="initally-hidden-highlight">&lt;----+</b>
+    if (i % 2 === 0) {                 <b class="initally-hidden-highlight">|</b>
+        console.log("i is even. ");   <b class="initally-hidden-highlight">|</b>
+        continue;<b class="initally-hidden-highlight">---------------------+</b>
+    }
+    console.log("i is odd. ");
+}
+</pre>
+			<p>Удобен е когато се установи че текущата итерация не е перспективна и трябва да се премине към следващата. </p>
+
+			<p>Може да бъде заместена от <code>if</code>, но е по-елегантен защото избягва дълбоко влагане. </p>
+		</article>
+	</slide>
+	
 	<!--
 	<slide>
 		<hgroup>
