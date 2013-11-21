@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript Basics 1</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="all" href="theme/css/default.css">
+	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+	<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+
+	<slide class="title-slide segue nobackground">
+		<article class="flexbox logo-welcome">
+			<span><img src="images/2c/logo.png"></span>
+		</article>
+
+		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+		<hgroup class="auto-fadein">
+			<h1 data-config-title><!-- populated from slide_config.json --></h1>
+			<h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+			<p data-config-presenter><!-- populated from slide_config.json --></p>
+		</hgroup>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Масиви</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Масив е колекция от елементи, които могат да бъдат достъпени чрез пореден индекс. </p>
+
+			<p>В javascript масивите нямат определен размер. Те могат да се допълват и растат без да предизвикват overflow проблеми като в други езици. </p>
+
+			<p>Масиви се използват, когато трябва да запазите колекция от елементи, чиято последователност е важна. </p>
+
+<pre class="prettyprint" data-lang="javascript">
+var arr_literal = ["js", "arrays", "are", "weird"];
+</pre>
+			<p>Повечето browser-и позволяват да оставите допълнителна запетая след последния елемент. В по-стари версии на Internet Explorer обаче, това предизвиква parse error. Не го правете. </p>
+			<p>Четенето на елемент от масив става с оператора <code>[index]</code>:</p>
+<pre class="prettyprint" data-lang="javascript">
+console.log(arr_literal[0]); // js
+</pre>
+			<p>Първият елемент на масива се намира на индекс 0; втория е на индекс 1 и т.н. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>length</code> атрибут</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Всеки масив има property <code>length</code>, подобно на низовете, което указва колко елемента има в масива. Тъй като елементите се индексират от 0, последния елемент се намира на индекс <code>arr.length - 1</code></p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["js", "arrays", "are", "weird"];
+console.log(arr.length); // 4
+console.log(arr[arr.length - 1]); // weird
+</pre>
+			<p><code>length</code> propery-то на масива е writable, което значи че можете да променяте дължината на масива чрез него: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apple", "Banana", "Pear", "Orange"];
+arr.length = 2;
+console.log(arr); // ["Apple", "Banana"]</pre>
+			<p>Не правете това, има други, по-елегантни начини да постигнете същия ефект. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Добавяне на елементи в масив</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Има 2 начина да добавите елементи в масив: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apple"];
+arr[1] = "Banana";
+arr.push("Orange");
+console.log(arr); // ["Apple", "Banana", "Orange"] </pre>
+		<p>Първият начин е като използвате нотацията <code>array[index] = value</code>. Това ви позволява да добавите(или презапишете) елемент на точно определен индекс. Можете да добавите елемент и на индекс по голям от array.length: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apple"];
+arr[4] = "Banana";
+console.log(arr); // ["Apple", undefined, undefined, undefined, "Banana"]</pre>
+		<p>Ако просто искате да добавите елемент на края на масива е удобно да ползвате метода <code>push</code>: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apple"];
+arr.push("Orange");
+console.log(arr); // ["Apple", "Orange"] </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Елементи на масив</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>В масив можете да поставите стойности от всякакъв тип; javascript <strong>не</strong> изисква тези стойности да бъдат от един и същи тип: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = [
+	5,
+	"javascript string",
+	{
+		key: "value"
+	},
+	["inner array string", 15],
+	function () {
+		console.log("I am a function!");
+	}
+];</pre>
+		<p>Не е добра практира да правите това, защото създавате неконсистентни данни, които ще са трудни за обработка. Най-вероятно можете да намерите по-добър начин да структурирате информацията. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>delete</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Оператора <code>delete</code> позволява да изтриете елемент от масив: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apple", "Banana"];
+delete arr[0];
+console.log(arr); // [undefined, "Banana"]
+console.log(arr.length); // 2</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Многомерни масиви</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато елементите на масив са други масиви се получава многомерен масив: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = [
+     <b class="initially-hidden-highlight">0   1   2   3   4</b>
+  <b class="initially-hidden-highlight">0</b> [10, 11, 12, 13, 14],
+  <b class="initially-hidden-highlight">1</b> [20, <b class="hidden-highlight">21</b>, 22, 23, 24],
+  <b class="initially-hidden-highlight">2</b> [30, 31, 32, 33, 34],
+  <b class="initially-hidden-highlight">3</b> [40, 41, 42, 43, 44],
+  <b class="initially-hidden-highlight">4</b> [50, 51, 52, 53, 54]
+];
+</pre>
+		<p>Многомерните масиви могат да преставят матрици(в математическия смисъл) или други по-сложни структури от данни. </p>
+		<p>За да достигнете до елемент на многомерен масив трябва да насложите оператора за четене на елемент на масив така: </p>
+<pre class="prettyprint" data-lang="javascript">
+console.log("the element at position (1, 1) is " + <b class="hidden-highlight">arr[1][1]</b>); // 21 </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Итерация в масив</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>За да обиколите масив просто трябва да направите цикъл, който минава през индексите му:</p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = ["Apples", "Banana", "Pear"];
+for ( var i = 0; i &lt; arr.length; i++) {
+    console.log(arr[i]);
+}
+</pre>
+<pre class="prettyprint" data-lang="result">
+Apples
+Banana
+Pear
+</pre>
+		<p>За да обиколите двумерен масив, трябва да използвате два вложени цикъла: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = [ [1, 2], [3, 4] ];
+for ( var row = 0; row &lt; <b>arr.length</b>; row++ ) {
+    for ( var col = 0; col &lt; <b>row.length</b>; col++ ) {
+        console.log( arr[row][col] );
+    }
+}
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Методи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop"><code>arr.pop()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push"><code>arr.push()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse"><code>arr.reverse()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift"><code>arr.shift()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"><code>arr.sort()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"><code>arr.splice()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift"><code>arr.unshift()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat"><code>arr.concat()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join"><code>arr.join()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"><code>arr.slice()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString"><code>arr.toString()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf"><code>arr.indexOf()</code></a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf"><code>arr.lastIndexOf()</code></a></li>
+			</ul> 			
+		</article>
+	</slide>
+	<slide class="backdrop"></slide>
+
+</slides>
+</body>
+</html>

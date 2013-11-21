@@ -15,6 +15,6 @@ Comments: If your feel your code is too complex to understand without comments, 
 
 <!-- операторите && и || не стигат до операндите след първия, ако това не е необходимо.  -->
 
-Изпълнение на javascript от други файлове. 
+<!-- Изпълнение на javascript от други файлове.  -->
 
 <!-- Да се махне == и да се замести с === -->

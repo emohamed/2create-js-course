@@ -166,12 +166,12 @@ console.log(greeting + ", " + name);
 
 		<article class="">
 <pre class="prettyprint" data-lang="javascript">
-var text = "Lorem ipsum dolor sit amet, consectetur adipisicing<b class="initally-hidden-highlight">\r\n" + </b>
-<b class="initally-hidden-highlight">"</b>elit. Corporis, ratione, accusantium fugit consectetur pariatur";
+var text = "Lorem ipsum dolor sit amet, consectetur adipisicing<b class="initially-hidden-highlight">\r\n" + </b>
+<b class="initially-hidden-highlight">"</b>elit. Corporis, ratione, accusantium fugit consectetur pariatur";
 
 console.log("Message for " + text);</pre>
 			<p>Разликата между <code>\r</code> и <code>\n</code>. </p>
-			
+
 		</article>
 	</slide>
 	<slide>
@@ -183,19 +183,20 @@ console.log("Message for " + text);</pre>
 			<p>Всеки низ е обект и притежава properties и methods:</p>
 			
 			<pre class="prettyprint" data-lang="javascript">
-var string = "javascript strings";
-console.log(string.length); 
+var s = "javascript strings";
+console.log(s.length); 
 // => 18</pre>
-			<p>Методите са функции, които работят в контекста на низа. Те не променят низа, а връщат нов низ. Няколко примера:</p>
 
+			<p>Методите са функции, които работят в контекста на низа. Те не променят низа, а връщат нов низ. Няколко примера:</p>
+			
 			<ul>
-				<li><code>.indexOf()</code></li>
-				<li><code>.lastIndexOf()</code></li>
-				<li><code>.replace()</code></li>
-				<li><code>.charAt()</code></li>
-				<li><code>.slice()</code></li>
-				<li><code>.substr()</code></li>
-				<li><code>.toUpperCase()</code>, <code>.toLowerCase()</code></li>
+				<li><code>s.indexOf()</code></li>
+				<li><code>s.lastIndexOf()</code></li>
+				<li><code>s.replace()</code></li>
+				<li><code>s.charAt()</code></li>
+				<li><code>s.slice()</code></li>
+				<li><code>s.substr()</code></li>
+				<li><code>s.toUpperCase()</code>, <code>.toLowerCase()</code></li>
 			</ul>
 		</article>
 	</slide>
@@ -360,7 +361,7 @@ null == undefined    // true
 			<p>Когато смесвате 2 различни логически оператора трябва да ползвате скоби: </p>
 <pre class="prettyprint" data-lang="javascript">
 var a = true, b = false, c = true;
-console.log(a &amp;&amp; <b class="initally-hidden-highlight">(</b>b || c<b class="initally-hidden-highlight">)</b>);
+console.log(a &amp;&amp; <b class="initially-hidden-highlight">(</b>b || c<b class="initially-hidden-highlight">)</b>);
 </pre>
 			<p>Операндите в логическите оператори могат да бъдат и резултати от функции. </p>
 <pre class="prettyprint" data-lang="javascript">
