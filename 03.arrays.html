@@ -170,7 +170,7 @@ Pear
 <pre class="prettyprint" data-lang="javascript">
 var arr = [ [1, 2], [3, 4] ];
 for ( var row = 0; row &lt; <b>arr.length</b>; row++ ) {
-    for ( var col = 0; col &lt; <b>row.length</b>; col++ ) {
+    for ( var col = 0; col &lt; <b>arr[row].length</b>; col++ ) {
         console.log( arr[row][col] );
     }
 }
