@@ -28,10 +28,84 @@
 		</hgroup>
 
 		<article class="smaller">
+			<p>Обектите в javascript представляват колекция от двойки ключове(keys) и стойности(values). Те се дефинират така: </p>
+<pre class="prettyprint" data-lang="javascript">
+var dog = {
+    name: "Jack",
+    age: 4,
+    weight: 5
+};</pre>
+			<p>В този пример ключовете са <code>name</code>, <code>age</code> и <code>weight</code>. Стойностите са съответно <code>Jack</code>, <code>4</code> и <code>5</code>. Запетая след последния елемент не трябва да има.</p>
+
+			<p>В javascript всичко е обект(включително низовете, числата, масивите и функциите). Обектите не се създават като инстанция на клас. Те са class-free -  започват съществуването си като копие на друг обект(техен прототип). </p>
+
+			<p>Обектите в javascript имат 2 приложения: <b>асоцииативни масиви</b> и обекти <b>в смисъл на ООП</b>. Днес ще говорим за обектите в смисъл на асоцииативни масиви.</p>
+
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Ключове: правила</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Ключовете могат да бъдат всеки низ(включително празен низ).</p>
+			<p>Когато ключа е валиден идентификатор(отговарящ на <code>[a-zA-Z_][a-zA-Z0-9_]*</code>) той няма нужда да бъде обграждан в двойни кавички и може да присъства в кода като литерал: </p>
+<pre class="prettyprint" data-lang="javascript">
+var dog = {
+	<b>age</b>: 9
+}</pre>
+			<p>Когато ключа не е валиден идентификатор, той трябва да бъде обграден в двойни кавички: </p>
+<pre class="prettyprint" data-lang="javascript">
+var dog = {
+	<b>"weight-when-hungry"</b>: 15
+}</pre>
+
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Стойности: правила</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Стойностите могат да бъдат всяка стойност освен <code>undefined</code>, включително числа, низове, функции, масиви, обекти, null или изрази: </p>
+<pre class="prettyprint" data-lang="javascript">
+var flight = {
+	airline: "Bulgaria Air",
+	number: 1544,
+	from: {
+		IATA: "VN",
+		city: "Varna",
+		time: "2013-05-04 15:30"
+	},
+	to: {
+		IATA: "SF",
+		city: "Sofia",
+		time: "2013-05-04 16:00"
+	}
+}</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Взимане на информация от обект</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>За да прочетете информация от property на обект може да използвате 2 различни синтаксиса, които правят едно и също: </p>
+<pre class="prettyprint" data-lang="javascript">
+var dog = {
+	name: "Jack",
+	"weight-when-hungry": 15
+};
+console.log(dog.name);
+console.log(dog["weight-when-hungry"]);</pre>
+			<p>С оператора точка може да вземете само property, което има ключ валиден идентификатор. </p>
+			<p>С нотицията <code>["property-name"]</code> може да вземате всякакви properties, но обикновенно се използва за да вземете такива които не са валидни идентификатори. </p>
 			<p></p>
 		</article>
 	</slide>
-
 	<slide class="backdrop"></slide>
 
 </slides>
