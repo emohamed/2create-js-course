@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" media="all" href="theme/css/default.css">
 	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
 </head>
 <body style="opacity: 0">
@@ -152,7 +153,7 @@
 			<p>Низа не може да съдържа нов ред директно, трябва да се използва <code>\n</code>, <code>\r</code> или и двете</p>
 
 			<p>Concatenation("слепване") на 2 низа се прави с оператора плюс:</p>
-			<pre class="prettyprint" data-lang="javascript">
+			<pre class="prettyprint fiddle" data-lang="javascript">
 var name = "Emo";
 var greeting = "Good evening";
 console.log(greeting + ", " + name);
@@ -223,6 +224,80 @@ console.log(s.length);
 			<p>Всичко останало се свежда до <code>true</code>(truthy е).</p>
 
 
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Функции</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Функциите са широка тема, която ще обсъдим в дълбочина по-късно. За момента само ще видим какъв е основния им синтаксис и какво представляват.</p>
+<pre class="prettyprint" data-lang="javascript">
+// Returns a numeric value between -1 and 1 that
+// represents the sine of the angle given in degrees.
+function sin_from_degrees(angle_degrees) {
+    var angle_radians = (angle_degrees * Math.PI) / 180;
+    var result = Math.sin(angle_radians);
+    return result;
+}
+var angle_degrees = 90;
+var res = sin_from_degrees(angle_degrees);
+console.log("Sine of " + angle_degrees + " is " + res);</pre>
+		
+			<ul class="builda fade">
+				<li><code>function</code> - ключова дума дефинираща функция</li>
+				<li><code>comment</code> - добре е функцията да има коментар оказващ какво е предназначението й</li>
+				<li><code>sin</code> - име на функцията</li>
+				<li><code>angle_degrees</code> - параметри на функцията</li>
+				<li><code>angle_radians</code> - локални променливи на функцията </li>
+				<li><code>return</code> - върната стойност</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции: връщане на стойност</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Функциите могат да върнат или да не върнат стойност. Когато не се връща стойност, функцията обикновенно има странични ефекти(side effects):</p>
+<pre class="prettyprint" data-lang="javascript">
+function log_matrix(message, matrix) {
+    console.log(message);
+    console.table(matrix);
+}
+log_matrix("Ping ping results", [
+    ["", "Emo", "Stefan"],
+    ["Game 1", "1:1", "2:1"],
+    ["Game 2", "0:1", "0:2"]
+]);</pre>
+			<p>Резултата от функцията е <code>undefined</code>, но тя извършва полезна работа сама по себе си вместо да връща резултат. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции: преизползване</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Целта на функциите да намалят сложността на кода и да го направят по лесно разбираем. Те ви дават възможност да изолирате определена операция, да й дадете име и да я викате множество пъти без да има нужда да я повтаряте: </p>
+<pre class="prettyprint" data-lang="javascript">
+// Transforms degrees in radians
+function degrees_to_radians(angle_degrees) {
+	return (angle_degrees * Math.PI) / 180
+}
+// Returns cosine from an angle in degrees
+function cos_from_degrees(angle_degrees) {
+	return Math.cos(degrees_to_radians(angle_degrees));
+}
+// Returns sine from an angle in degrees
+function sin_from_degrees(angle_degrees) {
+	return Math.sin(degrees_to_radians(angle_degrees));
+}
+console.log(sin_from_degrees(0));
+console.log(cos_from_degrees(0));</pre>
 		</article>
 	</slide>
 
