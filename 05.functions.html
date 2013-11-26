@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript objects</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="all" href="theme/css/default.css">
+	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+	<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+
+	<slide class="title-slide segue nobackground">
+		<article class="flexbox logo-welcome">
+			<span><img src="images/2c/logo.png"></span>
+		</article>
+
+		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+		<hgroup class="auto-fadein">
+			<h1 data-config-title><!-- populated from slide_config.json --></h1>
+			<h2 data-config-subtitle>Lecture 5 - Functions</h2>
+			<p data-config-presenter><!-- populated from slide_config.json --></p>
+		</hgroup>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Pay Attention</h2>
+		</hgroup>
+
+		<article class="">
+			<p>Разбирането на механизма на работа на функциите е критично важно за ефективната работа с javascript. </p>
+			<p>Те са градивните блокове на всяка по-голяма система и изискват известно усилие за да се използват правилно.</p>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Дефиниране на функции</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Функциите в javascript са обекти, т.е. функция може да присъства навсякъде където може да присъства стойност. </p>
+
+			<p>Дефинирането на функция в javascript в действителност създава променлива, която се казва като името на функцията и сочи към обекта на функцията. </p>
+<pre class="prettyprint" data-lang="javascript">
+function add(a, b) {
+	return a + b;
+}
+// Работи идентично на: 
+var add = function (a, b) {
+	return a + b;
+}
+</pre>
+			<p>Тъй като функциите са просто обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
+		</article>
+	</slide>
+
+	
+	
+	<slide class="backdrop"></slide>
+</slides>
+</body>
+</html>
