@@ -29,10 +29,41 @@
 
 		<article class="">
 			<p>Разбирането на механизма на работа на функциите е критично важно за ефективната работа с javascript. </p>
-			<p>Те са градивните блокове на всяка по-голяма система и изискват известно усилие за да се използват правилно.</p>
+			<p>Те са градивните блокове на всяка система и изискват известно усилие за да се разберат в дълбочина.</p>
+			<p>Функциите в javascript <b>не</b> са взаимствани от C-подобните езици за програмиране, ами от Scheme. Концепциите, за които ще говорим днес по всяка вероятност не са ви познати от други езици за програмиране. </p>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>First-class citizens</h2>
+		</hgroup>
+	
+		<article class="smaller">
+			<p>Функциите в javascript са first-class citizens. Това означава, че те могат да присъстват навсякъде, където може да присъства израз:</p>	
+			<ul>
+				<li>Като стойност на променлива</li>
+				<li>Като елемент на масив</li>
+				<li>Като стойност на object property(метод)</li>
+				<li>Като аргумент на друга функция</li>
+				<li>Като резултат върнат от друга функция</li>
+			</ul>
+			<p>Функциите могат да имат или да нямат име. Функции без име се наричат анонимни. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Примери за функции в необичаен контекст</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<p>Функция, подадена като аргумент на друга функция: </p>
+<pre class="prettyprint" data-lang="javascript">
+setTimeout(function () {
+	console.log("I'm a little bit slow ... ");
+}, 500)
+</pre>
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>Функции</h2>
@@ -105,6 +136,28 @@ console.log(sin_from_degrees(0));
 console.log(cos_from_degrees(0));</pre>
 		</article>
 	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Scope</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Scope в контекста на език за програмиране е концепция за това колко "известна" е една променлива. </p>
+			<p>В повечето C-like езици за програмиране има block scope. В javascript това не е така. Единствено функциите създават собствен scope в javascript. </p>
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+	var result = a + b;	
+	return result;
+}
+console.log(add(4, 5)); // 9
+console.log(result); // undefined</pre>
+			<p>Променливата <code>result</code> е локална за функцията <code>add</code>. Тя се инициализира наново всеки път когато функцията се извика и не може да бъде "видяна" отвън, освен ако не бъде върната чрез return statement. </p>
+			<p></p>
+		</article>
+	</slide>
+
+
 	
 	
 	<slide class="backdrop"></slide>

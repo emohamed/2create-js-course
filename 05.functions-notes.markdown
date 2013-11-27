@@ -38,6 +38,8 @@ module pattern
 
 arguments
 
+chained methods
+
 this
 
 recursion
