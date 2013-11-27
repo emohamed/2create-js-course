@@ -35,26 +35,76 @@
 
 	<slide>
 		<hgroup>
-			<h2>Дефиниране на функции</h2>
+			<h2>Функции</h2>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Функциите в javascript са обекти, т.е. функция може да присъства навсякъде където може да присъства стойност. </p>
-
-			<p>Дефинирането на функция в javascript в действителност създава променлива, която се казва като името на функцията и сочи към обекта на функцията. </p>
 <pre class="prettyprint" data-lang="javascript">
-function add(a, b) {
-	return a + b;
+// Returns a numeric value between -1 and 1 that
+// represents the sine of the angle given in degrees.
+function sin_from_degrees(angle_degrees) {
+    var angle_radians = (angle_degrees * Math.PI) / 180;
+    var result = Math.sin(angle_radians);
+    return result;
 }
-// Работи идентично на: 
-var add = function (a, b) {
-	return a + b;
-}
-</pre>
-			<p>Тъй като функциите са просто обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
+var angle_degrees = 90;
+var res = sin_from_degrees(angle_degrees);
+console.log("Sine of " + angle_degrees + " is " + res);</pre>
+		
+			<ul class="builda fade">
+				<li><code>function</code> - ключова дума дефинираща функция</li>
+				<li><code>comment</code> - добре е функцията да има коментар оказващ какво е предназначението й</li>
+				<li><code>sin</code> - име на функцията</li>
+				<li><code>angle_degrees</code> - параметри на функцията</li>
+				<li><code>angle_radians</code> - локални променливи на функцията </li>
+				<li><code>return</code> - върната стойност</li>
+			</ul>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции: връщане на стойност</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<p>Функциите могат да върнат или да не върнат стойност. Когато не се връща стойност, функцията обикновенно има странични ефекти(side effects):</p>
+<pre class="prettyprint" data-lang="javascript">
+function log_matrix(message, matrix) {
+    console.log(message);
+    console.table(matrix);
+}
+log_matrix("Ping pong results", [
+    ["", "Emo", "Stefan"],
+    ["Game 1", "1:1", "2:1"],
+    ["Game 2", "0:1", "0:2"]
+]);</pre>
+			<p>Резултата от функцията е <code>undefined</code>, но тя извършва полезна работа сама по себе си вместо да връща резултат. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции: преизползване</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Целта на функциите да намалят сложността на кода и да го направят по лесно разбираем. Те ви дават възможност да изолирате определена операция, да й дадете име и да я викате множество пъти без да има нужда да я повтаряте: </p>
+<pre class="prettyprint" data-lang="javascript">
+// Transforms degrees in radians
+function degrees_to_radians(angle_degrees) {
+	return (angle_degrees * Math.PI) / 180
+}
+// Returns cosine from an angle in degrees
+function cos_from_degrees(angle_degrees) {
+	return Math.cos(degrees_to_radians(angle_degrees));
+}
+// Returns sine from an angle in degrees
+function sin_from_degrees(angle_degrees) {
+	return Math.sin(degrees_to_radians(angle_degrees));
+}
+console.log(sin_from_degrees(0));
+console.log(cos_from_degrees(0));</pre>
+		</article>
+	</slide>
 	
 	
 	<slide class="backdrop"></slide>

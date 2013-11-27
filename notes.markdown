@@ -18,3 +18,5 @@ Comments: If your feel your code is too complex to understand without comments, 
 <!-- Изпълнение на javascript от други файлове.  -->
 
 <!-- Да се махне == и да се замести с === -->
+
+arr.length - cache it before the loop

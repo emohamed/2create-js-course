@@ -2,7 +2,7 @@
 
 Functions are first class citizens in javascript. 
 
-Functions are objects, so they can be stored in variables, objects, arrays. They can be invoked.
+Functions are objects, so they can be stored in variables, objects, arrays. They can be invoked. They can appear whereever expressions can appear. 
 
 declaring functions:
     
