@@ -7,7 +7,6 @@ Contents:
  0. Arrays
  0. Objects
  0. Functions
- 0. Exceptions
  0. DOM and basic jQuery
  0. Async code
  0. HTTP basics

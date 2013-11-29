@@ -7,10 +7,6 @@ i- -; - -i;
 i += 2;
 i -= 2; -->
 
-General style: indenation, tabs, spaces, quote styles, braces, comments
-
-Comments: If your feel your code is too complex to understand without comments, your code is probably just bad. Rewrite it until it doesn’t need comments any more. If, at the end of that effort, you still feel comments are necessary, then by all means, add comments. Carefully.
-
 <!-- 58 а не 13 запетая -->
 
 <!-- операторите && и || не стигат до операндите след първия, ако това не е необходимо.  -->
@@ -19,4 +15,6 @@ Comments: If your feel your code is too complex to understand without comments, 
 
 <!-- Да се махне == и да се замести с === -->
 
-arr.length - cache it before the loop
+General style: indenation, tabs, spaces, quote styles, braces, comments
+
+Comments: If your feel your code is too complex to understand without comments, your code is probably just bad. Rewrite it until it doesn’t need comments any more. If, at the end of that effort, you still feel comments are necessary, then by all means, add comments. Carefully.
