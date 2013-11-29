@@ -30,7 +30,7 @@
 		<article class="">
 			<p>Разбирането на механизма на работа на функциите е критично важно за ефективната работа с javascript. </p>
 			<p>Те са градивните блокове на всяка система и изискват известно усилие за да се разберат в дълбочина.</p>
-			<p>Функциите в javascript <b>не</b> са взаимствани от C-подобните езици за програмиране, ами от Scheme. Концепциите, за които ще говорим днес по всяка вероятност не са ви познати от други езици за програмиране. </p>
+			<p>Функциите в javascript <b>не</b> са взаимствани от C-подобните езици за програмиране, ами от функционален език за програмиране - Scheme. Концепциите, за които ще говорим днес по всяка вероятност не са ви познати, защото не съществуват в класическите езици. </p>
 		</article>
 	</slide>
 	<slide>
@@ -59,23 +59,21 @@
 			<p>Функция, подадена като аргумент на друга функция: </p>
 <pre class="prettyprint" data-lang="javascript">
 setTimeout(function () {
-	console.log("I'm a little bit slow ... ");
+    console.log("I'm a little bit slow ... ");
 }, 500)
 </pre>
+			<p>Функция, върната като резултат от друга функация: </p>
 <pre class="prettyprint" data-lang="javascript">
 function get_operation() {
-    return function (a, b) {
-        return a + b;
-    }
+    return function (a, b) { return a + b; }
 }
 var func = get_operation();
 console.log(func(1, 5));
 console.log(get_operation()(1, 5));</pre>
+			<p>Функция в property на обект(метод): </p>
 <pre class="prettyprint" data-lang="javascript">
 var operations = {
-    add: function (a, b) {
-        return a + b;
-    }
+    add: function (a, b) { return a + b; }
 };
 console.log(operations.add(4, 1));
 </pre>
@@ -197,7 +195,7 @@ log_matrix("Ping pong results", [
 		</hgroup>
 
 		<article class="smaller">
-			<p>Целта на функциите да намалят сложността на кода и да го направят по лесно разбираем. Те ви дават възможност да изолирате определена операция, да й дадете име и да я викате множество пъти без да има нужда да я повтаряте: </p>
+			<p>Целта на функциите е да намалят сложността на кода и да го направят по лесно разбираем. Те ви дават възможност да изолирате определена операция, да й дадете име и да я викате множество пъти без да има нужда да я повтаряте: </p>
 <pre class="prettyprint" data-lang="javascript">
 // Transforms degrees in radians
 function degrees_to_radians(angle_degrees) {
@@ -245,7 +243,7 @@ console.log(result); // Uncaught ReferenceError: result is not defined </pre>
 
 		<article class="smaller">
 			<p>Кода написан директно в <code>script</code> таг, а не във фунцкия се изпълнява в глобалния scope. Всички променливи в този scope се създават като properties на обекта window. </p>
-			<p>Колкото по-малко неща се намират в глобалния scope, толкова по-добре. Това намаля възможността за конфликти. Със създаването на функция, в която да се изпълнява кода ви, вие поставяте кода си в среда, над която имате повече контрол. </p>
+			<p>Колкото по-малко променливи се намират в глобалния scope, толкова по-добре. Това намаля възможността за конфликти. Със създаването на функция, в която да се изпълнява кода ви, вие поставяте кода си в среда, над която имате контрол. </p>
 			<p>Променливите, деклариране в глобалния scope се виждат във функциите надолу без да има нужда да ги глобализирате: </p>
 <pre class="prettyprint" data-lang="javascript">
 var base_num = 5;
@@ -264,13 +262,38 @@ console.log(add_to_base(5)); // 10</pre>
 			<p>Когато в глобалния scope има променлива с определено име, и в локален scope присъства променлива със същото име, javascript работи с локалната променлива а не с глобалната: </p>
 <pre class="prettyprint" data-lang="javascript">
 var base_number = 5;
-function add_to_base(number) {
+var add_to_base = function (number) {
     var base_number = 10;
     return base_number + number;
 }
 console.log(add_to_base(6)); // 16</pre>
 			<p>Този начина на работа дава гаранция, че когато използвате определени променливи във функциите си, те не зависят от външен код. Това е хубаво, защото ви позволява да мислите само за кода във функцията и да се абстрахирате от всичко останало. </p>
 			<p>Когато пишете комплексен код, е по-лесно много код да работи със споделени променливи. Това обаче прави кода много по-труден за четене и разбиране.</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Автоматично глобализиране на променливи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Javascript автоматично глобализира променлива, която не е декларирана с <code>var</code> при първото й извикване. Това е design грешка, която по исторически причини е останала в езика и до днес. </p>
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+    result = a + b;
+    return result;
+}
+console.log(add(5, 1)); // 6
+console.log(result); // 6</pre>
+			<p>Можете да избегнете тази грешка ако използвате стриктен режим:</p>
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+    "use strict";
+    result = a + b; // Uncaught ReferenceError: result is not defined 
+    return result;
+}
+console.log(add(5, 1));
+</pre>
 		</article>
 	</slide>
 	<slide>
@@ -377,18 +400,18 @@ console.log(counter.increment()); // 2 </pre>
 			<p>Когато функцията не принадлежи към обект, <code>this</code> сочи към глобалния обект - <b>window</b>. Това е грешка в езика. </p>
 <pre class="prettyprint" data-lang="javascript">
 function add (a, b) {
-    console.log(this);
+    console.log(this); //Window {top: Window, window: Window…}
     return a + b;
 }
-add(1, 2);//Window {top: Window, window: Window, location: Location, external: Object, chrome: Object…}</pre>
+add(1, 2);</pre>
 			<p>Това поведение не присъства в strict mode:</p>
 <pre class="prettyprint" data-lang="javascript">
 function foo (a, b) {
     "use strict";
-    console.log(this);
+    console.log(this); // undefined
     return a + b;
 }
-add(1, 2); // undefined </pre>
+add(1, 2); </pre>
 		</article>
 	</slide>
 	<slide>
@@ -434,7 +457,17 @@ print_name.apply(person); // Emo
 			<p>Това е широко използван в jQuery, където <code>this</code> сочи към HTML елементи в callback функциите. </p>
 		</article>
 	</slide>
-	
+	<slide class="hidden">
+		<hgroup>
+			<h2>Рекурсия</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Рекурсията(recursion) е процес на повтаряне на нещо чрез самото него. <a href="http://upload.wikimedia.org/wikipedia/commons/b/b3/Screenshot_Recursion_via_vlc.png">Пример.</a> </p>
+			<p>В програмирането рекурсията се описва чрез рекурсивни функции. Те се отличават с това че викат сами себе си. </p>
+			<p>Най-честото използване на рекурсията е при обработка на дървовидни структури: ако имаме вземем само един клон на дървото ще получим друго дърво, към което може да приложи същата логика(функция). </p>
+		</article>
+	</slide>
 	<slide class="backdrop"></slide>
 </slides>
 </body>
