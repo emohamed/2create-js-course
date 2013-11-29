@@ -226,7 +226,6 @@ console.log(s.length);
 
 		</article>
 	</slide>
-
 	<slide>
 		<hgroup>
 			<h2>Функции</h2>
@@ -234,72 +233,75 @@ console.log(s.length);
 
 		<article class="smaller">
 			<p>Функциите са широка тема, която ще обсъдим в дълбочина по-късно. За момента само ще видим какъв е основния им синтаксис и какво представляват.</p>
+			
+			<p>Функциите в javascript са обекти, т.е. функция може да присъства навсякъде където може да присъства стойност. </p>
+
+			<p>Дефинирането на функция в javascript в действителност създава променлива, която се казва като името на функцията и сочи към обекта на функцията. </p>
 <pre class="prettyprint" data-lang="javascript">
-// Returns a numeric value between -1 and 1 that
-// represents the sine of the angle given in degrees.
-function sin_from_degrees(angle_degrees) {
-    var angle_radians = (angle_degrees * Math.PI) / 180;
-    var result = Math.sin(angle_radians);
-    return result;
+function add(a, b) {
+	return a + b;
 }
-var angle_degrees = 90;
-var res = sin_from_degrees(angle_degrees);
-console.log("Sine of " + angle_degrees + " is " + res);</pre>
-		
-			<ul class="builda fade">
-				<li><code>function</code> - ключова дума дефинираща функция</li>
-				<li><code>comment</code> - добре е функцията да има коментар оказващ какво е предназначението й</li>
-				<li><code>sin</code> - име на функцията</li>
-				<li><code>angle_degrees</code> - параметри на функцията</li>
-				<li><code>angle_radians</code> - локални променливи на функцията </li>
-				<li><code>return</code> - върната стойност</li>
+// Работи идентично на: 
+var add = function (a, b) {
+	return a + b;
+}
+</pre>
+			<p>Тъй като функциите са просто обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
+			<p>Аналогично, ако презапишем променливата, сочеща към функцията с нещо различно от функция, ще имаме проблеми. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Анатомия на функция</h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+    return a + b;
+}</pre>
+			<ul>
+				<li>
+					<code>var add = </code>
+					Инициализираме променлива, която ще сочи към фунцкията. 
+				</li>
+
+				<li>
+					<code>function</code>
+					Ключова дума за създаване на функция. 
+				</li>
+
+				<li>
+					<code>a, b</code>
+					Списък с аргументи, локални променливи във функцията. Промени по аргументите ще се отразят на стойности complex типовете, а тези от basic типовете няма да бъдат 
+					променени.
+				</li>
+
+				<li>
+					<code>{ return a + b }</code>
+					Тяло на функцията, което ще бъде изпълнено в момента в който функцията бъде извикана. 
+				</li>
 			</ul>
+			<p>Дефинирането на функция само по себе си не извиква кода, който се съдържа в нея. Тя трябва да бъде <b>извикана</b>. </p>
+			
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Функции: връщане на стойност</h2>
+			<h2>Извикване на функция</h2>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Функциите могат да върнат или да не върнат стойност. Когато не се връща стойност, функцията обикновенно има странични ефекти(side effects):</p>
+			<p>Извикването на функция може да се направи по 4 различни начина, но за момента ще разгледаме само най простия от тях: </p>
 <pre class="prettyprint" data-lang="javascript">
-function log_matrix(message, matrix) {
-    console.log(message);
-    console.table(matrix);
-}
-log_matrix("Ping pong results", [
-    ["", "Emo", "Stefan"],
-    ["Game 1", "1:1", "2:1"],
-    ["Game 2", "0:1", "0:2"]
-]);</pre>
-			<p>Резултата от функцията е <code>undefined</code>, но тя извършва полезна работа сама по себе си вместо да връща резултат. </p>
+var res = add(4, 5);
+console.log(res);</pre>
+			<p>Синтаксиса е да се напише името на променливата, сочеща към функцията с допълнение на кръгли скоби, в които да се подадат аргументите. </p>
+			<p>В момента, в който се стигне до извикване на функция, javascript спира изълнението на текущия контекст и предава изпълнението към тялото на функцията. </p>
+			<p>Кода на функцията се изпълнява, като изпълнението на функцията се прекратява при достигане на конструкция return, или при достигане на <code>}</code> за затварянето на функцията. </p>
 		</article>
 	</slide>
-	<slide>
-		<hgroup>
-			<h2>Функции: преизползване</h2>
-		</hgroup>
 
-		<article class="smaller">
-			<p>Целта на функциите да намалят сложността на кода и да го направят по лесно разбираем. Те ви дават възможност да изолирате определена операция, да й дадете име и да я викате множество пъти без да има нужда да я повтаряте: </p>
-<pre class="prettyprint" data-lang="javascript">
-// Transforms degrees in radians
-function degrees_to_radians(angle_degrees) {
-	return (angle_degrees * Math.PI) / 180
-}
-// Returns cosine from an angle in degrees
-function cos_from_degrees(angle_degrees) {
-	return Math.cos(degrees_to_radians(angle_degrees));
-}
-// Returns sine from an angle in degrees
-function sin_from_degrees(angle_degrees) {
-	return Math.sin(degrees_to_radians(angle_degrees));
-}
-console.log(sin_from_degrees(0));
-console.log(cos_from_degrees(0));</pre>
-		</article>
-	</slide>
 
 	<slide>
 		<hgroup>
@@ -329,8 +331,8 @@ var circle_area = 3.14 * circle_radis * circle_radis;
 var result = "Circle area is " <b>+</b> circle_area;
 // => Circle area is 12.56</pre>
 			<p>За да може да направи конкатенацията с оператора плюс, javascript трябва да уеднакви типовете на операндите и да превърне числото в низ. </p>
+			<p>Това крие и капани:</p>
 			<pre class="prettyprint" data-lang="javascript">
-Това крие и капани:
 var a = 5, b = "8";
 var result = a <b>+</b> b;
 // => 58</pre>
