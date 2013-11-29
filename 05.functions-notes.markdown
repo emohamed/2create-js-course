@@ -24,21 +24,17 @@ Identical to:
     	return a + b;
     }
 
-Scope -- local vs global variables
+arguments
 
 Returns
 
-callbacks
+Scope -- local vs global variables
 
 inner functions -- they enjoy access to variables in the scope of the parent functions. They can emulate block scope.
 
 self executing functions. 
 
-module pattern
-
-arguments
-
-chained methods
+callbacks
 
 this
 

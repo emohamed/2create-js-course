@@ -52,7 +52,7 @@
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Примери за функции в необичаен контекст</h2>
+			<h2>Примери за функции в "необичаен" контекст</h2>
 		</hgroup>
 
 		<article class="smaller">
@@ -62,18 +62,35 @@ setTimeout(function () {
 	console.log("I'm a little bit slow ... ");
 }, 500)
 </pre>
+<pre class="prettyprint" data-lang="javascript">
+function get_operation() {
+    return function (a, b) {
+        return a + b;
+    }
+}
+var func = get_operation();
+console.log(func(1, 5));
+console.log(get_operation()(1, 5));</pre>
+<pre class="prettyprint" data-lang="javascript">
+var operations = {
+    add: function (a, b) {
+        return a + b;
+    }
+};
+console.log(operations.add(4, 1));
+</pre>
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Функции</h2>
+			<h2>Функции: анатомия</h2>
 		</hgroup>
 
 		<article class="smaller">
 <pre class="prettyprint" data-lang="javascript">
 // Returns a numeric value between -1 and 1 that
 // represents the sine of the angle given in degrees.
-function sin_from_degrees(angle_degrees) {
+var sin_from_degrees = function(angle_degrees) {
     var angle_radians = (angle_degrees * Math.PI) / 180;
     var result = Math.sin(angle_radians);
     return result;
@@ -90,6 +107,68 @@ console.log("Sine of " + angle_degrees + " is " + res);</pre>
 				<li><code>angle_radians</code> - локални променливи на функцията </li>
 				<li><code>return</code> - върната стойност</li>
 			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции: аргументи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Аргументи(или параметри) на функция се наричат входните данни, които функцията получава. Те са локални променливи за функцията и се инициализират към стойностите, които са й подадени при всяко нейно извикване. </p>
+			<p>Javascript, сам по себе си, не проверява дали функцията е извикана с правилен брой аргументи или не; допълнително, няма вграден механизъм който указва дали даден аргумент трябва да бъде от определен тип. Това е проблем, защото отваря врата за доста проблеми, ако сте невнимателни. </p>
+			<p>Ако подадете по-малко аргументи, отколото функцията изисква, то допълнителните аргументи ще имат стойност <code>undefined</code>:</p>
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+    console.log(b); // undefined
+    return a + b;
+}
+console.log(add(5)); // NaN </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Аргумент със стойност по подразбиране</h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var add = function (a, b) {
+    console.log(b); // undefined
+    b = b || 0;
+    return a + b;
+}
+console.log(add(5)); // 5
+</pre>
+			<p>Израза <code>b || 0</code> проверява стойността на променливата b и ако тя е falsy, връща втория операнд(0). Същото може да се постигне и чрез: </p>
+<pre class="prettyprint" data-lang="javascript">
+if (typeof b === "undefined") {
+    b = 0;
+}
+</pre>
+			<p>Налага се да използвате втория вариант, ако искате да приемате falsy стойности. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Функции с неограничен брой аргументи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>В някои случаи не знаете точния брой на аргументите, които функцията ще приема: </p>
+<pre class="prettyprint" data-lang="javascript">
+var numbers_avarage = avarage(2, 5, 15, 61, 12, 16);</pre>
+			<p>Искате да напишете функция, която да изчислява средно аритметичното число на всички аргументи. </p>
+			<p>Всяка функция в javascript има достъп до специална променлива наречена <code>arguments</code>. Тя е подобна на масив и съдържа всички аргмуенти на функцията. </p>
+<pre class="prettyprint" data-lang="javascript">
+function avarage() {
+    var total = 0;
+    for (var i = 0; i &lt; arguments.length; i++) {
+        total += arguments[i];
+    }
+    return total / arguments.length;
+}
+console.log(avarage(2, 5, 15, 61, 12, 16)); // 18.5</pre>
 		</article>
 	</slide>
 	<slide>
@@ -122,15 +201,15 @@ log_matrix("Ping pong results", [
 <pre class="prettyprint" data-lang="javascript">
 // Transforms degrees in radians
 function degrees_to_radians(angle_degrees) {
-	return (angle_degrees * Math.PI) / 180
+    return (angle_degrees * Math.PI) / 180
 }
 // Returns cosine from an angle in degrees
 function cos_from_degrees(angle_degrees) {
-	return Math.cos(degrees_to_radians(angle_degrees));
+    return Math.cos(degrees_to_radians(angle_degrees));
 }
 // Returns sine from an angle in degrees
 function sin_from_degrees(angle_degrees) {
-	return Math.sin(degrees_to_radians(angle_degrees));
+    return Math.sin(degrees_to_radians(angle_degrees));
 }
 console.log(sin_from_degrees(0));
 console.log(cos_from_degrees(0));</pre>
@@ -143,22 +222,218 @@ console.log(cos_from_degrees(0));</pre>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Scope в контекста на език за програмиране е концепция за това колко "известна" е една променлива. </p>
-			<p>В повечето C-like езици за програмиране има block scope. В javascript това не е така. Единствено функциите създават собствен scope в javascript. </p>
+			<p>Scope е <b>зоната на видимост на променлива</b>. В контекста програмирането е термин за това колко "известна" е една променлива. Колкото повече код "знае" за тази променлива, толкова по-голям scope има тя. </p>
+			<p>В javascript единствено функциите създават нова зона на видимост: </p>
 <pre class="prettyprint" data-lang="javascript">
-var add = function (a, b) {
-	var result = a + b;	
-	return result;
+var factoriel = function (a) {
+    var result = 1;	
+    for (var i = 2; i &lt;= a; i++) {
+        result *= i;
+    }
+    console.log(i); // 5
+    return result;
 }
-console.log(add(4, 5)); // 9
-console.log(result); // undefined</pre>
-			<p>Променливата <code>result</code> е локална за функцията <code>add</code>. Тя се инициализира наново всеки път когато функцията се извика и не може да бъде "видяна" отвън, освен ако не бъде върната чрез return statement. </p>
-			<p></p>
+console.log(factoriel(4)); // 24
+console.log(result); // Uncaught ReferenceError: result is not defined </pre>
+			<p>Променливата <code>result</code> е локална за функцията <code>add</code>. Тя се инициализира наново всеки път когато функцията се извика и не може да бъде "видяна" отвън, освен ако не бъде върната чрез <code>return</code> statement. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Scope: глобални променливи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Кода написан директно в <code>script</code> таг, а не във фунцкия се изпълнява в глобалния scope. Всички променливи в този scope се създават като properties на обекта window. </p>
+			<p>Колкото по-малко неща се намират в глобалния scope, толкова по-добре. Това намаля възможността за конфликти. Със създаването на функция, в която да се изпълнява кода ви, вие поставяте кода си в среда, над която имате повече контрол. </p>
+			<p>Променливите, деклариране в глобалния scope се виждат във функциите надолу без да има нужда да ги глобализирате: </p>
+<pre class="prettyprint" data-lang="javascript">
+var base_num = 5;
+var add_to_base = function (num) {
+    return base_num + num;
+}
+console.log(add_to_base(5)); // 10</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Scope: Conflicts</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато в глобалния scope има променлива с определено име, и в локален scope присъства променлива със същото име, javascript работи с локалната променлива а не с глобалната: </p>
+<pre class="prettyprint" data-lang="javascript">
+var base_number = 5;
+function add_to_base(number) {
+    var base_number = 10;
+    return base_number + number;
+}
+console.log(add_to_base(6)); // 16</pre>
+			<p>Този начина на работа дава гаранция, че когато използвате определени променливи във функциите си, те не зависят от външен код. Това е хубаво, защото ви позволява да мислите само за кода във функцията и да се абстрахирате от всичко останало. </p>
+			<p>Когато пишете комплексен код, е по-лесно много код да работи със споделени променливи. Това обаче прави кода много по-труден за четене и разбиране.</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Вътрешни функции</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>В javascript можете да декларирате функция в друга функция. Вътрешната функция ще има достъп до променливите на външната, но външната няма да има достъп до вътрешната. </p>
+<pre class="prettyprint" data-lang="javascript">
+function add(a, b) {
+    function perform_operation() {
+        return a + b;
+    }
+    return perform_operation();
+}
+console.log(add(2, 5)); // 7 </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Само изпълняващи се функции</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Само-изпълняващите се функции са техника за изолиране на код в javascript.</p>
+<pre class="prettyprint" data-lang="javascript">
+(function () {
+    var a = 4;
+})();</pre>
+			<p>Тук декларираме анонимна функция, след което веднага я изпълняваме. На пръв поглед това е безмислено упражнение, но всъщност предоставя възможност да се направи зона на видимост, която е лично ваша, без да "замърсявате" глобалния scope с променливи. </p>
+			<p>Често използван похват е да се пуснат и аргументи на ограждащата функция по този начин: </p>
+<pre class="prettyprint" data-lang="javascript">
+(function (<b>$</b>) {
+    $('a').addClass('link');
+})(<b>jQuery</b>);</pre>
+			<p>Тук подаваме аргумент на функцията <code>jQuery</code>(от външния scope) и приемаме аргумента под друго име (<code>$</code>), който да използваме вътре във функцията. </p>
+			<p>Има няколко алтернативни синтаксиса за постигане на същия резултат. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Callbacks</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Callback функции са "парчета" код, които се подават като аргумент към друг код, от който се очаква да <b>извика</b> арумента в някакъв момент. Извикването може да бъде извършено веднага, или в някакъв по-късен момент. </p>
+			<p>Callback функциите са основен инструмент в асинхронното програмиране. Те се използват и при обработката на събития. </p>
+<pre class="prettyprint" data-lang="javascript">
+$('a').click(function () {
+    console.log('Link was clicked ... ');
+});
+</pre>
+			<p>Тук "слушаме" за събитието click върху определени елементи. В момента, в което то възникне, callback функцията подадена като аргумент бива извикана. </p>
+			<p>Ако искаме да изпълним именувана функция трябва да подадем променливата, която сочи към нея: </p>
+<pre class="prettyprint" data-lang="javascript">
+var handle_click = function () {
+    console.log('Link was clicked ... ');
+};
+$('a').click(handle_click);</pre>
 		</article>
 	</slide>
 
+	<slide>
+		<hgroup>
+			<h2><code>this</code></h2>
+		</hgroup>
 
-	
+		<article class="smaller">
+			<p>В обектно ориентираното програмиране <code>this</code> променливата е специална и бива дефинирана от интерпретатора. Тя сочи към обекта, към който принадлежи функцията. </p>
+			<p>Има 4 различни начина да бъде извикана дадена функция. Всеки от тях дава различна стойност на променливата <code>this</code> във функцията. </p>
+			<ul>
+				<li>Извикване като метод</li>
+				<li>Извикване като функция</li>
+				<li>Извикване като конструктор</li>
+				<li>Извикване чрез <code>apply</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Извикване като метод</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато функцията е property на обект и е извикана чрез обръщение към обекта, <code>this</code> променливата е обвързана с обекта: </p>
+<pre class="prettyprint" data-lang="javascript">
+var counter = {
+    count: 1,
+    increment: function () {
+        return <b>this</b>.count++;
+    }
+}
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2 </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Извикване като функция</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато функцията не принадлежи към обект, <code>this</code> сочи към глобалния обект - <b>window</b>. Това е грешка в езика. </p>
+<pre class="prettyprint" data-lang="javascript">
+function add (a, b) {
+    console.log(this);
+    return a + b;
+}
+add(1, 2);//Window {top: Window, window: Window, location: Location, external: Object, chrome: Object…}</pre>
+			<p>Това поведение не присъства в strict mode:</p>
+<pre class="prettyprint" data-lang="javascript">
+function foo (a, b) {
+    "use strict";
+    console.log(this);
+    return a + b;
+}
+add(1, 2); // undefined </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Извикване като конструктор</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Нови обекти в javascript могат да се създават чрез функции-конструктор, подобно на Java. </p>
+<pre class="prettyprint" data-lang="javascript">
+var Person = function (name, age) {
+    this.name = name;
+    this.age = age;
+}
+var emo = new Person("Emo", 27);
+console.log(emo.age); // 27 </pre>
+			<p>Ще говорим за обектния модел на javascript в следващо обучение, за сега запомнете следното: </p>
+			<ul>
+				<li><code>this</code> в конструктор сочи към новия обект, който се създава в момента</li>
+				<li>Когато функция започва с главна буква е конструктор. Това е конвенция, която спазват много хора, и която трябва спазвате и вие</li>
+				<li>Конструкторите създават обекти и трябва да бъдат викани с ключовата дума <code>new</code></li>
+				<li>Конструкторите имат специално property наречено <code>prototype</code>, което се използва да писане на методи за обекта</li>
+				<li>Има други начини за създаване на обекти, които са по-ясни. Така или иначе, трябва да познавате и този синтаксис, защото той се използва от много хора </li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Извикване чрез <code>apply</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Тъй като функциите в javascript са обекти, те могат да имат и методи. <code>apply</code> метода позволява да викате функцията, като й зададете кой обект трябва да бъде смятан за <code>this</code> в нея. </p>
+<pre class="prettyprint" data-lang="javascript">
+var person = {
+    name: "Emo"
+};
+print_name = function () {
+    console.log(this.name);
+}
+print_name.apply(person); // Emo
+</pre>
+			<p>Това е широко използван в jQuery, където <code>this</code> сочи към HTML елементи в callback функциите. </p>
+		</article>
+	</slide>
 	
 	<slide class="backdrop"></slide>
 </slides>
