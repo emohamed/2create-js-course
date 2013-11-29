@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="all" href="theme/css/default.css">
+	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+	<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+
+	<slide class="title-slide segue nobackground">
+		<article class="flexbox logo-welcome">
+			<span><img src="images/2c/logo.png"></span>
+		</article>
+
+		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+		<hgroup class="auto-fadein">
+			<h1 data-config-title><!-- populated from slide_config.json --></h1>
+			<h2 data-config-subtitle>Lecture 6 - DOM and basic jQuery</h2>
+			<p data-config-presenter><!-- populated from slide_config.json --></p>
+		</hgroup>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Document Object Model</h2>
+		</hgroup>
+
+		<article class="">
+			<p>DOM предоставя интерфейс за работа с елементите в документа към javascript. Таговете в документа се представят като обекти, които имат properties и methods, чрез които можете да ги манипулирате. </p>
+			<p>DOM се имплементира във всеки browser по леко различен начин. На теория компаниите, които правят browser-и трябва да следват стандарти и нещата да се държат еднкаво, но на практира това не се случва. </p>
+			<p>За това и jQuery библиотеката е много популярна -- тя предоставя абстракция DOM, с която се работи по-бързо и която работи еднаква на всички browser-и поддържани от библиотеката. </p>
+			<p>Днес ще разгледаме основните положения в DOM, без да затъваме в детайли. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>DOM tree</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<pre class="prettyprint" data-lang="html">
+&lt;table&gt; 
+    &lt;tbody&gt; <img src="http://www.w3.org/TR/DOM-Level-2-Core/images/table.gif" alt="" align="right" style="margin: 0 6px 0 0;">
+        &lt;tr&gt; 
+            &lt;td&gt;shady grove&lt;/td&gt;
+            &lt;td&gt;aeolian&lt;/td&gt; 
+        &lt;/tr&gt; 
+        &lt;tr&gt;
+            &lt;td&gt;over the river, charlie&lt;/td&gt;        
+            &lt;td&gt;dorian&lt;/td&gt; 
+        &lt;/tr&gt; 
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+			<p>Дървото на документа се състои от HTML nodes - всеки node се асоциира с таг от документа или с текст, който се визуализира пред потреб. </p>
+			<p>Тези nodes вътрешно се репрезентира от javascript обект, чрез който можете да променяте техните характеристики. </p>
+			<p>Всеки node съдържа информация за позицията си в документа: родителя си, децата си и sibling node-овете му. </p>
+			<p>Също така, node-овете имат информация за атрибутите си, както и за съдържанието си(текста, който съдържат). </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа с DOM елементи</h2>
+		</hgroup>
+		<article class="smaller">
+			<ul>
+				<li><a href="http://jsfiddle.net/4Ygdx/1/"><code>document.getElementById()</code></a></li>
+				<li><a href="http://jsfiddle.net/3Vz3K/2/"><code>document.getElementsByTagName()</code></a></li>
+				<li><a href="http://jsfiddle.net/mevZF/1/">Четене на атрибут</a></li>
+				<li><a href="http://jsfiddle.net/3PmKY/1/">Четене на деца, проверка за тип на <code>node</code>, <code>innerHTML</code></a></li>
+				<li><a href="http://jsfiddle.net/e3cf8/">Четене на родител, <code>className</code></a></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>jQuery</h2>
+		</hgroup>
+		<article class="smaller">
+			<p>jQuery е библиотека за работа с DOM, анимации, AJAX. Тя е най-популярната js библиотека в момента. 68.2% от top 10'000 сайтовете го използват. </p>
+			<p>За да използвате jQuery трябва да го включите в страницата си, да се закачите за събитието, което указва кога документа е готов за работа. </p>
+<pre class="prettyprint" data-lang="javascript">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;jQuery demo&lt;/title&gt;
+    &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        jQuery(document).on('ready', function () {
+            $('p').text('jQuery rocks');
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;text&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>jQuery: </h2>
+		</hgroup>
+
+		<article class="smaller">
+			
+		</article>
+	</slide>
+	<slide class="backdrop"></slide>
+	<!-- http://dom-tutorials.appspot.com/static/1.html -->
+</slides>
+</body>
+</html>
