@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Javascript objects</title>
+	<title>Javascript Functions</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" media="all" href="theme/css/default.css">
 	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
@@ -115,7 +115,7 @@ console.log("Sine of " + angle_degrees + " is " + res);</pre>
 		<article class="smaller">
 			<p>Аргументи(или параметри) на функция се наричат входните данни, които функцията получава. Те са локални променливи за функцията и се инициализират към стойностите, които са й подадени при всяко нейно извикване. </p>
 			<p>Javascript, сам по себе си, не проверява дали функцията е извикана с правилен брой аргументи или не; допълнително, няма вграден механизъм който указва дали даден аргумент трябва да бъде от определен тип. Това е проблем, защото отваря врата за доста проблеми, ако сте невнимателни. </p>
-			<p>Ако подадете по-малко аргументи, отколото функцията изисква, то допълнителните аргументи ще имат стойност <code>undefined</code>:</p>
+			<p>Ако подадете по-малко аргументи, отколкото функцията изисква, то допълнителните аргументи ще имат стойност <code>undefined</code>:</p>
 <pre class="prettyprint" data-lang="javascript">
 var add = function (a, b) {
     console.log(b); // undefined
@@ -457,7 +457,7 @@ print_name.apply(person); // Emo
 			<p>Това е широко използван в jQuery, където <code>this</code> сочи към HTML елементи в callback функциите. </p>
 		</article>
 	</slide>
-	<slide class="hidden">
+<!-- 	<slide class="">
 		<hgroup>
 			<h2>Рекурсия</h2>
 		</hgroup>
@@ -468,7 +468,7 @@ print_name.apply(person); // Emo
 			<p>Най-честото използване на рекурсията е при обработка на дървовидни структури: ако имаме вземем само един клон на дървото ще получим друго дърво, към което може да приложи същата логика(функция). </p>
 		</article>
 	</slide>
-	<slide class="backdrop"></slide>
+ -->	<slide class="backdrop"></slide>
 </slides>
 </body>
 </html>
