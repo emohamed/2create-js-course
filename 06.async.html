@@ -27,12 +27,67 @@
 			<h2>Asynchronous code</h2>
 		</hgroup>
 
-		<article class="">
+		<article class="smaller">
+			<p>За да можем да строим използваеми потребителски интерфейси в browser, са ни нужни механизми за асинхронно програмиране. </p>
+			<p>Например, за да можем да следим за момента, в който всички картинки на страницата са заредени и след това да инциализираме javascript галерия с тях, ни е нужен код който работи паралелно. </p>
+			<p>Асинхронния код дава възможност парче код(функция) да бъде изпълнено на по-късен етап от времето, в резултат на настъпването на определено събитие. </p>
+			<p>Събитието може да бъде предизвикано от потребител(например натискане с мишка или докосване на екрана на touch device), да възникне от browser-а(например browser-а може да ни уведоми в момента когато документа е зарeдил). </p>
+			<p>Javascript също така дава механизъм за "отлагане" на изпълнението на парче код(фунцкия) с определено време. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Callbacks</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Javascript не поддържа нишки -- всичко се случва в една нишка.</p>
+			<p>За да се поддържа паралелното изпълнение на много задачи, езика използва callback модел: код може да следи за настъпването на събитие и в резултат на него да реагира. 	</p>
+			<p>Callback представлява функция, подадена като аргумент на друга функция. От виканата функция се очаква в определен момент от бъдещето да извика обратно(callback) аргумента, който й е подаден. </p>
+<pre class="prettyprint" data-lang="javascript">
+$(document).on('ready', function () {
+	console.log("document is now ready" );
+});
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>setTimeout</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+setTimeout(function () {
+    console.log("I'm a little bit slow ... ");
+}, 500);</pre>
+			<p><code>setTimeout()</code> изпълнява функцията подадена му в първия аргумент след определено време. Времето се подава в милисекунди(1 секунда е 1000 милисекунди) като втори аргумент на функцията</p>
 			
+			<p>Функцията връща идентификатор на операцията, която ще бъде извършена след определеното време. Този идентификатор може да се използва за да бъде отменено изпълнението на фунцкията чрез <code>clearTimeout()</code>. </p>
+			<p><a href="http://jsfiddle.net/q6FuN/2/">Пример</a></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>setInterval</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><code>setInterval</code> работи идентично на <code>setTimeout</code> с тази разлика, че не изпълнява функцията веднъж, а докато не бъде отменен с clearTimeout.</p>
+			<p><a href="http://jsfiddle.net/zQm4L/2/">Пример</a></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Пример</h2>
+			<h3>Зареждане на всички картинки в документа</h3>
+		</hgroup>
+
+		<article class="smaller">
+			<p></p>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
-	<!-- http://dom-tutorials.appspot.com/static/1.html -->
 </slides>
 </body>
 </html>
