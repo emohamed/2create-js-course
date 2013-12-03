@@ -46,7 +46,14 @@
 </pre>
 
 			<p>Конзолата на browser ви позволява да дебъгвате javascript код. Shortcut-а за нея е <b>F12</b>.</p>
-
+			<aside class="note">
+				<section>
+					<ul>
+						<li>Изпълнение на javascript в browser. Live demo. </li>
+						<li>Конзола, <button>Ctrl</button>+<button>Shift</button>+<button>J</button></li>
+					</ul>
+				</section>
+			</aside>
 		</article>
 	</slide>
 	<slide>
@@ -108,8 +115,6 @@
 			<p>Ако операцията от числа не може да бъде извършена се получава стойност <code>NaN</code>(not a number):</p>
 			<p><code>5 / "Banana" => NaN</code></p>
 			
-			
-
 		</article>
 	</slide>
 
@@ -143,9 +148,7 @@
 		<article class="smaller">
 			<p>String(низ) в javascript е текст обграден в двойни или единични кавички. </p>
 			
-			<p>Низовете са обекти; промяната на низ създава нов низ. </p>
-
-			<p>Няма отделен тип character; той е низ с един елемент. </p>
+			<p>Промяната на низ създава нов низ. Няма отделен тип character; той е низ с един елемент. </p>
 
 			<p>Обратната наклонена черта е escape character и се използва за да поставят специални символи в низа:</p>
 			<p><code>\n, \r, \t</code> - whitespace</p>
@@ -174,6 +177,15 @@ console.log("Message for " + text);</pre>
 			<p>Разликата между <code>\r</code> и <code>\n</code>. </p>
 
 		</article>
+		<aside class="note">
+			<section>
+				<ul>
+					<li>Live demo за декларирането на string с нови редове. </li>
+					<li>Live demo за деклариране на string с различни видове кавички</li>
+					<li>Да се обясни разликата между <code>\r</code>, <code>\n</code></li>
+				</ul>
+			</section>
+		</aside>
 	</slide>
 	<slide>
 		<hgroup>
@@ -222,8 +234,6 @@ console.log(s.length);
 			</ul>
 
 			<p>Всичко останало се свежда до <code>true</code>(truthy е).</p>
-
-
 		</article>
 	</slide>
 	<slide>
@@ -314,7 +324,11 @@ console.log(res);</pre>
 				<li><code>undefined</code></li>
 				<li><code>null</code></li>
 			</ul>
-			<p>Техническата разлика между тях е тънка и извън обхвата на това обучение.</p>
+			<p>Техническата разлика между тях е тънка:</p>
+			<ul>
+				<li><code>undefined</code>: до момента променливата не е била споменавана, или е била декларирана без стойност</li>
+				<li><code>null</code> е стойност, която се дава на променлива от програмиста за да укаже че променливата няма стойност</li>
+			</ul>
 		</article>
 	</slide>
 
@@ -343,7 +357,7 @@ var result = a <b>+</b> b;
 	
 	<slide>
 		<hgroup>
-			<h2>Оператори за сравняване на променливи</h2>
+			<h2>Оператори за сравняване</h2>
 		</hgroup>
 
 		<article class="smaller">
@@ -354,7 +368,7 @@ var result = a <b>+</b> b;
 				<li><code>!==</code> not identical (проверява стойност и тип)</li>
 				<li><code>&gt;, &lt;, &gt;=, &lt;=</code></li>
 			</ul>
-			<p>Избягвайте <code>==</code> и <code>!=</code>, използвайте <code>===</code> и <code>!==</code> вместо тях:</p>
+			<p>Не ползвайте <code>==</code> и <code>!=</code>, а само <code>===</code> и <code>!==</code>:</p>
 			<pre class="prettyprint" data-lang="javascript">
 '' == '0'            // false
 0 == ''              // true
@@ -484,10 +498,6 @@ if (<b>!</b>age) {
 			<h2>Стриктен режим</h2>
 		</hgroup>
 		<article class="smaller">
-			<!-- 
-			<p>Javascript еволюира много в последните 20 години. Това се наложи от бума на web технологиите, бума на smart phone-ите(които елиминираха flash и оставиха javascript като единствена технология за добавяне на динамика web). </p>
-			<p>Javascript ще еволюира в бъдеще. В момента се работи по нов стандард, нови feature-и в езика се добавят . </p>
-			-->
 			<p><b>Strict mode</b> инструктира browser-а да изпълни код в по-стриктна среда и да ви предпази от чести грешки в кода ви. </p>
 			<p>Вклучва се като се постави низ <code>"use strict"</code> като първи statement в javascript файл, script tag, или във функция. </p>
 <pre class="prettyprint" data-lang="html">
@@ -504,6 +514,7 @@ var age = 25;
 		</article>
 	</slide>
 
+	<!--
 	<slide>
 		<hgroup>
 			<h2>Заключение</h2>
@@ -513,7 +524,6 @@ var age = 25;
 			<p>Неща за четене:</p>
 			<ul>
 				<li><a href="http://msdn.microsoft.com/en-us/library/ie/b272f386(v=vs.94).aspx">Math javascript object</a></li>
-				
 				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals">Values, variables, and literals</a> - тук четете само първите 2 секции: Values и Variables</li>
 				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">Strings</a></li>
 				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict mode</a></li>
@@ -521,11 +531,9 @@ var age = 25;
 				<li><a href="https://developers.google.com/chrome-developer-tools/docs/console">Основни неща за Chrome developer tools console panel</a></li>
 			</ul>
 			<p>Задачите за горните точки ще намерите в тасковете си. </p>
-			<!--
 			 Задачи за basic javascript.
-
-				# напишете javascript, който да проверява дали променлива съдържа четно или нечетно число. Принтирайте резултата в конзолата
-				# при входни данни на координати от 2 точки(x1, y1, x2, y2) изчислете разтоянието между двете точки
+				# напишете функция, която проверява дали променлива съдържа четно или нечетно число
+				# при входни данни на координати от 2 точки(x1, y1, x2, y2), напишете функция, която изчислява разтоянието между две точки
 				# напишете script, който дефинира променлива със следния текст:
 {{{
 An island song
@@ -533,13 +541,14 @@ Like a "floating" river
 Rain's Rain's Fall Fall
 }}}
 Разделете текста на 3 елемента чрез метода split и log-нете резултатния масив в конзолата. 
-				# Дефинирайте променлива със текстова стойност и проверете дали дадена буква се съдържа в нея. Разгледайте методите на string обекта и провете кой ще ви срърши работа за целта. 
+				# Дефинирайте променлива със текстова стойност и проверете дали дадена буква се съдържа в нея
 				# Дефинирайте string променлива със текстова стойност и я промените като буквите са в горен регистър. 
+				# Напишете функция, която да пре
 			 
-			-->
 		</article>
 	</slide>
-
+	-->
+	
 	<!--
 	<slide>
 		<hgroup>
