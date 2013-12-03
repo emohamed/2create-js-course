@@ -52,7 +52,7 @@
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Примери за функции в "необичаен" контекст</h2>
+			<h2>Примери за функции в необичаен контекст</h2>
 		</hgroup>
 
 		<article class="smaller">
@@ -62,7 +62,7 @@ setTimeout(function () {
     console.log("I'm a little bit slow ... ");
 }, 500)
 </pre>
-			<p>Функция, върната като резултат от друга функация: </p>
+			<p>Функция, върната като резултат от друга функция: </p>
 <pre class="prettyprint" data-lang="javascript">
 function get_operation() {
     return function (a, b) { return a + b; }
@@ -94,16 +94,16 @@ var sin_from_degrees = function(angle_degrees) {
     return result;
 }
 var angle_degrees = 90;
-var res = sin_from_degrees(angle_degrees);
-console.log("Sine of " + angle_degrees + " is " + res);</pre>
+var sin = sin_from_degrees(angle_degrees);
+console.log("Sine of " + angle_degrees + " is " + sin);</pre>
 		
 			<ul class="builda fade">
+				<li><code>var sin_from_degrees</code> - деклариране на променлива, сочеща към функцията</li>
 				<li><code>function</code> - ключова дума дефинираща функция</li>
-				<li><code>comment</code> - добре е функцията да има коментар оказващ какво е предназначението й</li>
-				<li><code>sin</code> - име на функцията</li>
 				<li><code>angle_degrees</code> - параметри на функцията</li>
-				<li><code>angle_radians</code> - локални променливи на функцията </li>
-				<li><code>return</code> - върната стойност</li>
+				<li><code>angle_radians</code>, <code>result</code> - локални променливи на функцията </li>
+				<li><code>return</code> - връщане на стойност</li>
+				<li><code>comment</code> - добре е функцията да има коментар оказващ какво е предназначението й</li>
 			</ul>
 		</article>
 	</slide>
@@ -220,10 +220,10 @@ console.log(cos_from_degrees(0));</pre>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Scope е <b>зоната на видимост на променлива</b>. В контекста програмирането е термин за това колко "известна" е една променлива. Колкото повече код "знае" за тази променлива, толкова по-голям scope има тя. </p>
+			<p>Scope е <b>зоната на видимост на променлива</b>. В контекста програмирането е термин за това колко "известна" е една променлива. Колкото повече код "знае" за нея, толкова по-голям scope има тя. </p>
 			<p>В javascript единствено функциите създават нова зона на видимост: </p>
 <pre class="prettyprint" data-lang="javascript">
-var factoriel = function (a) {
+var factorial = function (a) {
     var result = 1;	
     for (var i = 2; i &lt;= a; i++) {
         result *= i;
@@ -231,7 +231,7 @@ var factoriel = function (a) {
     console.log(i); // 5
     return result;
 }
-console.log(factoriel(4)); // 24
+console.log(factorial(4)); // 24
 console.log(result); // Uncaught ReferenceError: result is not defined </pre>
 			<p>Променливата <code>result</code> е локална за функцията <code>add</code>. Тя се инициализира наново всеки път когато функцията се извика и не може да бъде "видяна" отвън, освен ако не бъде върната чрез <code>return</code> statement. </p>
 		</article>
@@ -267,8 +267,8 @@ var add_to_base = function (number) {
     return base_number + number;
 }
 console.log(add_to_base(6)); // 16</pre>
-			<p>Този начина на работа дава гаранция, че когато използвате определени променливи във функциите си, те не зависят от външен код. Това е хубаво, защото ви позволява да мислите само за кода във функцията и да се абстрахирате от всичко останало. </p>
-			<p>Когато пишете комплексен код, е по-лесно много код да работи със споделени променливи. Това обаче прави кода много по-труден за четене и разбиране.</p>
+			<p>Когато използвате определени променливи във функциите си, те не зависят от външен код. Това е хубаво, защото ви позволява да мислите само за кода във функцията и да се абстрахирате от всичко останало. </p>
+			<!-- <p>Когато пишете комплексен код, е по-лесно много код да работи със споделени променливи. Това обаче прави кода много по-труден за четене и разбиране.</p> -->
 		</article>
 	</slide>
 	<slide>
@@ -340,7 +340,7 @@ console.log(add(2, 5)); // 7 </pre>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Callback функции са "парчета" код, които се подават като аргумент към друг код, от който се очаква да <b>извика</b> арумента в някакъв момент. Извикването може да бъде извършено веднага, или в някакъв по-късен момент. </p>
+			<p>Callback функции са "парчета" код, които се подават като аргумент към друг код, от който се очаква да <b>извика</b> арумента в някакъв момент в бъдешето. Извикването може да бъде извършено веднага, или в някакъв по-късен момент. </p>
 			<p>Callback функциите са основен инструмент в асинхронното програмиране. Те се използват и при обработката на събития. </p>
 <pre class="prettyprint" data-lang="javascript">
 $('a').click(function () {
