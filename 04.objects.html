@@ -61,7 +61,7 @@ var dog = {
 
 			<p>Всеки обект има прототип, така че всички обекти са свързани с главния обект: <code>Object</code></p>
 
-			<p>Прототипната система на javascript е елегантно решение, но понякога може да бъде много объркваща. </p>
+			<p>Прототипната система на javascript е елегантно решение, но понякога може да бъде объркваща. Връзката на обекта с прототипа му се осъществява чрез <code>__proto__</code> property-то му. </p>			
 		</article>
 	</slide>
 	<slide>
@@ -74,12 +74,12 @@ var dog = {
 			<p>Когато ключа е валиден идентификатор(отговарящ на <code>[a-zA-Z_][a-zA-Z0-9_]*</code>) той няма нужда да бъде обграждан в двойни кавички и може да присъства в кода като литерал: </p>
 <pre class="prettyprint" data-lang="javascript">
 var dog = {
-	<b>age</b>: 9
+    <b>age</b>: 9
 }</pre>
 			<p>Когато ключа не е валиден идентификатор, той трябва да бъде обграден в двойни кавички: </p>
 <pre class="prettyprint" data-lang="javascript">
 var dog = {
-	<b>"weight-when-hungry"</b>: 15
+    <b>"weight-when-hungry"</b>: 15
 }</pre>
 
 		</article>
@@ -93,18 +93,18 @@ var dog = {
 			<p>Стойностите могат да бъдат всяка стойност освен <code>undefined</code>, включително числа, низове, функции, масиви, обекти, null или изрази: </p>
 <pre class="prettyprint" data-lang="javascript">
 var flight = {
-	airline: "Bulgaria Air",
-	number: 1544,
-	"from": {
-		IATA: "VN",
-		city: "Varna",
-		time: "2013-05-04 15:30"
-	},
-	"to": {
-		IATA: "SF",
-		city: "Sofia",
-		time: "2013-05-04 16:00"
-	}
+    airline: "Bulgaria Air",
+    number: 1544,
+    "from": {
+        IATA: "VN",
+        city: "Varna",
+        time: "2013-05-04 15:30"
+    },
+    "to": {
+        IATA: "SF",
+        city: "Sofia",
+        time: "2013-05-04 16:00"
+    }
 }</pre>
 		</article>
 	</slide>
@@ -117,8 +117,8 @@ var flight = {
 			<p>За да прочетете информация от property на обект може да използвате 2 различни синтаксиса, които правят едно и също: </p>
 <pre class="prettyprint" data-lang="javascript">
 var dog = {
-	name: "Jack",
-	"weight-when-hungry": 15
+    name: "Jack",
+    "weight-when-hungry": 15
 };
 console.log(dog.name);
 console.log(dog["weight-when-hungry"]);</pre>
@@ -135,26 +135,26 @@ console.log(dog["weight-when-hungry"]);</pre>
 		<article class="smaller">
 <pre class="prettyprint" data-lang="javascript">
 var nav = {
-	"home": "home.html",
-	"about": "about-us.html",
-	"terms-and-conditions": "toc.html"
+    "home": "home.html",
+    "about": "about-us.html",
+    "terms-and-conditions": "toc.html"
 };
 var page = "about";
 console.log(nav.page); // undefined
 console.log(nav[page]); // about-us.html
 </pre>
-			<p>Горния код интерполира стойността на променливата и се обръща към property, което има име като стойността на променливата. </p>
+			<p>Горния код интерполира стойността на променливата и се обръща към property, което има такова име. </p>
 <pre class="prettyprint" data-lang="javascript">
 var flight = {
-	"from": {
-		"city": "Sofia"
-	}
+    "from": {
+        "city": "Sofia"
+    }
 };
 console.log(flight.from.city); // Sofia
 console.log(flight["from"].city); // Sofia
 console.log(flight[from].city); // Uncaught ReferenceError: from is not defined 
 </pre>
-			<p>Когато се използва нотацията [prop-name] не може името да се подава като литерал, то трябва да бъде дадено като string. </p>
+			<p>Когато се използва нотацията <code>[prop-name]</code> не може името да се подава като променлива(както при нотацията с точка), то трябва да бъде дадено като string. </p>
 		</article>
 	</slide>
 	<slide>
@@ -166,9 +166,9 @@ console.log(flight[from].city); // Uncaught ReferenceError: from is not defined
 			<p>Писането в property се прави по идентичен начин като четенето: </p>	
 <pre class="prettyprint" data-lang="javascript">
 var flight = {
-	"from": {
-		"city": "Sofia"
-	}
+    "from": {
+        "city": "Sofia"
+    }
 };
 flight.from.city = "Varna";
 flight.to = {};
@@ -182,11 +182,11 @@ flight.to.city = "Sofia";
 		</hgroup>
 
 		<article class="smaller">
-			<p>Обектите в javascript се копират само по референция. </p>
+			<p>Обектите в javascript се копират по референция. </p>
 <pre class="prettyprint" data-lang="javascript">
 var banana = {
-	color: "yellow",
-	yummy: true
+    color: "yellow",
+    yummy: true
 };
 var mango = banana;
 mango.yummy = false;
@@ -212,12 +212,12 @@ console.log(b); // 6
 			<p>Минаването през всички properties на обекта се правви с цикъл <code>for ... in</code>: </p>
 <pre class="prettyprint" data-lang="javascript">
 var person = {
-	name: "Emil Mohamed",
-	age: 27,
-	gender: "male"
+    name: "Emil Mohamed",
+    age: 27,
+    gender: "male"
 };
 for (var prop in person) {
-	console.log("The person's " + prop + " is " + person[prop]);
+    console.log("The person's " + prop + " is " + person[prop]);
 }</pre>
 <pre class="">
 The person's name is Emil Mohamed
@@ -241,9 +241,9 @@ The person's gender is male</pre>
 			<p>Оператора <code>delete</code> работи идентично както при масиви: </p>
 <pre class="prettyprint" data-lang="javascript">
 var person = {
-	name: "Emil Mohamed",
-	age: 27,
-	gender: "male"
+    name: "Emil Mohamed",
+    age: 27,
+    gender: "male"
 };
 delete person.age;
 console.log(person);</pre>
@@ -251,6 +251,45 @@ console.log(person);</pre>
 Object {name: "Emil Mohamed", gender: "male"}</pre>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Methods</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Обектите в javascript могат да имат методи. Методите са просто функции, които живеят като property на обекта си: </p>
+<pre class="prettyprint" data-lang="javascript">
+var flight = {
+    "from": {
+        lat: 38.8654,
+        lng: 41.5497
+    },
+    "to": {
+        lat: 24.4943,
+        lng: 15.6815
+    },
+    get_distance: function() {
+        return Math.sqrt(
+            Math.pow(flight["from"].lat - flight["to"].lat, 2) +
+            Math.pow(flight["from"].lng - flight["to"].lng, 2)
+        );
+    }
+}
+console.log(flight.get_distance());
+console.log(<b>flight["get_distance"]</b>());
+<b>console["log"]</b>(flight["get_distance"]());</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Задачи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><a href="http://trac.2c-studio.com/wiki/js-course/excersies/04.objects">Задачи</a></p>
+		</article>
+	</slide>
+
 	
 	<slide class="backdrop"></slide>
 </slides>
