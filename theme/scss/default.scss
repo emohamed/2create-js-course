@@ -262,7 +262,9 @@ slides.layout-faux-widescreen {
 b {
   font-weight: 600;
 }
-
+a code {
+  color: $brand-blue-secondary2;
+}
 a {
   color: $brand-blue-secondary2;
   text-decoration: none;
