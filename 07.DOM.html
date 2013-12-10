@@ -53,9 +53,9 @@
         &lt;/tr&gt; 
     &lt;/tbody&gt;
 &lt;/table&gt;</pre>
-			<p>Дървото на документа се състои от HTML nodes - всеки node се асоциира с таг от документа или с текст, който се визуализира пред потребителя. Тези nodes вътрешно се репрезентира от javascript обекти, които можете да манипулирате. </p>
-			<p>Всеки node съдържа информация за позицията си в документа: родителя си, децата си и sibling node-овете му. </p>
-			<p>Също така, node-овете имат информация за атрибутите си, за съдържанието си(текста, който съдържат), CSS стиловете си. </p>
+			<p>Дървото на документа се състои от HTML nodes - всеки node се асоциира с таг от документа или с текст, който се визуализира пред потребителя. Тези node-ове вътрешно се представят от javascript обекти, които можете да манипулирате. </p>
+			<p>Всеки node съдържа информация за позицията си в дървото на документа: родителя си, децата си и sibling node-овете му. </p>
+			<p>Също така, node-овете имат информация за атрибутите си, за съдържанието си(текста, който съдържат) и CSS стиловете си. </p>
 		</article>
 	</slide>
 	<slide>
@@ -67,19 +67,21 @@
 				<li><a href="http://jsfiddle.net/4Ygdx/1/"><code>document.getElementById()</code></a></li>
 				<li><a href="http://jsfiddle.net/3Vz3K/2/"><code>document.getElementsByTagName()</code></a></li>
 				<li><a href="http://jsfiddle.net/mevZF/1/">Четене на атрибут</a></li>
+				<li><a href="http://jsfiddle.net/5QXrf/1/">Писане в атрибут</a></li>
 				<li><a href="http://jsfiddle.net/3PmKY/1/">Четене на деца, проверка за тип на <code>node</code>, <code>innerHTML</code></a></li>
-				<li><a href="http://jsfiddle.net/e3cf8/">Четене на родител, <code>className</code></a></li>
+				<li><a href="http://jsfiddle.net/a2YBj/2/">Работа със стилове</a></li>
 			</ul>
 		</article>
 	</slide>
+
 	<slide>
 		<hgroup>
 			<h2>jQuery</h2>
 		</hgroup>
 		<article class="smaller">
-			<p>jQuery е библиотека за работа с DOM, анимации, AJAX. Тя е най-популярната js библиотека в момента. 68.2% от top 10'000 сайтовете го използват. </p>
+			<p>jQuery е библиотека за работа с DOM, анимации, AJAX. Тя е най-популярната js библиотека в момента. 68.2% от top 10'000 сайтовете я използват. </p>
 			<p>За да използвате jQuery трябва да го включите в страницата си, да се закачите за събитието, което указва кога документа е готов за работа. </p>
-<pre class="prettyprint" data-lang="javascript">
+<pre class="prettyprint" data-lang="live demo">
 &lt;!doctype html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -88,23 +90,171 @@
     &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
     &lt;script&gt;
         jQuery(document).on('ready', function () {
-            $('p').text('jQuery rocks');
+            jQuery('p').text('jQuery rocks');
         });
     &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;p&gt;text&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>jQuery: </h2>
+			<h2>jQuery: dollar function and scope issues</h2>
 		</hgroup>
 
 		<article class="smaller">
-			
+			<p>jQuery предоставя цялата си функционалност чрез 1 функция: <code>jQuery</code>. Тя се използва за много цели, и работи различно според типа на аргументите, които са й подадени. </p>
+			<p>Тъй като функцията се ползва много често, библиотеката предоставя вграден механизъм за съкратен запис на името й. Функцията долар <code>$()</code> по подразбиране сочи към функцията <code>jQuery()</code> и може да ползва по същия начин.</p>
+			<p>В javascript знака долар е позволен за ползване в имена на променливи, така че фунцията <code>$()</code> не е по-специална с нищо от функцията <code>jQuery()</code>. </p>
+
+			<p>Тъй като има и други библиотеки, които използват знака долар за собствени цели, jQuery предоставя и начин да изключите автоматичното закачане за <code>$</code>: това става чрез <code>noConflict()</code>. </p>
+
+			<p>Много честа практика е да се ползва само изпълняваща се функция за да се създаде scope, в който променливата <code>$</code> сочи към <code>jQuery</code>.</p>
+<pre class="prettyprint" data-lang="javascript">
+(function ($) {
+    console.log("$ is now jQuery!");
+})(jQuery)</pre>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>jQuery: <code>document.ready</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Много често срещана грешка е да се опитва работа с документа преди той да е готов [live demo]. </p>
+			<p>Тъй като почти винаги трябва да се изчака документа да зареди преди да се работи с него, jQuery предоставя стандартен механизъм за това:</p>
+<pre class="prettyprint" data-lang="javascript">
+jQuery(document).on('ready', function () {
+    console.log('document is now ready 1');
+});
+jQuery(document).ready(function () {
+    console.log('document is now ready 2');
+});
+jQuery(function () {
+    console.log('document is now ready 3');
+});</pre>
+			<p><code>document.ready</code> събитието настъпва когато DOM дървото е готово за работа, а <code>window.load</code> когато всички ресурси на страницата са заредени. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Селектиране на елементи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Основна идея в jQuery е, че елементите в документа се взимат чрез CSS селектори. Когато подадете CSS селектор на функцията долар, тя връща jQuery обект, който в основата си е колекция от HTML елементи, които можете да манипулирате. </p>
+			<p>Забележете, че обекта винаги е колекция, дори когато в него се съдържат само 1 елемент.</p>
+			<p>Ако в документа няма елементи, които отговарят на селектора, се връща празна колекция. Това не се смята за проблемна ситуация.</p>
+<pre class="prettyprint" data-lang="javascript">
+$("#my-id");
+$(".my-class");
+$("#contents ul.people li");
+$("input[name='first_name']");
+</pre>
+			<p>jQuery поддържа някои допълнителни селектори: </p>
+<pre class="prettyprint" data-lang="javascript">
+$("a.external:first");
+$("tr:odd");
+$("#myForm :input");
+$("div:visible");
+$("div:gt(2)");</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Utility methods</h2>
+			<h3><code>$('selector').method()</code> vs <code>$.method()</code></h3>
+		</hgroup>
+
+		<article class="smaller">
+			<p>jQuery предоставя 2 типа методи: </p>
+			<ul>
+				<li>Работещи върху колекция: изискват да направите селекция от елементите</li>
+				<li>Utility методи: не работят върху колекция, ами самостоятелно</li>
+			</ul>
+			<p>Типичен пример за utility е <code>$.trim</code>: </p>
+<pre class="prettyprint" data-lang="javascript">
+var name = " Emil Mohamed ";
+console.log('"' + $.trim(name) + '"'); // "Emil Mohamed" </pre>
+			<p>Типичен пример метод, работещ върху колекция е <code>addClass()</code>: </p>
+<pre class="prettyprint" data-lang="javascript">
+$('a').addClass('link'); </pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Манипулиране на елементи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>jQuery предоставя множество методи за манипулиране на HTML елементи. Има добра документация за тях, и няма да говорим за всички - само за основните. </p>
+			<p>В jQuery има някои конвенции, които важат за почти всички манипулиращи методи: </p>
+			<ul>
+				<li>Работи се върху всички елементи в колекцията:
+<pre class="prettyprint" data-lang="javascript">
+$('a').addClass('link'); // All a tags now have link class </pre>
+</li>
+				<li>В зависимост от броя и типа на аргументите, методите се държат различно
+<pre class="prettyprint" data-lang="javascript">
+$('a').text();
+$('a').text('I am the new text. ');</pre>
+</li>
+				<li>Методите връщат jQuery обект-а си, така че следващия метод да може да се извика директно върху предишния
+<pre class="prettyprint" data-lang="javascript">
+$('a').addClass('link').text('new text for all a tags')</pre>
+</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа с класове</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><code>addClass(className)</code></li>
+				<li><code>removeClass(className)</code></li>
+				<li><code>hasClass(className)</code></li>
+				<li><code>toggleClass(className)</code></li>
+			</ul>
+			<p>Тези функции също така могат да приемат и аргумент функция. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа с атрибути</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Тук има само един метод, който се държи различно според броя и типа на аргументите, които приема: </p>
+<pre class="prettyprint" data-lang="javascript">
+var target = $('a').attr('target'); // read
+$('a').attr('target', '_blank'); // write
+</pre>
+			<p>jQuery прави разделение между атрибути и properties. Под атрибут трябва да разбирате атрибут на HTML тага в документа, а под property -- стойността на property-то в DOM обекта.  </p>
+<pre class="prettyprint" data-lang="javascript">
+var is_checked = $('input[type=checkbox]').prop('checked');
+$('input[type=checkbox]').prop('checked', true); // will check mark the checkbox as checked</pre>
+			<p>Разликата е тънка, защото атрибутите и property-тата се покриват в DOM API-то. Ето <a href="http://jsfiddle.net/4WCL6/1/">пример</a>, който трябва да изясни ситуацията.</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>To Read</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="http://api.jquery.com/jQuery.noConflict/">noConflict</a></li>
+				<li><a href="http://api.jquery.com/category/selectors/">Selectors</a></li>
+				<li><a href="http://api.jquery.com/attr/">attr method</a></li>
+			</ul>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
