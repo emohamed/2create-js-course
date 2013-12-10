@@ -246,6 +246,23 @@ $('input[type=checkbox]').prop('checked', true); // will check mark the checkbox
 	</slide>
 	<slide>
 		<hgroup>
+			<h2>Работа с HTML текста на елемента</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Често се налага да се прочете или да се промени съдържанието на даден node от javascript. Това се постига чрез метода <code>.html()</code>: </p>
+<pre class="prettyprint" data-lang="javascript">
+var html = $("strong").html(); // HTML of the first strong tag in the document
+$("strong").html("We are strong. "); // Change the HTML of all strong tags in the document
+</pre>
+
+			<p>Пример: ако трябва да валидарате форма, ще се наложи да промените документа при показване на грешката на потребителя: <a href="http://jsfiddle.net/9B8sM/">пример</a></p>
+			
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
 			<h2>To Read</h2>
 		</hgroup>
 
@@ -253,7 +270,7 @@ $('input[type=checkbox]').prop('checked', true); // will check mark the checkbox
 			<ul>
 				<li><a href="http://api.jquery.com/jQuery.noConflict/">noConflict</a></li>
 				<li><a href="http://api.jquery.com/category/selectors/">Selectors</a></li>
-				<li><a href="http://api.jquery.com/attr/">attr method</a></li>
+				<li><a href="http://api.jquery.com/attr/">attr method</a>, <a href="http://learn.jquery.com/using-jquery-core/attributes/">jQuery LC attributes</a></li>
 			</ul>
 		</article>
 	</slide>
