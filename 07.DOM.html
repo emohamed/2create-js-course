@@ -246,7 +246,7 @@ $('input[type=checkbox]').prop('checked', true); // will check mark the checkbox
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Работа с HTML текста на елемента</h2>
+			<h2>Работа с HTML на елемента</h2>
 		</hgroup>
 
 		<article class="smaller">
@@ -257,10 +257,63 @@ $("strong").html("We are strong. "); // Change the HTML of all strong tags in th
 </pre>
 
 			<p>Пример: ако трябва да валидарате форма, ще се наложи да промените документа при показване на грешката на потребителя: <a href="http://jsfiddle.net/9B8sM/">пример</a></p>
-			
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа с текста на елемента</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<p>Идентично на <code>.html()</code> метода, има и метод <code>.text()</code>, който работи по много подобен начин: <a href="http://jsfiddle.net/VTEk7/">пример</a></p>
+			<p>Често, този метод се използва, когато искате да поставите string в документа, но не сте сигурни какво има в него: например, ако текста идва от външен източник, трябва да се вземат определени предпразни мерки преди да го вкарате в дървото на документа. </p>
+		</article>
+	</slide>
+		<slide>
+			<hgroup>
+				<h2>Връзка между jQuery колекция и DOM елементи</h2>
+			</hgroup>
+	
+			<article class="smaller">
+				<p>По същество jQuery обектите представляват абстракция на колекция от HTML елементи. За това има тясна връзка между jQuery обектите и лежащите под тях DOM елементи. </p>
+				<p>За да достигнете до "суровите" DOM елементи в jQuery колекция можете да ползвате един от следните методи: </p>
+<pre class="prettyprint" data-lang="javascript">
+var last_link = $('a:last').<b>get(0)</b>;
+var first_link = $('a:first')<b>[0]</b>;
+</pre>
+				<p>Обратната процедура също е възможна: за да получите jQuery обект / колекция от HTML елемент просто трябва да приложите функцията <code>$</code> върху елемента:</p>
+<pre class="prettyprint" data-lang="javascript">
+var link = document.getElementById('id');
+$(link).addClass('test');
+</pre>
+				<p>DOM обектите са по-ефикасни от гледна точка на скорост на изпълнение, докато jQuery колекциите са по-лесни за работа и с тях се пише код по-бързо. От тази гледна точка е добре да използвате DOM обектите, когато кода, който пишете се изпълнява често. </p>
+				<p>Callback функциите, които подавате за работа на jQuery работят с контекст на DOM елемента. Още по темата по-късно. </p>
+			</article>
+		</slide>
+	<slide>
+		<hgroup>
+			<h2>Итериране през елементите на колекция</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Има 2 основни начина да се итерира през елементите на колекция. </p>
+			<p>С метода <code>.each()</code></p>
+<pre class="prettyprint" data-lang="javascript">
+$('a').each(function () {
+    console.log(this.href);
+});
+</pre>
+			<p>С цикъл: </p>
+<pre class="prettyprint" data-lang="javascript">
+var links = $('a');
+var link;
+for (var i = 0; i &lt; links.length; i++) {
+    link = links[i];
+    console.log(link.href);
+}
+</pre>
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>To Read</h2>
@@ -271,6 +324,7 @@ $("strong").html("We are strong. "); // Change the HTML of all strong tags in th
 				<li><a href="http://api.jquery.com/jQuery.noConflict/">noConflict</a></li>
 				<li><a href="http://api.jquery.com/category/selectors/">Selectors</a></li>
 				<li><a href="http://api.jquery.com/attr/">attr method</a>, <a href="http://learn.jquery.com/using-jquery-core/attributes/">jQuery LC attributes</a></li>
+				<li><a href="http://api.jquery.com/html/">html method</a>, <a href="http://api.jquery.com/text/">text method</a></li>
 			</ul>
 		</article>
 	</slide>
