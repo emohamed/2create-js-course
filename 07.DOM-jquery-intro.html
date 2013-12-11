@@ -174,7 +174,7 @@ $("div:gt(2)");</pre>
 		<article class="smaller">
 			<p>jQuery предоставя 2 типа методи: </p>
 			<ul>
-				<li>Работещи върху колекция: изискват да направите селекция от елементите</li>
+				<li>Работещи върху колекция: изискват да направите селекция от елементи</li>
 				<li>Utility методи: не работят върху колекция, ами самостоятелно</li>
 			</ul>
 			<p>Типичен пример за utility е <code>$.trim</code>: </p>
@@ -250,13 +250,13 @@ $('input[type=checkbox]').prop('checked', true); // will check mark the checkbox
 		</hgroup>
 
 		<article class="smaller">
-			<p>Често се налага да се прочете или да се промени съдържанието на даден node от javascript. Това се постига чрез метода <code>.html()</code>: </p>
+			<p>Често се налага да се прочете или да се промени съдържанието на даден node от javascript. Това се прави чрез метода <code>.html()</code>: </p>
 <pre class="prettyprint" data-lang="javascript">
 var html = $("strong").html(); // HTML of the first strong tag in the document
 $("strong").html("We are strong. "); // Change the HTML of all strong tags in the document
 </pre>
 
-			<p>Пример: ако трябва да валидарате форма, ще се наложи да промените документа при показване на грешката на потребителя: <a href="http://jsfiddle.net/9B8sM/">пример</a></p>
+			<p>Пример: ако трябва да валидарате форма, ще се наложи да промените документа при показване на грешката на потребителя: <a href="http://jsfiddle.net/9B8sM/1/">пример</a></p>
 		</article>
 	</slide>
 	<slide>
@@ -269,27 +269,37 @@ $("strong").html("We are strong. "); // Change the HTML of all strong tags in th
 			<p>Често, този метод се използва, когато искате да поставите string в документа, но не сте сигурни какво има в него: например, ако текста идва от външен източник, трябва да се вземат определени предпразни мерки преди да го вкарате в дървото на документа. </p>
 		</article>
 	</slide>
-		<slide>
-			<hgroup>
-				<h2>Връзка между jQuery колекция и DOM елементи</h2>
-			</hgroup>
-	
-			<article class="smaller">
-				<p>По същество jQuery обектите представляват абстракция на колекция от HTML елементи. За това има тясна връзка между jQuery обектите и лежащите под тях DOM елементи. </p>
-				<p>За да достигнете до "суровите" DOM елементи в jQuery колекция можете да ползвате един от следните методи: </p>
+	<slide>
+		<hgroup>
+			<h2>Работа с елементи на форма</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Стойностите на полетата в HTML формите се четат и пишат чрез метода <code>.val()</code>. </p>
+			<p>Този метод работи консистентно за <code>input</code>, <code>select</code> и <code>textarea</code> елементи. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Връзка между jQuery колекция и DOM елементи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>По същество jQuery обектите представляват абстракция на колекция от HTML елементи. За това има тясна връзка между jQuery обектите и лежащите под тях DOM елементи. </p>
+			<p>За да достигнете до "суровите" DOM елементи в jQuery колекция можете да ползвате един от следните методи: </p>
 <pre class="prettyprint" data-lang="javascript">
 var last_link = $('a:last').<b>get(0)</b>;
 var first_link = $('a:first')<b>[0]</b>;
 </pre>
-				<p>Обратната процедура също е възможна: за да получите jQuery обект / колекция от HTML елемент просто трябва да приложите функцията <code>$</code> върху елемента:</p>
+			<p>Обратната процедура също е възможна: за да получите jQuery обект / колекция от HTML елемент просто трябва да приложите функцията <code>$</code> върху елемента:</p>
 <pre class="prettyprint" data-lang="javascript">
 var link = document.getElementById('id');
 $(link).addClass('test');
 </pre>
-				<p>DOM обектите са по-ефикасни от гледна точка на скорост на изпълнение, докато jQuery колекциите са по-лесни за работа и с тях се пише код по-бързо. От тази гледна точка е добре да използвате DOM обектите, когато кода, който пишете се изпълнява често. </p>
-				<p>Callback функциите, които подавате за работа на jQuery работят с контекст на DOM елемента. Още по темата по-късно. </p>
-			</article>
-		</slide>
+			<p>DOM обектите са по-ефикасни от гледна точка на скорост на изпълнение, докато jQuery колекциите са по-лесни за работа и с тях писането на код е по-бързо. От тази гледна точка е добре да използвате DOM обектите, когато кода, който пишете се изпълнява често. </p>
+			<p>Callback функциите, които подавате за работа на jQuery работят с контекст на DOM елемента. Още по темата по-късно. </p>
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>Итериране през елементите на колекция</h2>
@@ -316,7 +326,36 @@ for (var i = 0; i &lt; links.length; i++) {
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>To Read</h2>
+			<h2>Работа с data атрибути</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Често се налага да се добави допълнителна информация към определен таг. Това стандартно се прави чрез data атрибути: </p>
+<pre class="prettyprint" data-lang="html">
+&lt;div class="widget" data-widget-id="154"&gt;&lt;/div&gt;
+</pre>
+			<p>jQuery предоставя стандартен начин да се работи с тези атрибути чрез метода <code>.data()</code>:</p>
+<pre class="prettyprint" data-lang="javascript">
+console.log($('.widget').data('widget-id'));
+</pre>
+			<p>По-често самите елементи не съдържат дата атрибути в HTML: meta информацията в тези атрибути се записва от javascript. <a href="http://jsfiddle.net/YTKv7/">Пример</a></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа със стилове</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Основен метод: <a href="http://api.jquery.com/css/"><code>css()</code></a></p>
+			<p>Позициониране: <a href="http://api.jquery.com/offset/"><code>offset()</code></a>, <a href="http://api.jquery.com/position/"><code>position()</code></a></p>
+			<p>Размери: <a href="http://api.jquery.com/width/"><code>width()</code></a>, <a href="http://api.jquery.com/innerHeight/"><code>innerHeight()</code></a>, <a href="http://api.jquery.com/outerHeight/"><code>outerHeight()</code></a>. Аналогично за width. </p>
+			<p>Scroll: <a href="http://api.jquery.com/scrollLeft/"><code>scrollLeft()</code></a>, <a href="http://api.jquery.com/scrollTop/"><code>scrollTop()</code></a>. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Further Reading &amp; Tasks</h2>
 		</hgroup>
 
 		<article class="smaller">
@@ -325,7 +364,10 @@ for (var i = 0; i &lt; links.length; i++) {
 				<li><a href="http://api.jquery.com/category/selectors/">Selectors</a></li>
 				<li><a href="http://api.jquery.com/attr/">attr method</a>, <a href="http://learn.jquery.com/using-jquery-core/attributes/">jQuery LC attributes</a></li>
 				<li><a href="http://api.jquery.com/html/">html method</a>, <a href="http://api.jquery.com/text/">text method</a></li>
+				<li><a href="http://api.jquery.com/data/">data method @ api.jquery.com</a></li>
+				<li><a href="http://api.jquery.com/category/manipulation/style-properties/">Style properties</a></li>
 			</ul>
+			<a href="">Tasks</a>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
