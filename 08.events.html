@@ -192,17 +192,27 @@ $links.trigger('click');
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Event bubbling and propagation</h2>
+			<h2>Event propagation: Overview</h2>
 		</hgroup>
 
 		<article class="smaller">
 			<ul>
-				<li>Събитията в browser възникват от най-дълбокия елемент в DOM дървото </li>
-				<li>Те "изплуват" (англ. bubble) към по-горните елементи </li>
-				<li>Някои browser-и поддържат обратния модел: събитията възникват на коренния елемент на дървото, след което се предизвикват надолу до най-дълбокия елемент. Това се нарича capturing. Този модел на практика това не се ползва. </li>
-				<li>Тези процеси на изплуване и capturing генерално се наричат propagation. Понеже capturing не се ползва, bubbling и propagation могат да се разбират като синоними. </li>
-				
+				<li>Събитията в browser възникват от най-дълбокия елемент в DOM дървото</li>
+				<li>Те "изплуват" (англ. bubble) към по-горните елементи</li>
+				<li>Някои browser-и поддържат обратния модел: събитията възникват на коренния елемент на дървото, след което се предизвикват надолу до най-дълбокия елемент. Това се нарича capturing. Тези browser-и изпълняват capturing, и след това bubbling. </li>
+				<li>Тези процеси на изплуване и capturing генерално се наричат propagation</li>
+				<li>Проблемите и хаковете около capturing и bubling са разрешени вътршно в jQuery, и на вас не ви се налага да знаете за тях</li>
 			</ul>
+			<a href="http://yuiblog.com/assets/caridy-graph1.jpg"><img src="http://yuiblog.com/assets/caridy-graph1.jpg" alt="" height="250" /></a>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Event propagation: защо е важно?</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Възникването на събитие върху определен елемент го предизвизвиква и в родителите на елемента:</p>
 		</article>
 	</slide>
 	<slide>
