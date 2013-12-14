@@ -18,7 +18,7 @@
 		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
 		<hgroup class="auto-fadein">
 			<h1 data-config-title><!-- populated from slide_config.json --></h1>
-			<h2 data-config-subtitle>Lecture 6 - Events</h2>
+			<h2 data-config-subtitle>Lecture 8 - Events</h2>
 			<p data-config-presenter><!-- populated from slide_config.json --></p>
 		</hgroup>
 	</slide>
@@ -210,19 +210,59 @@ $links.trigger('click');
 		<hgroup>
 			<h2>Event propagation: защо е важно?</h2>
 		</hgroup>
-
 		<article class="smaller">
 			<p>Възникването на събитие върху определен елемент го предизвизвиква и в родителите на елемента: <a href="http://jsfiddle.net/EYxYL/">пример</a></p>
-			<p></p>
+			<p>Понякога това има интересни резултати: <a href="http://jsfiddle.net/fvP8T/">пример</a>. </p>
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>For Reading</h2>
+			<h2>Делегиране на събития</h2>
+			<h3>Ситуации</h3>
 		</hgroup>
 
 		<article class="smaller">
-			<p><a href="http://api.jquery.com/category/events/event-object/">jQuery events objects</a>. </p>
+			<p>Понякога се налага да се интересуваме от събития на елементи, които не съществуват в DOM дървото в момента в който искаме да закачим слушателя за събитието. <a href="http://jsfiddle.net/8UFDy/">Пример</a></p>
+			<p>Нека кажем, че искаме да слушаме за определено събитие на всички <code>li</code> елементи, които в момента се намират в <code>ul#list</code>. Бихме могли да постигнем това по този начин: <a href="http://jsfiddle.net/2pnzs/1/">пример</a>. </p>
+			<p>Това обаче не е елегантно решение: то изисква от нас да обвържем(couple) кода, който слуша за събитието с кода, който променя дървото. Това означава, че винаги когато променяте дървото, ще трябва да мислите и за слушателите на събития - резултата е увеличена сложност на кода. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Делегиране на събития</h2>
+			<h3>Overview</h3>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Делегираните събития предлагат решение. Те работят така: </p>
+			<ul>
+				<li>Казвате на jQuery да следи за събитието върху елемента, който не се променя(в случая: <code>ul#list</code>)</li>
+				<li>Казвате на jQuery, че се интересувате само от събития, предизвикани от определени деца на този елемент(в случая: <code>li</code>)</li>
+				<li>В момента, в който събитието възникне върху този елемент, или някое от децата му, jQuery проверява кой е най-вътрешния елемент предизвикал събитието</li>
+				<li>Ако този елемент отговаря на критерия от точка 2, се извиква вашата callback функция</li>
+				<li>В противен случай, събитието се игнорира</li>
+			</ul>
+
+			<p>jQuery API за закачане на делегирани събития е: </p>
+<pre class="prettyprint" data-lang="javascript">
+$('selector').on('event', 'selector', function () {
+    // callback code
+});
+</pre>
+			<p><a href="http://jsfiddle.net/rG38y/1/">Пример</a>. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Performance Issues</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>Не селектирайте елементи в event handler-а, освен ако не се налага. Селектирайте елементите преди да закачите слушателя и кеширайте резултата от селектора</li>
+				<li>Събития, които се изпълнявани често(mousemove, scroll) трябва да се оптимизират до колкото е възможно</li>
+				<li>Делегирани събития към елементи близки до корена на DOM дървото са лоша идея -- делегирайте събития към възможно най-малка зона в документа</li>
+			</ul>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
