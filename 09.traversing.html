@@ -45,11 +45,11 @@
 
 		<article class="smaller">
 			<ul>
-				<li><code>.parent()</code></li>
-				<li><code>.parents()</code></li>
-				<li><code>.closest()</code></li>
-				<li><code>.offsetParent()</code></li>
-				<li><code>.parentsUntil()</code></li>
+				<li><code>.parent()</code>: <a href="http://jsfiddle.net/7NePZ/">пример</a></li>
+				<li><code>.parents()</code>: <a href="http://jsfiddle.net/cUmZE/1/">пример</a></li>
+				<li><code>.closest()</code>: <a href="http://jsfiddle.net/qUu9u/1/">пример</a></li>
+				<li><code>.offsetParent()</code>: <a href="http://jsfiddle.net/B2krE/2/">пример</a></li>
+				<li><code>.parentsUntil()</code>: <a href="http://api.jquery.com/parentsuntil/">API docs</a></li>
 			</ul>
 		</article>
 	</slide>
@@ -60,41 +60,74 @@
 
 		<article class="smaller">
 			<ul>
-				<li><code>.children()</code></li>
-				<li><code>.contents()</code></li>
-				<li><code>.find()</code></li>
+				<li><code>.children()</code> - връща(и филтрира) всички директни деца</li>
+				<li><code>.contents()</code> - връща(и филтрира) всички директни деца, включително текстови node-ове и comment node-ове</li>
+				<li><code>.find()</code> - връща(и филтрира) всички node-ове надолу по дървото, в дълбочина</li>
 			</ul>
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Преминаване натрани</h2>
+			<h2>Преминаване настрани</h2>
 		</hgroup>
 
 		<article class="smaller">
 			<ul>
-				<li><code>.siblings()</code></li>
-				<li><code>.next()</code>, <code>.prev()</code></li>
-				<li><code>.nextAll()</code>, <code>.prevAll()</code></li>
+				<li><code>.siblings()</code> - връща(и филтрира) всички node-ове на същия родител и на същото ниво</li>
+				<li><code>.next()</code>, <code>.prev()</code> - връща предишен(респективно следващ) елемент от същия родител</li>
+				<li><code>.nextAll()</code>, <code>.prevAll()</code> - връща всички предишни(респективно следващи) елементи от същия родител</li>
 				<li><code>.nextUntil()</code>, <code>.prevUntil()</code></li>
 			</ul>
 		</article>
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Филтриране на елементите в jQuery колекция</h2>
+			<h2>Visual aid</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><img src="images/content/tree.png" alt=""></p>
+		</article>
+	</slide>
+	
+	<slide>
+		<hgroup>
+			<h2>Манипулиране на колекции</h2>
 		</hgroup>
 
 		<article class="smaller">
 			<ul>
-				<li><code>.eq()</code></li>
-				<li><code>.filter()</code></li>
-				<li><code>.first()</code></li>
-				<li><code>.has()</code></li>
-				<li><code>.last()</code></li>
-				<li><code>.not()</code></li>
-				<li><code>.slice()</code></li>
+				<li><code>.add()</code> - добавя нови елементи в колекцията </li>
+				<li><code>.eq()</code> - извлича елемент от определен индекс в колекцията </li>
+				<li><code>.filter()</code> - филтрира елементите в колекцията със селектор или функция </li>
+				<li><code>.first()</code> - оставя само първия елемент от колекцията </li>
+				<li><code>.has()</code> - филтрира колекцията така че да останат само елементи, които имат деца с определен селектор </li>
+				<li><code>.last()</code> - оставя само последния елемент от колекцията </li>
+				<li><code>.not()</code> - оставя само елементите, които не отговарят на определен селектор</li>
+				<li><code>.slice()</code> - оставя само елементите между определени индекси </li>
 			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Работа със стека на jQuery обекта</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато промените дадена колекция с някой от горните методи, jQuery записва старото състояние на колекцията, така че можете да се върнете към него на по-късен етап. </p>
+			<p>Това се прави чрез метода <code>.end()</code>. </p>
+<pre class="prettyprint" data-lang="javascript">
+$('.nav')
+    .addClass('main-navigation')
+    .find('li')
+        .addClass('nav-items')
+        .on('click', function () {
+            console.log("clicked");
+        })
+        .end()
+    .find('ul')
+        .addClass("nav-lists");
+</pre>
 		</article>
 	</slide>
 	<slide>
@@ -104,14 +137,31 @@
 
 		<article class="smaller">
 			<ul>
-				<li><code>.add()</code></li>
-				<li><code>.addBack()</code></li>
-				<li><code>.end()</code></li>
 				<li><code>.map()</code></li>
 				<li><code>.is()</code></li>
 			</ul>
 		</article>
 	</slide>
+		<slide>
+			<hgroup>
+				<h2>За четене и задачи</h2>
+
+			</hgroup>
+	
+			<article class="smaller">
+				<p><a href="http://api.jquery.com/category/traversing/">Traversing jQuery API</a>. </p>
+				<p><b>Камък ножница хартия</b></p>
+				<ul>
+					<li><a href="http://trac.2c-studio.com/wiki/js-course/excersies/practice-1/rock-scissors-paper">Камък ножница хартия</a></li>
+					<li><a href="http://trac.2c-studio.com/wiki/js-course/excersies/practice-1/rock-scissors-paper-lizard-spock">Камък ножница хартия гущер спок</a></li>
+				</ul>
+				<p><b>Морски шах</b></p>
+				<ul>
+					<li><a href="http://trac.2c-studio.com/wiki/js-course/excersies/practice-2/TicTacToe">Морски шах</a></li>
+					<li><a href="http://trac.2c-studio.com/wiki/js-course/excersies/practice-2/TicTacToeAdvanced">Морски шах с повече полета</a></li>
+				</ul>
+			</article>
+		</slide>
 	<slide class="backdrop"></slide>
 </slides>
 </body>
