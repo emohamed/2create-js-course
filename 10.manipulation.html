@@ -27,11 +27,111 @@
 			<h2>Manipulation</h2>
 		</hgroup>
 
-		<article class="smaller">
-
+		<article>
+			<p>Ще разгледаме как можем да добавяме, махаме и копираме елементи от DOM дървото. </p>
+			<p>Основните типове манипулации:</p>
+			<ul>
+				<li>Премахване на елементи</li>
+				<li>Клониране на елементи</li>
+				<li>Добавяне на елементи в друг елемент</li>
+				<li>Добавяне на елементи извън друг елемент</li>
+				<li>Презаписавне на един елемент с друг</li>
+				<li>Добавяне на елементи около друг елемент</li>
+			</ul>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Премахване на елементи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><code>.empty()</code> - премахва всички деца на елемента, и ги връща</li>
+				<li><code>.remove()</code> - премахва елемента от документа, и го връща</li>
+				<li><code>.detach()</code> - откача елемента от документа, и го връща</li>
+			</ul>
+			<p><code>.remove()</code> и <code>.detach()</code> методите са много подобни. <code>.detach()</code> се ползва когато елемента, който искате да премахнете ще да бъде върнат в документа на по-късен етап. Той съхранява event handler-ите, които са закачени за елемента, докато <code>.remove()</code> ги трие. </p>
+			<p><a href="http://jsfiddle.net/emohamed/K6NfZ/">Пример</a></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Клониране на елементи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Клонирането на елементи се прави чрез функцията <code>.clone()</code>: той копира колекция от елементи. Можете да окажете дали клонираните елементи трябва да имат същите event handlers, като оригиналите. </p>
+			<p>Процеса на клониране е първата стъка: след това трябва да направите нещо с новия, клониран елемент. Обикновенно, клонирания елемент бива променен и върнат в DOM дървото.  </p>
+
+			<p><a href="http://jsfiddle.net/emohamed/byUhg/">Пример за клониране</a>. </p>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Добавяне на елементи в друг елемент</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="http://api.jquery.com/append/"><code>.append()</code></a></li>
+				<li><a href="http://api.jquery.com/appendTo/"><code>.appendTo()</code></a></li>
+				<li><a href="http://api.jquery.com/prepend/"><code>.prepend()</code></a></li>
+				<li><a href="http://api.jquery.com/prependTo/"><code>.prependTo()</code></a></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Добавяне на елементи извън друг елемент</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="http://api.jquery.com/after/"><code>.after()</code></a></li>
+				<li><a href="http://api.jquery.com/insertAfter/"><code>.insertAfter()</code></a></li>
+				<li><a href="http://api.jquery.com/before/"><code>.before()</code></a></li>
+				<li><a href="http://api.jquery.com/insertBefore/"><code>.insertBefore()</code></a></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Презаписавне на един елемент с друг</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="http://api.jquery.com/replaceWith/"><code>.replaceWith()</code></a></li>
+				<li><a href="http://api.jquery.com/replaceAll/"><code>.replaceAll()</code></a></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Добавяне на елементи около друг елемент</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><a href="http://api.jquery.com/wrap/"><code>.wrap()</code></a></li>
+				<li><a href="http://api.jquery.com/unwrap/"><code>.unwrap()</code></a></li>
+				<li><a href="http://api.jquery.com/wrapAll/"><code>.wrapAll()</code></a></li>
+				<li><a href="http://api.jquery.com/wrapInner/"><code>.wrapInner()</code></a></li>
+			</ul>
+		</article>
+	</slide>
+		<slide>
+			<hgroup>
+				<h2>Reading and Tasks</h2>
+			</hgroup>
 	
+			<article class="smaller">
+				<p><a href="http://api.jquery.com/category/manipulation/">Manipulation API</a></p>
+				<p><a href="http://trac.2c-studio.com/wiki/js-course/excersies/practice-3">Задачи. </a></p>
+			</article>
+		</slide>
 	<slide class="backdrop"></slide>
 </slides>
 </body>
