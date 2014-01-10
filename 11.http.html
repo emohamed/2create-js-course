@@ -24,13 +24,223 @@
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>HTTP</h2>
+			<h2>Hyper Text Transfer Protocol - abstract</h2>
 		</hgroup>
 
 		<article>
+			<p>HTTP е протокол за комуникация между client agents(обикновенно browser-и) и server-и. </p>
+			<p>Той описва езика, на който могат да си "говорят" web browser-и и web server-и. </p>
+			<p>HTTP стои в основата на World Wide Web. </p>
 		</article>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Как протича HTTP връзкaта</h2>
+		</hgroup>
 
+		<article class="smaller">
+			<ul>
+				<li>browser-а инициира връзка със server като изпраща HTTP Request</li>
+				<li>server връща отговора във формата на HTTP Response</li>
+			</ul>
+			<hr>
+			<img src="images/content/http.png" alt="">
+		</article>
+	</slide>
+	<slide>
+		<h2>HTTP Message Anatomy</h2>
+
+		<article class="smaller">
+			<img src="images/content/http-req-res.png" alt="">
+			<hr>
+			<p><b>Request</b>: </p>
+			<ul>
+				<li>заглавния ред съдържа "[METHOD] [REQUEST-URI] HTTP/[VER]"</li>
+				<li>тялото може да съдържа информация, която потребителя иска да изпрати към server-а чрез форма</li>
+			</ul>
+			<p><b>Response</b></p>
+			<ul>
+				<li>заглавния ред съдържа "HTTP/[VER] [CODE] [TEXT]"</li>
+				<li>тялото съдържа ресурса, който е бил поискан от HTTP request-а</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>HTTP методи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Основни методи: </p>
+			<ul>
+				<li>GET: използва се клиента изисква ресурс от server-а</li>
+				<li>POST: използва се когато browser-а променя състоянието на server-а по някакъв начин</li>
+			</ul>
+			<p>Има и други методи, които се ползват доста по-рядко: </p>
+			<ul>
+				<li>HEAD</li>
+				<li>PUT</li>
+				<li>DELETE</li>
+				<li>OPTIONS</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>HTTP headers</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Всяко HTTP съобщение(заявка или отговор) носи допълнителна информация със себе си в заглавната си част. </p>
+			<p>Тя се намира след първия ред от събщението и има формат на двойки ключове и стойности, разделени с двуеточие. </p>
+<pre class="prettyprint" data-lang="request">
+GET /docs/index.html HTTP/1.1
+Host: www.test101.com
+Accept: image/gif, image/jpeg, */*
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+<i>(blank line)</i>
+</pre>
+
+<pre class="prettyprint" data-lang="response">
+HTTP/1.1 200 OK
+Date: Sun, 18 Oct 2009 08:56:53 GMT
+Server: Apache/2.2.14 (Win32)
+Last-Modified: Sat, 20 Nov 2004 07:16:26 GMT
+Content-Length: 44
+Content-Type: text/html
+
+&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Важни HTTP request хедъри</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li><code>Host: domain-name</code></li>
+				<li><code>Referer: referer-URL</code></li>
+				<li><code>User-Agent: browser-type</code></li>
+				<li><code>Authorization</code></li>
+				<li><code>Cookie: cookie-name-1=cookie-value-1, cookie-name-2=cookie-value-2, ... </code></li>
+				<li><code>If-Modified-Since: date</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Важни HTTP response хедъри</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<ul>
+					<li><code>Content-Encoding</code></li>
+					<li><code>Content-Length</code></li>
+					<li><code>Content-Disposition</code></li>
+					<li><code>Content-Type</code></li>
+					<li><code>Date</code></li>
+					<li><code>Expires</code></li>
+					<li><code>Last-Modified</code></li>
+					<li><code>Location</code></li>
+					<li><code>Server</code></li>
+					<li><code>Set-Cookie</code></li>
+					<li><code>WWW-Authenticate</code></li>
+				</ul>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>X-</code> хедъри</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Можете да добавяте свои HTTP хедъри в комуникацията между browser и server. Единственото изискване е те да започват с <code>X-</code>. </p>
+			<p>Някои примери: </p>
+			<ul>
+				<li><code>X-Requested-With</code></li>
+				<li><code>X-Forwarded-For</code></li>
+				<li><code>X-UA-Compatible</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Процес по рендиране на страница в browser</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>Browser-а изисква ресурса от поискания адрес от server-а</li>
+				<li>Server-а отговаря с HTML код и browser го парсира и започва да го показва на потребителя</li>
+				<li>Обикновенно, HTML кода на страницата съдържа референции към външни ресурси: например CSS файлове, javascript файлове, картинки, font-ове и т.н.</li>
+				<li>За всеки от тези ресурси, browser-а трябва да направи нов HTTP request</li>
+				<li>Някои request-и към server-а блокират рендирането: javascript и CSS ресурсите трябва да бъдат свалени от browser-а преди да може HTML-а да бъде показан</li>
+			</ul>
+			<p>Следните проблеми оказват най голямо влияние: </p>
+			<ul>
+				<li>Страницата съдържа много външни ресурси; колкото по-малко са те, толкова по-добре</li>
+				<li>Страницата съдържа големи блокиращи външни ресурси в горната си част</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Key points</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>Независимо дали става въпрос за HTML, CSS, javascript file, картинка, font или видео файл, всичко се случва по идентичен начин</li>
+				<li>Комуникацията между browser и server се случва на базата само на няколко реда текст</li>
+				<li>За това и server-а не знае дали от другата страна има цял browser, някаква програма(напр. PHP script) или човек, който на ръка пише заявката</li>
+				<li>От своя страна, browser-а не знае дали от другата страна има статичен HTML файл, програма, която генерира HTML(напр. PHP script) или администратор, който диктува отговора на speech recognition software</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Stateless</h2>
+		</hgroup>
+
+		<article class="smaller">
+	 		<p>HTTP е stateless протокол:</p>
+ 			<ul>
+				<li>всяка заявка е сама за себе си - тя не "знае" нищо за предишни заявки</li>
+				<li>това е хубаво, защото се намаля комплекснотта на случващото се -- всяка заявка може да се обработи без да се взима предвид някакъв контекст от странични фактори. Ако нещо се счупи, просто продължаваме нататък, защото зявката е самостоятелна единица</li>
+				<li>това е лошо, защото понякога се налага да определяме кога една заявка е част от серия заявки. Например винаги, когато се оторизирате в някой сайт, той трябва да създаде сесия, за да ви предостави адекватната информацията за вас а не за някой друг потребител.</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Cookies(Бисквити)</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>бисквитите предоставят механизъм за проследяване на сесията на потребителя потребителя</li>
+				<li>бисквитa са малкo парче информация, коeто се дава на browser-а при първото зареждане сайт(който използва сесии) в HTTP response header: <code>Set-Cookie</code></li>
+				<li>при всяко следващо зареждане на страница от този сайт, browser-а предоставя информацията в бисквитата на server-а в HTTP request header: <code>Cookie</code></li>
+				<li>server-а използва идентификатора от бисквитата за да проследи кой точно клиент прави текущата HTTP заявка</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Chrome developer tools</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Най добрия инструмент за изследване на HTTP заявките е Chrome developer tools(таб Network). <i>[Live demo]</i></p>
+			<p>Firebug също е добър инструмент. <i>[Live demo]</i></p>
+		</article>
+	</slide>
 	<slide class="backdrop"></slide>
 </slides>
 </body>
