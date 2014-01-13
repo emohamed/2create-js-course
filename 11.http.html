@@ -48,7 +48,7 @@
 		</article>
 	</slide>
 	<slide>
-		<h2>HTTP Message Anatomy</h2>
+		<h2>HTTP Communication</h2>
 
 		<article class="smaller">
 			<img src="images/content/http-req-res.png" alt="">
@@ -73,15 +73,15 @@
 		<article class="smaller">
 			<p>Основни методи: </p>
 			<ul>
-				<li>GET: използва се клиента изисква ресурс от server-а</li>
-				<li>POST: използва се когато browser-а променя състоянието на server-а по някакъв начин</li>
+				<li><code>GET</code>: използва се когато клиента изисква ресурс от server-а</li>
+				<li><code>POST</code>: използва се когато browser-а променя състоянието на server-а по някакъв начин</li>
 			</ul>
 			<p>Има и други методи, които се ползват доста по-рядко: </p>
 			<ul>
-				<li>HEAD</li>
-				<li>PUT</li>
-				<li>DELETE</li>
-				<li>OPTIONS</li>
+				<li><code>HEAD</code></li>
+				<li><code>PUT</code></li>
+				<li><code>DELETE</code></li>
+				<li><code>OPTIONS</code></li>
 			</ul>
 		</article>
 	</slide>
@@ -91,7 +91,7 @@
 		</hgroup>
 
 		<article class="smaller">
-			<p>Всеки отговор връща статус код указващ дали server-а е успял да генерира отговор. Статуса на успешен отговор е <code>200 OK</code>. Най-често използвани други кодове са: </p>
+			<p>Всеки отговор връща статус код указващ дали server-а е успял да генерира отговор успешно. Статуса на успешен отговор е <code>200 OK</code>. Най-често използвани други кодове са: </p>
 			<ul>
 				<li><code>301 Moved Permanently</code></li>
 				<li><code>307 Moved Temporary</code></li>
@@ -252,7 +252,7 @@ Content-Type: text/html
 	</slide>
 	<slide>
 		<hgroup>
-			<h2>Chrome developer tools</h2>
+			<h2>Debug tools</h2>
 		</hgroup>
 
 		<article class="smaller">
