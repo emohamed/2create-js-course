@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Auto complete with HTML</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		$(function() {
+			var $dynamic_block = $('.reload');
+			var reload = function () {
+				$dynamic_block.load("data.php", function() {
+					setTimeout(reload, 1000);
+				});
+			}
+			reload();
+		});
+	</script>
+</head>
+<body>
+	<div class="shell">
+		<div class="reload">
+			
+		</div>
+	</div>
+</body>
+</html>

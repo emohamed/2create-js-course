@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Auto complete with HTML</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		$(function() {
+			var $form = $('form');
+			var $query_field = $('#query');
+			var $result = $('.results');
+
+			$query_field.on("keyup", function () {
+				var request = $.ajax({
+					url: "search.php",
+					type: "GET",
+					data: $form.serializeArray(),
+					dataType: "json"
+				});
+
+				request.done(function (response) {
+					$result.empty();
+					for (var i = 0; i < response.length; i++) {
+						$result.append($("<li>" + response[i] + "</li>"));
+					};
+				});
+				
+				request.fail(function (jqXHR, status, error) {
+					alert("Error occured(" + status + "): " + error);
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="shell">
+		<form action="search.php" method="GET">
+			<label for="query">Search</label>: <input type="text" name="query" id="query" />
+			<div>
+				<ul class="results">
+					<!-- Results will be added here -->
+				</ul>
+			</div>
+			<input type="submit" value="Search" />
+		</form>
+	</div>
+</body>
+</html>
