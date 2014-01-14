@@ -55,5 +55,5 @@ request.fail(function (jqXHR, test_status, error_thrown) {
  - auto complete с json
  - презареждане на определен блок от страницата от server-а
  - изпращане на форма с ajax
- - pagination
- - pagination with deep linking 
+ - AJAXify a site
+ - AJAXify a site with deep linking 
