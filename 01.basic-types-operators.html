@@ -29,7 +29,7 @@
 			<h2>Преглед на javascript</h2>
 		</hgroup>
 		<article>
-			<ul class="build fade">
+			<ul class="fade">
 				<li>Един от най-популярните езици за програмиране днес</li>
 				<li>Използван както за front-end(browser) така и за back-end(server) development</li>
 				<li>C-like синтаксис</li>
@@ -259,20 +259,18 @@ console.log(s.length);
 		<article class="smaller">
 			<p>Функциите са широка тема, която ще обсъдим в дълбочина по-късно. За момента само ще видим какъв е основния им синтаксис и какво представляват.</p>
 			
-			<p>Функциите в javascript са обекти, т.е. функция може да присъства навсякъде където може да присъства стойност. </p>
-
-			<p>Дефинирането на функция в действителност създава променлива, която се казва както името на функцията и сочи към обекта на функцията. </p>
+			<p>Дефинирането на функция в действителност създава променлива(стойност), която сочи към обекта на функцията. </p>
 <pre class="prettyprint" data-lang="javascript">
 function add(a, b) {
 	return a + b;
 }
-// Работи идентично на: 
+// Работи приблизително идентично на: 
 var add = function (a, b) {
 	return a + b;
 }
 </pre>
-			<p>Тъй като функциите са просто обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
-			<p>Аналогично, ако презапишем променливата, сочеща към функцията с нещо различно от функция, ще имаме проблеми. </p>
+			<p>Тъй като функциите са обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
+			<p>Аналогично, е възможно да презапишем променлива, сочеща към функцията с нещо различно от функция. </p>
 		</article>
 	</slide>
 	<slide>
@@ -528,58 +526,43 @@ var age = 25;
 </pre>
 		</article>
 	</slide>
-
-	<!--
 	<slide>
 		<hgroup>
-			<h2>Заключение</h2>
+			<h2>To Read</h2>
 		</hgroup>
 
 		<article class="smaller">
-			<p>Неща за четене:</p>
 			<ul>
-				<li><a href="http://msdn.microsoft.com/en-us/library/ie/b272f386(v=vs.94).aspx">Math javascript object</a></li>
 				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals">Values, variables, and literals</a> - тук четете само първите 2 секции: Values и Variables</li>
-				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">Strings</a></li>
-				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict mode</a></li>
 				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">Comparison Operators</a></li>
 				<li><a href="https://developers.google.com/chrome-developer-tools/docs/console">Основни неща за Chrome developer tools console panel</a></li>
 			</ul>
-			<p>Задачите за горните точки ще намерите в тасковете си. </p>
-			 Задачи за basic javascript.
-				# напишете функция, която проверява дали променлива съдържа четно или нечетно число
-				# при входни данни на координати от 2 точки(x1, y1, x2, y2), напишете функция, която изчислява разтоянието между две точки
-				# напишете script, който дефинира променлива със следния текст:
-{{{
-An island song
-Like a "floating" river
-Rain's Rain's Fall Fall
-}}}
-Разделете текста на 3 елемента чрез метода split и log-нете резултатния масив в конзолата. 
-				# Дефинирайте променлива със текстова стойност и проверете дали дадена буква се съдържа в нея
-				# Дефинирайте string променлива със текстова стойност и я промените като буквите са в горен регистър. 
-				# Напишете функция, която да пре
-			 
 		</article>
 	</slide>
-	-->
-	
-	<!--
 	<slide>
 		<hgroup>
-			<h2></h2>
+			<h2>Задачи</h2>
 		</hgroup>
 
 		<article class="smaller">
-			
+			<ul>
+				<li>напишете функция, която проверява дали променлива съдържа четно или нечетно число</li>
+				<li>при входни данни на координати от 2 точки(x1, y1, x2, y2), напишете функция, която изчислява разтоянието между две точки</li>
+				<li>напишете script, който дефинира променлива със следния текст:
+<pre class="prettyprint" data-lang="javascript">
+An island song
+Like a "floating" river
+Rain's Rain's Fall Fall
+</pre>
+					Разделете текста на 3 елемента чрез метода split и log-нете резултатния масив в конзолата. 
+				</li>
+				<li>Дефинирайте променлива със текстова стойност и проверете дали дадена буква се съдържа в нея</li>
+				<li>Дефинирайте string променлива със текстова стойност и я промените като буквите са в горен регистър. </li>
+				<li>Напишете функция <code>is_teenager(age)</code>, която да приема аргмуент age указващ години и да връща булева стойност</li>
+			</ul>
 		</article>
 	</slide>
-	-->
-
 	<slide class="backdrop"></slide>
-
 </slides>
-
-
 </body>
 </html>
