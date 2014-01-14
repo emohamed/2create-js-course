@@ -1,0 +1,22 @@
+	<div class="push"></div>
+</div><!-- /.wrapper -->
+
+<div class="footer">
+	<div class="shell">
+		<div class="footer-navigation">
+			<ul>
+				<li><a href="#">Royce Phillips for Iowa Senate</a></li>
+				<li><a href="#">Email</a></li>
+				<li><a href="#">Website built by Maudience.com</a></li>
+			</ul>
+		</div><!-- /.footer-navigation -->
+
+		<div class="socials">
+			<a href="#" class="ico-twitter">twitter</a>
+			<a href="#" class="ico-facebook">facebook</a>
+			<a href="#" class="ico-mail">mail</a>
+		</div><!-- /.socials -->
+	</div><!-- /.shell -->
+</div><!-- /.footer -->
+</body>
+</html>

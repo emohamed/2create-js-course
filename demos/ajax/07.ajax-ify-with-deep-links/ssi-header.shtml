@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<title>Royce Phillips Website</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="css/images/favicon.ico" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.history.js"></script>
+	<script type="text/javascript" src="js/ajaxify.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="header">
+		<div class="shell clearfix">
+			<h1 class="logo"><a href="home.html">Royce Phillips</a></h1>
+
+			<div class="navigation">
+			    <ul>
+			        <li><a href="home.html">Home <i></i></a></li>
+			        <li><a href="meet-royce.html" class="active">Meet Royce <i></i></a></li>
+			        <li><a href="issues.html">Issues <i></i></a></li>
+			        <li><a href="get-involved.html">Get Involved <i></i></a></li>
+			        <li><a href="get-connected.html">Get Connected <i></i></a></li>
+			        <li><a href="contribute.html" class="button">Contribute</a></li>
+			    </ul>
+			</div><!-- /.navigation -->
+		</div><!-- /.shell -->
+	</div><!-- /.header -->	
