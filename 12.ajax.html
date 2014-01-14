@@ -22,7 +22,163 @@
 			<p data-config-presenter><!-- populated from slide_config.json --></p>
 		</hgroup>
 	</slide>
+	<slide>
+		<hgroup>
+			<h2>Какво е AJAX</h2>
+		</hgroup>
+
+		<article>
+			<p>Акронима AJAX означава <b>A</b>synchronous <b>J</b>avaScript <b>a</b>nd <b>X</b>ML. Въпреки, че в името присъства XML, той вече рядко се използва в AJAX. </p>
+			<p>Предоставя възможност да се изпращат данни към server-а и да се взима информация от server-а чрез javascript код без да се презарежда страницата. </p>
+			<p>AJAX дава усещането на desktop програма, защото не е необходимо да се презарежда страницата за всяко ново парче информация, което трябва да се вземе от server-a. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Синхронен модел</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<img src="images/content/ajax-sync-communication.png" alt="">
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Асинхронен модел</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<img src="images/content/ajax-async-communication.png" alt="">
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Разлика между давата модела</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>При синхронния модел нова заявка към server-а се прави при напускане на страницата. </p>
+			<p>При асинхронния модел нова заявка към server-а се прави чрез javascript, без текущата страница да се напуска. </p>
+
+			<p>AJAX заявките са стандартни HTTP заявки, които не са по-специални от синхронните заявки. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Механизъм на работа</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>В определен момент на живота на web страницата, чрез javascript тя инструктира browser-а да извърши HTTP заявка към определен адрес</li>
+				<li>Browser-a има нужда от някакво време за да изпълни заявката(осъществяването на мрежова връзка, генерирането на отговор и т.н.)</li>
+				<li>В този период от време browser-а не блокира изпълнението на друг javascript код</li>
+				<li>В момента на приключване на заяквата се извиква callback функция, която слуша за успешното завършване на request-а, или такава за неуспешното му завършване</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>jQuery API</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<ul>
+				<li>Low level API: <code>$.ajax</code></li>
+				<li>Short hand methods: <code>$.get()</code>, <code>$.getJSON()</code>, <code>$.getScript()</code>, <code>$.post()</code>, <code>.load()</code></li>
+				<li>Utils: <code>.serializeArray()</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>$.ajax()</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Основния инструмент за правене на асинхронни HTTP(AJAX) заявки. </p>
+<pre class="prettyprint" data-lang="javascript">
+var request = $.ajax("file.html", {
+	// options here
+});
+
+// What to do when the request succeeds
+request.done(function (response) { 
+    console.log(response);
+});
+
+// What to do when the request fails
+request.fail(function (jqXHR, test_status, error_thrown) {
+    console.log("Failed due " + error_thrown + "(" + test_status + ")");
+});
+</pre>
+			<p>Важни AJAX options</p>
+			<ul>
+				<li>type - HTTP метод, който да се използва за заявката. Типично GET(default) или POST</li>
+				<li>data - данни, които да се изпратят към server-а(като GET или POST аргументи)</li>
+				<li>dataType - тип на данните, които се очаква server-а да върне(например HTML, json или text)</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>JSON</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>AJAX заявките пренасят данни между server-а и browser-а. Тези данни трябва да бъдат в текстов вид. Най-често ползвания формат за тях е JSON(<b>J</b>ava<b>s</b>cript <b>O</b>bject <b>N</b>otation). </p>
+			<p>JSON е малък, изключително лесен за ползване формат, който вече измести XML. </p>
+			<p>Всички данни в json формат са валидни javascript обекти. Обратното не е вярно: не всички javascript обектите са валидни json данни. </p>
+<pre class="prettyprint" data-lang="json">
+{
+    "key": "value",
+    "array": "value"
+}
+</pre>
+			<p>Стойности на json обектите могат да бъдат само plain objects. Те не могат да съдържат функции или обекти създадени с ключовата дума new. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Проблеми с AJAX</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Използването на AJAX води до определени потенциални проблеми: </p>
+			<ul>
+				<li>google bot не изпълнява javascript, и не може да индексира съдържание, което е скрито зад AJAX заявка</li>
+				<li>тъй като съдържанието, което е достъпно през AJAX променя страницата, то URL адреса й вече не може да се ползва като уникален идентификатор. Това води два проблема: не може да се bookmark-не, и не може да се вземе линк към конкретно този ресурс</li>
+				<li>достъпността на страницата най често страда(например за хора с гласови browser-и)</li>
+			</ul>
+		</article>
+	</slide>
+		<slide>
+			<hgroup>
+				<h2>Примери</h2>
+			</hgroup>
 	
+			<article class="smaller">
+				<ul>
+					<li><a href="demos/ajax/01.autocomplete-html/">auto complete с HTML</a></li>
+					<li><a href="demos/ajax/02.autocomplete-json/">auto complete с json</a></li>
+					<li><a href="demos/ajax/03.fragment-reload">презареждане на определен блок от страницата от server-а</a>, <a href="demos/ajax/04.fragment-reload-2">алтернативен вариант</a></li>
+					<li><a href="demos/ajax/05.form/">изпращане на форма с ajax</a></li>
+					<li><a href="demos/ajax/06.ajax-ify/">AJAXify a site</a></li>
+					<li><a href="demos/ajax/07.ajax-ify-with-deep-links">AJAXify a site with deep linking</a></li>
+				</ul>
+			</article>
+		</slide>
+	<slide>
+		<hgroup>
+			<h2>To read</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><a href="http://api.jquery.com/category/ajax/">API</a>. </p>
+			<p>Специално внимание: <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>. </p>
+		</article>
+	</slide>
+
 	<slide class="backdrop"></slide>
 </slides>
 </body>
