@@ -234,6 +234,25 @@ The person's gender is male</pre>
 	</slide>
 	<slide>
 		<hgroup>
+			<h2>Основни положения в прототипната система</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Всеки обект в javascript е свързан с друг обект, наречен негов прототип. Ако обекта е създаден като литерал(както във всички примери тук), прототипа на обекта е <code>Object.prototype</code>. </p>
+			<p>Javascript е много отворен език и ви предоставя възможност да променяте този протип: <a href="http://jsfiddle.net/emohamed/evXRM/">пример</a></p>
+			<p>Горния код добавя метод към <b>абсолютно всеки</b> обект! Това се постига благодарение на факта, че всеки обект е свързан директно или индиректно с <code>Object.prototype</code> обекта. Когато се опитате да достигнете до property(или както е в примера -- метод) на даден обект, javascript прави следното: </p>
+			<ul>
+				<li>Проверява дали самия обект има това property</li>
+				<li>Ако не е така, се проверява прототипа му</li>
+				<li>Ако и там го няма, се проверява прототипа на прототипа</li>
+				<li>И така докато се стигне до обекта <code>Object.prototype</code></li>	
+				<li>Ако и там го няма се връща <code>undefined</code></li>	
+			</ul>
+			<p>Добавянето на методи към главния прототипен обект се смята за лоша практика. <a href="http://jsfiddle.net/emohamed/GPutC/">Пример</a>. <a href="http://jsfiddle.net/emohamed/Y4FgB/1/">Пример 2</a></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
 			<h2><code>delete</code> оператора</h2>
 		</hgroup>
 
@@ -280,6 +299,15 @@ console.log(<b>flight["get_distance"]</b>());
 <b>console["log"]</b>(flight["get_distance"]());</pre>
 		</article>
 	</slide>
+	<slide>
+			<hgroup>
+				<h2>За четене</h2>
+			</hgroup>
+	
+			<article class="smaller">
+				<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects">Working with objects @ MDN</a>
+			</article>
+		</slide>	
 	<slide>
 		<hgroup>
 			<h2>Задачи</h2>
