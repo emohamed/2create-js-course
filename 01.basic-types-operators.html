@@ -29,15 +29,13 @@
 			<h2>Преглед на javascript</h2>
 		</hgroup>
 		<article>
-			<ul class="build fade">
+			<ul class="">
 				<li>Един от най-популярните езици за програмиране днес</li>
 				<li>Използван както за front-end(browser) така и за back-end(server) development</li>
 				<li>C-like синтаксис</li>
 				<li>Фунцкионален и обектно ориентиран</li>
 				<li>Whitespace-а почти винаги нямат значение</li>
-				<li>Редовете няма нужда да завършват с <code>;</code></li>
 				<li>Динамично типизиран език, променливите се декларират с <code>var</code></li>
-				<li>Коментарите се игнорират; многоредовите коментари са между <code>/*</code> и <code>*/</code>. Едноредовите започват с <code>//</code></li>
 			</ul>
 		</article>
 	</slide>
@@ -96,6 +94,7 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+			<!-- To mention in future: blocking nature of the script tags -->
 		</article>
 	</slide>
 
@@ -251,6 +250,34 @@ console.log(s.length);
 			<p>Всичко останало се свежда до <code>true</code>(truthy).</p>
 		</article>
 	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Определяне на тип на променлива</h2>
+		</hgroup>
+	
+		<article class="smaller">
+			<p>Javascript има механизъм за определяне на типа на променлива -- <code>typeof</code> оператора. </p>
+<pre class="prettyprint" data-lang="javascript">
+var test;
+console.log(typeof test); // undefined
+test = 5;
+console.log(typeof test); // number
+test = new Number(5);
+console.log(typeof test); // object
+</pre>
+			<p><code>typeof</code> оператора сам по себе си не може да се използва във всички ситуации. Понякога трябва да се прави по-дълбока проверка за типа на променливата. </p>
+			<p>Най-често той се използва за да се провери дали дадена променлива съществува: </p>
+<pre class="prettyprint" data-lang="javascript">
+if (typeof variable === "undefined") {
+	console.log("variable doesn't have value yet. ");
+} else {
+	console.log("variable is " + variable);
+}
+</pre>
+		</article>
+	</slide>
+	
 	<slide>
 		<hgroup>
 			<h2>Функции</h2>
