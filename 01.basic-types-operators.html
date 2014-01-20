@@ -29,15 +29,13 @@
 			<h2>Преглед на javascript</h2>
 		</hgroup>
 		<article>
-			<ul class="fade">
+			<ul class="">
 				<li>Един от най-популярните езици за програмиране днес</li>
 				<li>Използван както за front-end(browser) така и за back-end(server) development</li>
 				<li>C-like синтаксис</li>
 				<li>Фунцкионален и обектно ориентиран</li>
 				<li>Whitespace-а почти винаги нямат значение</li>
-				<li>Редовете няма нужда да завършват с <code>;</code></li>
 				<li>Динамично типизиран език, променливите се декларират с <code>var</code></li>
-				<li>Коментарите се игнорират; многоредовите коментари са между <code>/*</code> и <code>*/</code>. Едноредовите започват с <code>//</code></li>
 			</ul>
 		</article>
 	</slide>
@@ -96,6 +94,7 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+			<!-- To mention in future: blocking nature of the script tags -->
 		</article>
 	</slide>
 
@@ -129,6 +128,14 @@
 
 			<p>Ако операцията от числа не може да бъде извършена се получава стойност <code>NaN</code>(not a number):</p>
 			<p><code>5 / "Banana" => NaN</code></p>
+			<p><code>NaN</code> стойностите не могат да бъдат полезни с друго, освен за сигнал че нещо не е както се очаква: </p>
+<pre class="prettyprint" data-lang="javascript">
+var x = 5, y = "ponny",
+    z = x * y;
+if (isNaN(z)) {
+    console.log("Something went wrong!");
+}
+</pre>
 			
 		</article>
 	</slide>
@@ -149,8 +156,10 @@
 
 				<li>Инкрементиране <code>a++</code>, <code>a += b</code>, <code>++a</code></li>
 				<li>Декрементиране <code>a--</code>, <code>a -= b</code>, <code>--a</code></li>
+
 				<li>Обръщане на знак: <code>-a => a *= -1</code></li>
 				<li>Форсиране на тип число: <code>+a => a</code></li>
+
 			</ul>
 		</article>
 	</slide>
@@ -162,13 +171,6 @@
 
 		<article class="smaller">
 			<p>String(низ) в javascript е текст обграден в двойни или единични кавички. </p>
-			
-			<p>Промяната на низ създава нов низ. Няма отделен тип character; той е низ с един елемент. </p>
-
-			<p>Обратната наклонена черта е escape character и се използва, за да се поставят специални символи в низа:</p>
-			<p><code>\n, \r, \t</code> - whitespace</p>
-			<p><code>\", \'</code> - quoted кавички</p>
-			<p>Низа не може да съдържа нов ред директно, трябва да се използва <code>\n</code>, <code>\r</code> или и двете</p>
 
 			<p>Concatenation("слепване") на 2 низа се прави с оператора плюс:</p>
 			<pre class="prettyprint fiddle" data-lang="javascript">
@@ -176,31 +178,12 @@ var name = "Emo";
 var greeting = "Good evening";
 console.log(greeting + ", " + name);
 // => Good evening, Emo</pre>
+
+			<p>Обратната наклонена черта е escape character и се използва, за да се поставят специални символи в низа:</p>
+			<p><code>\n, \r, \t</code> - whitespace</p>
+			<p><code>\", \'</code> - quoted кавички</p>
+			<p>Низа не може да съдържа нов ред директно, трябва да се използва <code>\n</code>, <code>\r</code> или и двете</p>
 		</article>
-	</slide>
-	<slide>
-		<hgroup>
-			<h2>Strings</h2>
-		</hgroup>
-
-		<article class="">
-<pre class="prettyprint" data-lang="javascript">
-var text = "Lorem ipsum dolor sit amet, consectetur adipisicing<b class="initially-hidden-highlight">\r\n" + </b>
-<b class="initially-hidden-highlight">"</b>elit. Corporis, ratione, accusantium fugit consectetur pariatur";
-
-console.log("Message for " + text);</pre>
-			<p>Разликата между <code>\r</code> и <code>\n</code>. </p>
-
-		</article>
-		<aside class="note">
-			<section>
-				<ul>
-					<li>Live demo за декларирането на string с нови редове. </li>
-					<li>Live demo за деклариране на string с различни видове кавички</li>
-					<li>Да се обясни разликата между <code>\r</code>, <code>\n</code></li>
-				</ul>
-			</section>
-		</aside>
 	</slide>
 	<slide>
 		<hgroup>
@@ -214,8 +197,8 @@ console.log("Message for " + text);</pre>
 var s = "javascript strings";
 console.log(s.length); 
 // => 18</pre>
-
-			<p>Методите са функции, които работят в контекста на низа. Те не променят низа, а връщат нов низ. Няколко примера:</p>
+			<p>Property на обект се нарича променлива, която съществува в контекста му. </p>
+			<p>Методите са функции, които работят в контекста на низа. Няколко примера:</p>
 			
 			<ul>
 				<li><code>s.indexOf()</code></li>
@@ -227,6 +210,38 @@ console.log(s.length);
 				<li><code>s.toUpperCase()</code>, <code>.toLowerCase()</code></li>
 			</ul>
 		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Strings</h2>
+		</hgroup>
+
+		<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+var text = "Lorem ipsum dolor sit amet, consectetur adipisicing<b class="initially-hidden-highlight">\r\n" + </b>
+<b class="initially-hidden-highlight">"</b>elit. Corporis, ratione, accusantium fugit consectetur pariatur";
+
+console.log("Message for " + text);</pre>
+
+			<p>Промяната на низ създава нов низ. </p>
+<pre class="prettyprint" data-lang="javascript">
+var name = "Emil Mohamed";
+var name_lowercase = name.toLowerCase();
+console.log(name_lowercase); // emil mohamed
+console.log(name); // Emil Mohamed
+</pre>
+
+		</article>
+		<aside class="note">
+			<section>
+				<ul>
+					<li>Live demo за декларирането на string с нови редове. </li>
+					<li>Live demo за деклариране на string с различни видове кавички</li>
+					<li>Да се обясни разликата между <code>\r</code>, <code>\n</code></li>
+				</ul>
+			</section>
+		</aside>
 	</slide>
 
 	<slide>
@@ -251,6 +266,37 @@ console.log(s.length);
 			<p>Всичко останало се свежда до <code>true</code>(truthy).</p>
 		</article>
 	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Определяне на тип на променлива</h2>
+		</hgroup>
+	
+		<article class="smaller">
+			<p>Javascript има механизъм за определяне на типа на променлива -- <code>typeof</code> оператора. </p>
+<pre class="prettyprint" data-lang="javascript">
+var test;
+console.log(typeof test); // undefined
+test = 5;
+console.log(typeof test); // number
+test = new Number(5);
+console.log(typeof test); // object
+</pre>
+			<p>Най-често той се използва за да се провери дали дадена променлива съществува: </p>
+<pre class="prettyprint" data-lang="javascript">
+if (typeof variable === "undefined") {
+    console.log("variable doesn't have value yet. ");
+} else {
+    console.log("variable is " + variable);
+}
+</pre>
+			<p>В някои ситуации този оператор връща абсурдни резултати: </p>
+<pre class="prettyprint" data-lang="javascript">
+console.log(typeof NaN); // number
+</pre>
+		</article>
+	</slide>
+
 	<slide>
 		<hgroup>
 			<h2>Функции</h2>
@@ -262,11 +308,11 @@ console.log(s.length);
 			<p>Дефинирането на функция в действителност създава променлива(стойност), която сочи към обекта на функцията. </p>
 <pre class="prettyprint" data-lang="javascript">
 function add(a, b) {
-	return a + b;
+    return a + b;
 }
 // Работи приблизително идентично на: 
 var add = function (a, b) {
-	return a + b;
+    return a + b;
 }
 </pre>
 			<p>Тъй като функциите са обекти, дефинирането на 2 функции с едно и също име просто ще презапише първата стойност с втората. </p>
@@ -493,16 +539,21 @@ console.log(screen_is_ready() &amp;&amp; query_done());
 var age = 14;
 var is_teenager = <b>age &lt;= 19</b>;
 if (<b>!</b>is_teenager) {
-	console.log("Allow in");
+    console.log("Allow in");
 } else {
-	console.log("Go away");
+    console.log("Go away");
 }</pre>
 			<p>Приложен към не-булева променлива, удивителния знак я свежда до булева и обръща стойността й:</p>
 			<pre class="prettyprint" data-lang="javascript">
 var age = 0;
 if (<b>!</b>age) {
-	console.log("Newborns are not allowed here");
+    console.log("Newborns are not allowed here");
 }</pre>
+			<p>Можете да използвате оператора и така:</p>
+<pre class="prettyprint" data-lang="javascript">
+var age = 15;
+console.log(!!age); // true
+</pre>
 		</article>
 	</slide>
 	
@@ -560,6 +611,15 @@ Rain's Rain's Fall Fall
 				<li>Дефинирайте string и го променете така че буквите са в горен регистър</li>
 				<li>Напишете функция <code>is_teenager(age)</code>, която да приема аргмуент <code>age</code> указващ години и да връща булева стойност</li>
 			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Задачи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p><a href="http://trac.2c-studio.com/wiki/js-course/excersies/01.basics">Задачи</a></p>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
