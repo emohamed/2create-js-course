@@ -563,15 +563,15 @@ console.log(!!age); // true
 		</hgroup>
 		<article class="smaller">
 			<p><b>Strict mode</b> инструктира browser-а да изпълни кода ви в по-стриктна среда, като по този начин ви предпазва от често срещани грешки. </p>
-			<p>Вклучва се като се постави низ <code>"use strict"</code> като първи statement в javascript файл, script tag, или във функция. </p>
+			<p>Включва се като се постави низ <code>"use strict"</code> като първи statement в javascript файл, script tag, или във функция. </p>
 <pre class="prettyprint" data-lang="html">
 &lt;script&gt;
-"use strict"
+"use strict";
 age = 25;
 &lt;/script>
 
 &lt;script&gt;
-"use strict"
+"use strict";
 var age = 25;
 &lt;/script&gt;
 </pre>
@@ -617,9 +617,26 @@ Rain's Rain's Fall Fall
 		<hgroup>
 			<h2>Задачи</h2>
 		</hgroup>
-
+		
 		<article class="smaller">
 			<p><a href="http://trac.2c-studio.com/wiki/js-course/excersies/01.basics">Задачи</a></p>
+			<p>Пишете всички задачи в 1 html файл, като всяка трябва да е обградена в само-изпълняваща се функция. </p>
+<pre class="prettyprint" data-lang="javascript">
+(function () {
+	// Условие на задачата
+	/* ... */
+})();
+</pre>
+			<p>Например задача 1 трябва да изглежда така: </p>
+<pre class="prettyprint" data-lang="javascript">
+(function () {
+	//
+	function add (a, b) {
+		return a + b;
+	}
+	console.log(add(1, 5));
+})();
+</pre>
 		</article>
 	</slide>
 	<slide class="backdrop"></slide>
