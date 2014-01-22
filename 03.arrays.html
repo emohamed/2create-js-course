@@ -47,6 +47,29 @@ console.log(arr_literal[0]); // js
 	</slide>
 	<slide>
 		<hgroup>
+			<h2>Деклариране на масив</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Нов масив се създава по следния начин:</p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = [];
+</pre>
+			<p>Алтернативен синтаксис е: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = new Array();
+</pre>
+			<p>Не го използвайте, защото синтаксиса е особен: </p>
+<pre class="prettyprint" data-lang="javascript">
+var arr = new Array(5);
+console.log(arr.length); // 5
+var arr2 = new Array(5, 2);
+console.log(arr2.length); // 2
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
 			<h2><code>length</code> атрибут</h2>
 		</hgroup>
 		<article class="smaller">
