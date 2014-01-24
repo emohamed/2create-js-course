@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Regular Expressions</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="all" href="theme/css/default.css">
+	<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+	<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+
+	<slide class="title-slide segue nobackground">
+		<article class="flexbox logo-welcome">
+			<span><img src="images/2c/logo.png"></span>
+		</article>
+
+		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+		<hgroup class="auto-fadein">
+			<h1 data-config-title><!-- populated from slide_config.json --></h1>
+			<h2 data-config-subtitle>Lecture 13 - Regular Expressions</h2>
+			<p data-config-presenter><!-- populated from slide_config.json --></p>
+		</hgroup>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Регуларни изрази: шаблони</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Обарботката на текст е ежедневна задача. Всеки ден се сбълскваме с различни типове текст: </p>
+			<ul>
+				<li>Данни на потребители: email адреси, телефонни номера и т.н. </li>
+				<li>URL адреси</li>
+				<li>Сорс код във всякакви форми: HTML / CSS, javascript, PHP</li>
+				<li>Данни: лог файлове, дъмпове от база данни, XML, json</li>
+				<li>Комуникация и документация по проекти</li>
+			</ul>
+			<p>Регулярните изрази са мощен инструмент при всякаква работа с текст: </p>
+			<ul>
+				<li>В самия сорс код</li>
+				<li>За автоматизиране на повтарящи се операции в editor-а си</li>
+				<li>В различни command line tools(grep, awk, sed)</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Същност</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Регулярните изрази позволяват да бъде описана структурата на даден string, след което да бъде извършено някое от следните действия:</p>
+			<ul>
+				<li>Да се провери дали даден string отговаря на шаблон</li>
+				<li>Да се извлекат части(групи) от текста, които представляват интерес за нас</li>
+				<li>Да заменим част от текста с друг</li>
+				<li>Да се разбие на части целия текст</li>
+			</ul>
+			
+			<p>Регулярен израз е шаблон, който се прилага върху текст от ляво на дясно. Повечето символи в шаблона означават самите себе си, но някои са специални(или мета) символи.</p>
+
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Аналогия с DOS</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Да вземем например как търсим файлове във операционната си система. Всеки докосвал се до DOS е писал wildcard команди от рода на</p>
+			<pre class="prettyprint" data-lang="shell">dir *.txt</pre>
+			<p>В случая *.txt ще покаже всички файлове чиито имена завършват с .txt. Звездата означава просто "всякакви символи".</p>
+			<p>Този род команди са напълно достатъчни когато работим само с имена на файлове. За съжаление "истинския свят" е по-сложен от това и там се налага да работим с по-сложни типове текст. Това налага и нуждата от по-мощни инструменти. </p>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Специални символи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Синтаксиса на регулярните изрази се състои от 2 типа символи: </p>
+			<ul>
+				<li>quoted characters - тези символи са еднакви в шаблона и в самия текст</li>
+				<li>meta characters - тези символи имат специално значение</li>
+			</ul>
+			<p>Пример за meta символ е точката(<code class="regexp">.</code>). Тя означава просто "кой да е символ". </p>
+			<p>Пример за quoted character е символа #. </p>
+			<p>Нека кажем че искаме да намерим ЕГН номер в даден текст и знаем, че този номер е предшестван от символа #. Тогава можем да използваме следния регуларен израз: <code class="regexp">#..........</code>. </p>
+<pre class="prettyprint" data-lang="regexp match">
+Lorem ipsum dolor sit amet, <span class="regexp-match">#8605079944</span> explicabo.</pre>
+			<p>Когато искаме да търсим за самия специален символ(напр. точка), в регулярния израз той трябва да се escape-не с обратна наклонена черта: <code class="regexp">100\.</code></p>
+			<p>Сега ще разгледаме всички специални символи. </p>
+		</article>
+	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Text start and end</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Нека кажем, че искаме да проверим дали даден URL адрес използва криптиран(HTTPS) некриптирана(HTTP) връзка. За целта трябва просто да проверим дали адреса започва с <b>https://</b>.</p>
+			<p>Един начин да подходим към проблема би бил да проверим дали URL адреса отговаря на шаблона <code class="regexp">https://</code>. В него няма нито един специален символ, и шаблона би бил търсен буквално в подадения текст. </p>
+<pre class="prettyprint" data-lang="regexp match">
+<span class="regexp-match">https://</span>mail.google.com/mail/u/0/#inbox</pre>
+			<p>Но какво би станало при следния URL адрес: http://mail.google.com/mail/u/0/?url=<b>https://google.com</b> ?</p>
+<pre class="prettyprint" data-lang="regexp match">
+http://mail.google.com/mail/u/0/?url=<span class="regexp-match">https://</span>https://</span>google.com</pre>
+			
+			<p>Както се вижда това е HTTP адрес, който случайно включва и <b>https://</b> в себе си. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2><code>^</code> и <code>$</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>За да кажем на машината за регулярни изрази да търси само в началото на текста, трябва да поставим <code>^</code> в началото на регулярния израз, по този начин: <code class="regexp">^https://</code>. </p>
+			<p>Символа сам по себе си указва само позиция: той не "изяжда"(consumes) символ от самия текст, подобно на точката; той единствено закотвя позиция в текста. </p>
+			<p><code>$</code> символа е подобен, но отбелязва край на текста. Пример тук би бил да проверим дали адреса е на файл с определено разширение(напр. картинка):</p>
+<pre class="prettyprint" data-lang="regexp match">
+<code class="regexp">\.png$</code>
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Класови изброявания <code>[]</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Нека да кажем, че търсим всички срещания на думата gray в текст. В тази дума няма мета символи, така че търсенето е директно.</p>
+
+			<p>Но има един проблем -- в някои ситуации думата се изписва като grey. За да намерим и двете изписвания на думата можем да използваме регулярния израз <code class="regexp">gr[ae]y</code>.</p>
+
+			<p>Най-просто казано в квадратни скоби можем да изброим символи, които биха могли да бъдат сложени на тази позиция.</p>
+
+			<p>Класовите изброявания позволяват и да използвате тире за да изразите област от символи. Например <code class="regexp">[0-9]</code> би се разширило до <code class="regexp">[0123456789]</code>. Аналогично <code class="regexp">[a-z]</code> би се разширило до всички малки латински букви. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Обърнати класови изброявяния <code>[^]</code></h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Когато първия символ в квадратните скоби е <code>^</code> обхвата на изброените символи се обръща. Т.е. <code class="regexp">[^0-9]</code> означава "всичко освен цифра". Това е особенно полезно когато искате да филтрирате определен текст, така че вътре да останат само символи, които ни интересуват. Това се постига много просто като избоим символите, които ни интересуват, след което ги обърнем и наредим на машината за регулярни изрази да замени съвпаденията с празен низ.</p>
+			<p>Например ако приемаме номера на кредитни карти е добре да позволим на потребителя да въведе номера с каквите разделители му е удобно. Например:</p>
+<pre class="prettyprint" data-lang="javascript">
+0000000000000000
+0000-0000-0000-0000
+0000 0000 0000 0000
+00000000 00000000
+00-00-00-00-00-00-00-00</pre>
+			<p>Ако искаме да оставим само и единствено числата от тези символи можем да ползваме заместане на всичко, което не е число с празен string: <code class="regexp">[^0-9]</code>
+
+</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Промяна на значението на специалните символи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Използваме един и същи символ за начало на ред и за обръщане на символите в квадратни скоби(<code>^</code>). </p>
+
+			<p>Класовите изброявания имат различно разбиране за това какво е мета символ, и какво - не е.</p>
+
+			<p>В класово изброяване специални символите са само <code>^</code>, тирето и затварящята квадратна скоба. Единствено тези символи има нужда да се escape-ват с обратна наклонена черта. Останалите могат да присъстват директно. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Точката</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Точката означава просто "всеки символ освен нов ред".</p>
+			<p>Да кажем че имаме документ, в който автора е цитирал една дата няколко пъти. Но всеки път е използвал различен формат. Срещат се следните варианти на датата:</p>
+<pre class="prettyprint" data-lang="javascript">
+2013-03-27
+2013.03.27
+2013 03 27
+2013/03/27</pre>
+			<p>Искаме да намерим всички срещания на датата. За целта можем да използваме този регулярен израз: <code class="regexp">2013.03.27</code>. Тъй като точката означава всеки символ, то машината ще намери това, което ни трябва независимо какъв разделител сме използвали за датата.</p>
+			<p>Нещо важно тук е че точката match-ва и точка. Ако искаме да match-нем само точка, а не всеки символ, трябва да я escape-нем с обратна наклонена черта, така: <code class="regexp">2013\.03\.27</code></p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Alternations</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Регулярните изрази ни позволояват да кажем че на определено място в текста може да присъстват няколко възможни варианта. Това се описва по този начин: <code class="regexp">(option1|option2)</code>.</p>
+			
+			<p>Например, да кажем че търсим споменаването всички летни месеци в текст. Можем да постигнем това с помоща на този регулярен израз: <code class="regexp">(June|July|August)</code>. </p>
+
+			<p>Важна разлика между класово изброяване и alternation е, че при класовто изборяване можем да дадем набор от символи за определена позиция в текста, но не и цели думи: <code class="regexp">[JuneJulyAugust]</code> би намерило всяка буква от изброените, а не имена на месеци. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Optional items</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>За да покажем че нещо е незадължително можем да сложим въпросителен знак след него.</p>
+
+			<p>Например за да намерим всички линкове в даден текст можем да търсим за думи започващи с <code class="regexp">https?://</code>. По този начин ще хванем както http://, така и https:// линковете. За да постигнем същото можем да използваме и <code class="regexp">(http|https)://</code>, но с въпросителния знак постигаме по-чист външен вид на регулярния израз.</p>
+
+			<p>Незадължителни можем да направим и групи от символи. Например ако търсим за всяко споменаване на месец Март, но искаме да хванем както "Mar" така и "March", можем да използваме <code class="regexp">Mar(ch)?</code>.</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Repetiotions</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Повторението в регулярния израз ни позволява да отбележим че определен сегмент от текста би могъл да се повтаря.</p>
+
+			<p>Има 3 начина да кажем нещо може да се повтори:</p>
+			<ul>
+				<li>с звезда: <code>*</code> -- означава "нула или повече пъти"</li>
+				<li>с плюс: <code>+</code> -- означава "един или повече пъти"</li>
+				<li>с уточняване на брой повторения: <code>{n,m}</code> -- означава "поне n пъти и не повече от m пъти". И n, и m са незадължетлни. Т.е. <code>{3,} </code>означава поне 3 пъти, а <code>{,3}</code> ознaчава не повече от 3 пъти.</li>
+			</ul>
+			<p>Звездата отговаря на <code>{0,}</code>, а плюса на <code>{1,}</code>.</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Repetitions examples</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Ако имаме следня входен текст:</p>
+<pre class="" data-lang="text">
+I got 101 problems while dealing with regular expressions</pre>
+			<p>Нека кажем, че искаме да извлечем числото. Бихме могли да използваме <code class="regexp">I got [0-9]* problems while dealing with regular expressions</code>. Този регулярен израз би ни позволил да хванем и: </p>
+<pre class="" data-lang="text">
+I got problems while dealing with regular expressions</pre>
+			<p>Защо е така? Звездата ни позволява да кажем, че нещо го има <b>нула</b> или повече пъти. Т.е. въпросното нещо може и да го има, а може и да го няма.</p>
+
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Greedy vs ungreedy repetitions</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<pre class="" data-lang="text">
+I got <span class="regexp-match">_101 problems_</span> while dealing with regular expressions</pre>
+			<p>Искаме да излечем текста между подчертавките. Бихме могли да използваме този регулярен израз: <code class="regexp">_.*_</code></p>
+			<p>В превод: намери подчертавка, и след това хвани всички символи до подчертавка. Но какво ще стане ако входния ни текст е:</p>
+<pre class="" data-lang="text">
+I got <span class="regexp-match">_101 problems_ while dealing with _regular expressions_</span></pre>
+			<p>По подразбиране звездите и плюсовете са "алчни" или "лакоми"(greedy). Те се опитват да "изядат"(consume) максимално много символи от текста. </p>
+
+			<p>За да променим това поведение, можем да поставим въпросителен знак след звездата. Това би казало на регулярния израз да "изяде" възможно най малко символи след звездата. В този случай регулярния израз би изглеждал така: <code class="regexp">_.*?_</code>.</p>
+<pre data-lang="text">
+I got <span class="regexp-match">_101 problems_</span> while dealing with <span class="regexp-match">_regular expressions_</span></pre>
+</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Shortcuts</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Някои символни класове са толкова често използвани, че си имат специални съкратени записвания:</p>
+			<ul>
+				<li><code>\w</code> - word char отговаря на <code class="regexp">[a-zA-Z0-9_]</code>. Описва identifier</li>
+				<li><code>\W</code> - обратното на \w, отговаря на <code class="regexp">[^a-zA-Z0-9_]</code></li>
+				<li><code>\s</code> - whitespace, отговаря на <code class="regexp">[ \t\r\n]</code> (интервал, таб, нов ред, символ за връщане на каретката)</li>
+				<li><code>\S</code> - обратното на <code class="regexp">\s</code></li>
+				<li><code>\d</code> - число(digit), отговаря на <code class="regexp">[0-9]</code></li>
+				<li><code>\D</code> - обратното на число, отговаря на <code class="regexp">[^0-9]</code></li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Групи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Групите се използват за отделяне на части от резултата на регулярния израз. Те се обозначават с кръгли скоби и текста попаднал в тях може да бъде извлечен след като регулярния израз е приключил работата си. Да вземем например email адрес:</p>
+<pre class="" data-lang="text">
+emil@2create.bg</pre>
+			<p>Ако искаме да вземем само домейн името можем да използваме <code class="regexp">@(.*)$</code>. Което ще рече:</p>
+			<ul>
+				<li>Намери @</li>
+				<li>Намери възможно най много символи след него до края на входния текст и запази резултата като група</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Флагове</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Флагове(или модификатори) са допълнителни опции на регулярния израз, които променят поведението му. Най важните от тях(тези, които са в обхвата на този документ) са:</p>
+			<ul>
+				<li><b>i:</b> case-insensetive. Прави регулярния израз нечустивителен към регистъра на буквите. Например <code class="regexp">[a-z]</code> автоматично ще означава <code class="regexp">[a-zA-Z]</code>. Също така, например, test ще бъде намерено дори ако в текста се среща като "Test", "TEST" или "tESt"</li>
+				<li><b>g:</b> global. Прилага регулярния израз към целия текст а не само до първия match</li>
+				<li><b>m:</b> multiline. Променя поведението на <code>^</code> и <code>$</code> така че да значат начало и край на ред вместо на целия текст</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>For reading</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<p>Прочетете документацията за синтаксиса на регулярните изрази в javascript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">тук</a>. </p>
+			<p>Регулярните изрази са широка тема и показаното до момента са само основните неща. Има още много възможности, за които може да поровите в Google. </p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Задачи</h2>
+		</hgroup>
+
+		<article class="smaller">
+			<a href="http://trac.2c-studio.com/wiki/js-course/excersies/13.regexes">Задачи</a>
+		</article>
+	</slide>
+
+	<slide class="backdrop"></slide>
+</slides>
+</body>
+</html>

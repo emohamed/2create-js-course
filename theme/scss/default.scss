@@ -200,6 +200,9 @@ slides > slide {
   }
 }
 
+.regexp { background: orange; }
+.regexp-match { background: yellow; }
+
 slides.layout-faux-widescreen > slide {
   padding: $slide-top-bottom-padding 160px;
 }
