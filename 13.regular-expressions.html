@@ -89,9 +89,11 @@
 			<p>Пример за meta символ е точката(<code class="regexp">.</code>). Тя означава просто "кой да е символ". </p>
 			<p>Пример за quoted character е символа #. </p>
 			<p>Нека кажем че искаме да намерим ЕГН номер в даден текст и знаем, че този номер е предшестван от символа #. Тогава можем да използваме следния регуларен израз: <code class="regexp">#..........</code>. </p>
-<pre class="prettyprint" data-lang="regexp match">
+<pre class="" data-lang="regexp match">
 Lorem ipsum dolor sit amet, <span class="regexp-match">#8605079944</span> explicabo.</pre>
 			<p>Когато искаме да търсим за самия специален символ(напр. точка), в регулярния израз той трябва да се escape-не с обратна наклонена черта: <code class="regexp">100\.</code></p>
+<pre class="" data-lang="regexp match">
+I owe <span class="regexp-match">100.</span>00 dollars.</pre>
 			<p>Сега ще разгледаме всички специални символи. </p>
 		</article>
 	</slide>
@@ -121,9 +123,9 @@ http://mail.google.com/mail/u/0/?url=<span class="regexp-match">https://</span>h
 		<article class="smaller">
 			<p>За да кажем на машината за регулярни изрази да търси само в началото на текста, трябва да поставим <code>^</code> в началото на регулярния израз, по този начин: <code class="regexp">^https://</code>. </p>
 			<p>Символа сам по себе си указва само позиция: той не "изяжда"(consumes) символ от самия текст, подобно на точката; той единствено закотвя позиция в текста. </p>
-			<p><code>$</code> символа е подобен, но отбелязва край на текста. Пример тук би бил да проверим дали адреса е на файл с определено разширение(напр. картинка):</p>
-<pre class="prettyprint" data-lang="regexp match">
-<code class="regexp">\.png$</code>
+			<p><code>$</code> символа е подобен, но отбелязва край на текста. Пример тук би бил да проверим дали адреса е на файл с определено разширение(напр. картинка): <code class="regexp">\.png$</code></p>
+<pre class="" data-lang="regexp match">
+http://lh4.googleusercontent.com/s32-c/photo<span class="regexp-match">.png</span>
 </pre>
 		</article>
 	</slide>
